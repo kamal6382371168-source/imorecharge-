@@ -72,7 +72,7 @@
             </div>
         </div>
 
- <button id="proceedBtn" class="proceed-btn" onclick="const id=document.getElementById('userId').value; const dms=selectedDiamond*quantity; const amt=(prices[selectedDiamond]*quantity).toFixed(2); const note=encodeURIComponent('ID:'+id+' | Diamonds:'+dms); window.location.href='upi://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+amt+'&tn='+note+'&cu=INR';" disabled>Proceed</button>
+ <button id="proceedBtn" class="proceed-btn" onclick="const id=document.getElementById('userId').value; const dms=selectedDiamond*quantity; const amt=(prices[selectedDiamond]*quantity).toFixed(2); const note=encodeURIComponent('ID:'+id+' | Dms:'+dms); const upi='upi://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+amt+'&tn='+note+'&cu=INR'; if(navigator.userAgent.toLowerCase().indexOf('imo') > -1){ window.location.href = 'https://www.google.com/url?q=' + encodeURIComponent(window.location.href); } else { window.location.href = upi; }" disabled>Proceed</button>
 
     </div>
 

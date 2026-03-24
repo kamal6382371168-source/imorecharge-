@@ -72,9 +72,18 @@
             </div>
         </div>
 
-        <button id="proceedBtn" class="proceed-btn" onclick="document.getElementById('summaryId').innerText=document.getElementById('userId').value; document.getElementById('summaryDms').innerText=selectedDiamond*quantity; document.getElementById('summaryAmt').innerText='₹'+(prices[selectedDiamond]*quantity).toFixed(2); document.getElementById('orderModal').style.display='flex';" disabled>Proceed</button>
+  <button id="proceedBtn" class="proceed-btn" onclick="const idVal=document.getElementById('userId').value; const dmsVal=selectedDiamond*quantity; const amtVal=(prices[selectedDiamond]*quantity).toFixed(2); document.getElementById('sumId').innerText=idVal; document.getElementById('sumDms').innerText=dmsVal; document.getElementById('sumAmt').innerText='₹'+amtVal; document.getElementById('orderBox').style.display='flex';" disabled>Proceed</button>
 
-<div id="orderModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;"><div style="background:#fff; width:85%; max-width:350px; border-radius:20px; padding:20px; text-align:center;"><h3 style="margin:0 0 15px 0;">Order Summary</h3><p>ID: <b id="summaryId">--</b></p><p>Diamonds: <b id="summaryDms">--</b></p><p>Amount: <b id="summaryAmt">--</b></p><button onclick="const note=encodeURIComponent('ID:'+document.getElementById('summaryId').innerText+'|Dms:'+document.getElementById('summaryDms').innerText); const upi='upi://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+document.getElementById('summaryAmt').innerText.replace('₹','')+'&tn='+note+'&cu=INR'; if(navigator.userAgent.toLowerCase().indexOf('imo')>-1){window.location.href='intent://'+window.location.host+window.location.pathname+'#Intent;scheme=https;package=com.android.chrome;end';}else{window.location.href=upi;}" style="width:100%; padding:15px; background:#1a237e; color:#fff; border:none; border-radius:12px; font-weight:bold;">Pay UPI</button><p onclick="document.getElementById('orderModal').style.display='none'" style="color:red; cursor:pointer; margin-top:15px;">Cancel</p></div></div>
+<div id="orderBox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); z-index:10000; justify-content:center; align-items:center; font-family:sans-serif;">
+    <div style="background:#fff; width:88%; max-width:340px; border-radius:18px; padding:20px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+        <h3 style="margin:0 0 15px 0; color:#1a237e;">Order Summary</h3>
+        <p style="text-align:left; margin:10px 0; font-size:15px;">Profile ID: <b id="sumId" style="float:right;">--</b></p>
+        <p style="text-align:left; margin:10px 0; font-size:15px;">Diamonds: <b id="sumDms" style="float:right;">--</b></p>
+        <p style="text-align:left; margin:10px 0; font-size:15px;">Total Amount: <b id="sumAmt" style="float:right;">--</b></p>
+        <button onclick="const note=encodeURIComponent('ID:'+document.getElementById('sumId').innerText+' | Dms:'+document.getElementById('sumDms').innerText); const upiLink='upi://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+document.getElementById('sumAmt').innerText.replace('₹','')+'&tn='+note+'&cu=INR'; if(navigator.userAgent.toLowerCase().indexOf('imo')>-1){ window.location.href='intent://'+window.location.host+window.location.pathname+'#Intent;scheme=https;package=com.android.chrome;end'; }else{ window.location.href=upiLink; }" style="width:100%; padding:14px; background:#1a237e; color:#fff; border:none; border-radius:10px; font-weight:bold; font-size:16px; margin-top:15px;">Pay with UPI</button>
+        <p onclick="document.getElementById('orderBox').style.display='none'" style="color:red; cursor:pointer; margin-top:15px; font-weight:bold; font-size:14px;">Cancel</p>
+    </div>
+</div>
         
     </div>
 

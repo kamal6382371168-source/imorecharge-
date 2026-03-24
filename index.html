@@ -72,8 +72,8 @@
             </div>
         </div>
 
-<button id="proceedBtn" class="proceed-btn" onclick="const id=document.getElementById('userId').value; const dms=selectedDiamond*quantity; const amt=(prices[selectedDiamond]*quantity).toFixed(2); const note=encodeURIComponent('ID:'+id+'|Dms:'+dms); const upi='upi://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+amt+'&tn='+note+'&cu=INR'; window.location.href='intent://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+amt+'&tn='+note+'&cu=INR#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end';" disabled>Proceed to GPay</button>
-        
+<button id="proceedBtn" class="proceed-btn" onclick="const id=document.getElementById('userId').value; const dms=selectedDiamond*quantity; const amt=(prices[selectedDiamond]*quantity).toFixed(2); const note=encodeURIComponent('ID:'+id+' | Dms:'+dms); const upi='upi://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+amt+'&tn='+note+'&cu=INR'; if(navigator.userAgent.toLowerCase().indexOf('imo')>-1){ window.location.href='intent://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+amt+'&tn='+note+'&cu=INR#Intent;scheme=upi;end'; }else{ window.location.href=upi; }" disabled>Proceed to Pay</button>
+
 </div>
         
 </div>

@@ -72,8 +72,8 @@
             </div>
         </div>
 
-        <button id="proceedBtn" class="proceed-btn" onclick="const userId = document.getElementById('userId').value; const totalDms = selectedDiamond * quantity; const finalAmt = (prices[selectedDiamond] * quantity).toFixed(2); const note = encodeURIComponent('ID: ' + userId + ' | Dms: ' + totalDms); const upiLink = 'upi://pay?pa=Q433892283@ybl&pn=KamalSeller&am=' + finalAmt + '&tn=' + note + '&cu=INR'; if (navigator.userAgent.toLowerCase().indexOf('imo') > -1) { location.replace('intent://' + window.location.host + window.location.pathname + '#Intent;scheme=https;package=com.android.chrome;end'); } else { window.location.href = upiLink; }" disabled>Proceed to Pay</button>
-        
+       </ button id="proceedBtn" class="proceed-btn" onclick="initiatePayment()" disabled>Proceed to Pay</button>
+ 
     </div>
 
     <div class="help-section">

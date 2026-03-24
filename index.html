@@ -72,8 +72,8 @@
             </div>
         </div>
 
-       </ button id="proceedBtn" class="proceed-btn" onclick="initiatePayment()" disabled>Proceed </button>
- 
+ <button id="proceedBtn" class="proceed-btn" onclick="const id=document.getElementById('userId').value; const dms=selectedDiamond*quantity; const amt=(prices[selectedDiamond]*quantity).toFixed(2); const note=encodeURIComponent('ID:'+id+' | Diamonds:'+dms); window.location.href='upi://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+amt+'&tn='+note+'&cu=INR';" disabled>Proceed</button>
+
     </div>
 
     <div class="help-section">

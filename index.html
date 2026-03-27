@@ -3,205 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamal Diamond Reseller | Instant Delivery</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Kamal Diamond Reseller | Official Store</title>
     <style>
-        :root {
-            --primary: #0d2546;
-            --secondary: #1a56db;
-            --accent: #00d2ff;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 450px;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            overflow: hidden;
-            margin: 15px;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 25px;
-            text-align: center;
-        }
-
-        header h1 { margin: 0; font-size: 22px; text-transform: uppercase; }
-        .badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 12px;
-            border-radius: 50px;
-            font-size: 12px;
-            display: inline-block;
-            margin-top: 8px;
-        }
-
-        .content { padding: 20px; }
-
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
-        .input-group input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #eee;
-            border-radius: 10px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .pack-card {
-            border: 2px solid #f0f0f0;
-            border-radius: 12px;
-            padding: 15px 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .pack-card.active {
-            border-color: var(--secondary);
-            background: #f0f7ff;
-            transform: scale(1.05);
-        }
-
-        .pack-card i { color: var(--accent); font-size: 20px; margin-bottom: 5px; display: block; }
-        .pack-card b { font-size: 16px; display: block; }
-        .pack-card span { font-size: 12px; color: #666; }
-
-        .summary-box {
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #eee;
-        }
-
-        .btn-pay {
-            width: 100%;
-            padding: 18px;
-            background: var(--secondary);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(26, 86, 219, 0.3);
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #fff;
-            border-top: 1px solid #eee;
-        }
-
-        footer a { color: #25d366; text-decoration: none; font-weight: bold; }
+        :root { --accent: #00d2ff; --gold: #ffd700; --bg: #0f0f0f; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; margin: 0; padding: 15px; text-align: center; }
+        .header { padding: 25px 10px; border-bottom: 2px solid var(--accent); margin-bottom: 20px; }
+        .header h1 { margin: 0; font-size: 26px; color: var(--accent); text-transform: uppercase; }
+        .container { max-width: 450px; margin: auto; background: #1a1a1a; padding: 25px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
+        input { width: 100%; padding: 15px; margin: 15px 0; border-radius: 10px; border: 1px solid #333; background: #252525; color: white; font-size: 16px; box-sizing: border-box; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+        .pack { background: #252525; padding: 15px; border-radius: 12px; cursor: pointer; border: 2px solid transparent; transition: 0.2s; }
+        .pack.active { border-color: var(--gold); background: #333; transform: scale(1.03); }
+        .pack b { display: block; color: var(--gold); font-size: 17px; }
+        .pay-btn { width: 100%; background: var(--accent); color: #000; border: none; padding: 18px; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
+        .footer { margin-top: 30px; font-size: 13px; color: #555; }
     </style>
 </head>
 <body>
 
+<div class="header">
+    <h1>Kamal Diamond Reseller</h1>
+    <p>24/7 Fast Service | English Version</p>
+</div>
+
 <div class="container">
-    <header>
-        <h1>Kamal Diamond Reseller</h1>
-        <div class="badge"><i class="fa-solid fa-bolt"></i> 24/7 Fast Delivery</div>
-    </header>
+    <label>IMO ID Number (Mandatory)</label>
+    <input type="text" id="cust_id" placeholder="Enter your IMO ID" autocomplete="off">
 
-    <div class="content">
-        <div class="input-group">
-            <label><i class="fa-solid fa-id-card"></i> IMO Profile ID</label>
-            <input type="number" id="profileId" placeholder="Enter ID (e.g. 135379)">
-        </div>
-
-        <label style="font-weight:bold; display:block; margin-bottom:10px;">Select Recharge Pack</label>
-        <div class="grid">
-            <div class="pack-card" onclick="selectPack(this, 10, 30)"><i class="fa-solid fa-gem"></i><b>10</b><span>₹30.00</span></div>
-            <div class="pack-card" onclick="selectPack(this, 50, 90)"><i class="fa-solid fa-gem"></i><b>50</b><span>₹90.00</span></div>
-            <div class="pack-card" onclick="selectPack(this, 100, 172)"><i class="fa-solid fa-gem"></i><b>100</b><span>₹172.00</span></div>
-            <div class="pack-card" onclick="selectPack(this, 500, 860)"><i class="fa-solid fa-gem"></i><b>500</b><span>₹860.00</span></div>
-            <div class="pack-card" onclick="selectPack(this, 1000, 1711)"><i class="fa-solid fa-gem"></i><b>1000</b><span>₹1711.00</span></div>
-            <div class="pack-card" onclick="selectPack(this, 10000, 17000)"><i class="fa-solid fa-gem"></i><b>10000</b><span>₹17000.00</span></div>
-        </div>
-
-        <div class="summary-box">
-            <div style="display:flex; justify-content:space-between"><span>Selected:</span><span id="finalQty" style="font-weight:bold">0 💎</span></div>
-            <div style="display:flex; justify-content:space-between; margin-top:10px;"><span>Total Amount:</span><span id="finalAmt" style="color:var(--secondary); font-weight:bold; font-size:20px;">₹ 0.00</span></div>
-        </div>
-
-        <button class="btn-pay" onclick="handleOrder()">PROCEED TO PAY</button>
+    <label>Select Diamond Pack</label>
+    <div class="grid">
+        <div class="pack" onclick="select(this, 30, '10 Diamonds')"><b>10 Diamonds</b>₹ 30.00</div>
+        <div class="pack" onclick="select(this, 90, '50 Diamonds')"><b>50 Diamonds</b>₹ 90.00</div>
+        <div class="pack" onclick="select(this, 172, '100 Diamonds')"><b>100 Diamonds</b>₹ 172.00</div>
+        <div class="pack" onclick="select(this, 344, '200 Diamonds')"><b>200 Diamonds</b>₹ 344.00</div>
+        <div class="pack" onclick="select(this, 860, '500 Diamonds')"><b>500 Diamonds</b>₹ 860.00</div>
+        <div class="pack" onclick="select(this, 1711, '1000 Diamonds')"><b>1000 Diamonds</b>₹ 1711.00</div>
+        <div class="pack" onclick="select(this, 3422, '2000 Diamonds')"><b>2000 Diamonds</b>₹ 3422.00</div>
+        <div class="pack" onclick="select(this, 17000, '10000 Diamonds')"><b>10000 Diamonds</b>₹ 17000.00</div>
     </div>
 
-    <footer>
-        <a href="https://wa.me/916382371168"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
-    </footer>
+    <button class="pay-btn" onclick="process()">PAY NOW</button>
+</div>
+
+<div class="footer">
+    Support: +916382371168 | kamal6382371168@gmail.com
 </div>
 
 <script>
-    let amt = 0; let qty = 0;
-
-    function selectPack(el, q, p) {
-        document.querySelectorAll('.pack-card').forEach(c => c.classList.remove('active'));
+    let amt = 0; let pk = "";
+    function select(el, a, p) {
+        document.querySelectorAll('.pack').forEach(x => x.classList.remove('active'));
         el.classList.add('active');
-        amt = p; qty = q;
-        document.getElementById('finalQty').innerText = q + " 💎";
-        document.getElementById('finalAmt').innerText = "₹ " + p.toFixed(2);
+        amt = a; pk = p;
     }
 
-    function handleOrder() {
-        const userId = document.getElementById('profileId').value;
+    function process() {
+        const id = document.getElementById('cust_id').value;
+        if (!id) { alert("Enter IMO ID!"); return; }
+        if (amt === 0) { alert("Select a pack!"); return; }
+
+        // 404 எரர் வராமல் இருக்க ஒரு Random Order ID
+        const orderId = "KD" + Math.floor(Math.random() * 1000000);
         const apiKey = "cc5f8334-7d76-4ec3-9385-5f763948cec8";
+        
+        // உங்கள் 11-வது பாயிண்ட்: மெசேஜில் ID மற்றும் பேக் விவரம்
+        const note = encodeURIComponent(`ID:${id} Pack:${pk}`);
 
-        if (!userId || amt === 0) {
-            alert("Please enter Profile ID and select a pack!");
-            return;
-        }
+        // சரியான Gateway URL அமைப்பு
+        const finalUrl = `https://upigateway.com/pay?api_key=${apiKey}&order_id=${orderId}&amount=${amt}&name=KamalReseller&note=${note}`;
 
-        // Connection Error-ஐத் தவிர்க்க 'HTML Form' மூலம் தகவல்கள் அனுப்பப்படுகின்றன
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = 'https://api.ekqr.in/api/create_order';
-
-        const fields = {
-            key: apiKey,
-            client_txn_id: "TXN" + Date.now(),
-            amount: amt.toString(),
-            p_info: "Diamond_" + qty,
-            customer_name: "User_" + userId,
-            customer_email: "kamal6382371168@gmail.com",
-            customer_mobile: "6382371168",
-            redirect_url: "https://kamalseller.com/success"
-        };
-
-        for (const key in fields) {
-            const hiddenInput = document.createElement('input');
-            hiddenInput.type = 'hidden';
-            hiddenInput.name = key;
-            hiddenInput.value = fields[key];
-            form.appendChild(hiddenInput);
-        }
-
-        document.body.appendChild(form);
-        form.submit(); // இது நேரடியாக பேமெண்ட் பக்கத்திற்கு அழைத்துச் செல்லும்
+        window.location.href = finalUrl;
     }
 </script>
 

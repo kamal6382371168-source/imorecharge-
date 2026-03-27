@@ -1,219 +1,255 @@
-
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamal Diamond Reseller - Home</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Kamal Diamond Reseller | Fast & Secure</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary-blue: #1a4a8e;
-            --bg-gray: #f8f9fa;
+            --primary: #1e3a8a;
+            --secondary: #3b82f6;
+            --accent: #00d2ff;
+            --bg: #f3f4f6;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-gray);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
             margin: 0;
-            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
 
-        .main-container {
+        .container {
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             background: #fff;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            margin: 15px;
-        }
-
-        /* Header Section */
-        header {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        header h1 { margin: 0; font-size: 22px; }
-        .status-badge {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 10px;
             border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            overflow: hidden;
+            margin: 10px;
+        }
+
+        /* Header Styling */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        header h1 { margin: 0; font-size: 24px; letter-spacing: 1px; text-transform: uppercase; }
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 6px 15px;
+            border-radius: 50px;
             font-size: 12px;
             display: inline-block;
             margin-top: 10px;
+            border: 1px solid rgba(255,255,255,0.3);
         }
 
-        /* Form Content */
-        .content { padding: 20px; }
+        /* Content Area */
+        .content { padding: 25px; }
 
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
-        .input-group input {
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; font-size: 14px; }
+        .form-group input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
             box-sizing: border-box;
             font-size: 16px;
+            transition: 0.3s;
         }
+        .form-group input:focus { border-color: var(--secondary); outline: none; }
 
-        /* Diamond Grid */
-        .recharge-label { font-weight: bold; margin-bottom: 15px; display: block; }
-        .diamond-grid {
+        /* Diamond Selection Grid */
+        .section-title { font-weight: 700; margin-bottom: 15px; display: block; color: #333; }
+        .grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 25px;
+            gap: 12px;
+            margin-bottom: 30px;
         }
 
-        .diamond-card {
-            border: 1px solid #eee;
-            border-radius: 10px;
+        .card {
+            background: #fff;
+            border: 2px solid #f1f1f1;
+            border-radius: 15px;
             padding: 15px 5px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
         }
 
-        .diamond-card:hover { border-color: var(--primary-blue); background: #f0f7ff; }
-        .diamond-card.active {
-            border: 2px solid var(--primary-blue);
-            background: #eef4ff;
+        .card i { color: var(--accent); font-size: 22px; margin-bottom: 8px; display: block; }
+        .card .amount { font-weight: 800; font-size: 15px; display: block; color: #1f2937; }
+        .card .price { color: #6b7280; font-size: 12px; font-weight: 500; }
+
+        .card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .card.active {
+            border-color: var(--secondary);
+            background-color: #eff6ff;
+            transform: scale(1.05);
         }
 
-        .diamond-card i { color: #00c3ff; margin-bottom: 5px; display: block; }
-        .diamond-card .count { font-weight: bold; display: block; font-size: 14px; }
-        .diamond-card .price { color: #666; font-size: 12px; }
-
-        /* Calculation Section */
-        .summary-box {
-            background: #f9f9f9;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px dashed #ccc;
+        /* Order Summary */
+        .summary {
+            background: #f9fafb;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 5px solid var(--secondary);
         }
 
-        .summary-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
-        .total-price { font-size: 18px; color: var(--primary-blue); font-weight: bold; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
+        .total-val { font-size: 20px; color: var(--primary); font-weight: 900; }
 
-        /* Action Buttons */
-        .btn-proceed {
+        /* Action Button */
+        .btn-pay {
             width: 100%;
-            padding: 15px;
-            background-color: var(--primary-blue);
+            padding: 18px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 18px;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            transition: 0.3s;
         }
 
-        /* Footer / Customer Care */
-        .footer {
+        .btn-pay:active { transform: scale(0.98); }
+
+        /* Footer Info */
+        footer {
             text-align: center;
             padding: 20px;
-            background: #f1f1f1;
-            font-size: 13px;
+            background: #fcfcfc;
+            border-top: 1px solid #eee;
         }
 
-        .footer a { color: #25D366; text-decoration: none; font-weight: bold; }
+        .support-link { color: #25d366; text-decoration: none; font-weight: 600; display: block; margin-bottom: 5px; }
+        .email-link { color: #666; font-size: 12px; text-decoration: none; }
     </style>
 </head>
 <body>
 
-<div class="main-container">
+<div class="container">
     <header>
-        <h1>கமல் டைமண்ட் ரிசெல்லர்</h1>
-        <div class="status-badge">
-            <i class="fa-solid fa-bolt"></i> 24 ஹவர்ஸ் அவைலபிள் | ஃபாஸ்ட் சர்வீஸ்
+        <h1>Kamal Diamond Reseller</h1>
+        <div class="badge">
+            <i class="fa-solid fa-clock"></i> 24/7 Available | Fast Delivery
         </div>
     </header>
 
     <div class="content">
-        <div class="input-group">
-            <label for="imoId">Profile ID Number</label>
-            <input type="text" id="imoId" placeholder="Enter your IMO ID here...">
+        <div class="form-group">
+            <label><i class="fa-solid fa-user-tag"></i> Profile ID Number</label>
+            <input type="number" id="profileId" placeholder="Enter your ID (e.g. 154356)">
         </div>
 
-        <span class="recharge-label">Select Recharge credit List</span>
-        <div class="diamond-grid">
-            <div class="diamond-card" onclick="selectPack(this, 10, 30)">
-                <i class="fa-solid fa-gem"></i> <span class="count">10</span> <span class="price">₹ 30.00</span>
+        <span class="section-title"><i class="fa-solid fa-gem"></i> Select Diamond Pack</span>
+        <div class="grid" id="packGrid">
+            <div class="card" onclick="selectPack(this, 10, 30)">
+                <i class="fa-solid fa-gem"></i>
+                <span class="amount">10</span>
+                <span class="price">₹ 30.00</span>
             </div>
-            <div class="diamond-card" onclick="selectPack(this, 50, 90)">
-                <i class="fa-solid fa-gem"></i> <span class="count">50</span> <span class="price">₹ 90.00</span>
+            <div class="card" onclick="selectPack(this, 50, 90)">
+                <i class="fa-solid fa-gem"></i>
+                <span class="amount">50</span>
+                <span class="price">₹ 90.00</span>
             </div>
-            <div class="diamond-card" onclick="selectPack(this, 100, 172)">
-                <i class="fa-solid fa-gem"></i> <span class="count">100</span> <span class="price">₹ 172.00</span>
+            <div class="card" onclick="selectPack(this, 100, 172)">
+                <i class="fa-solid fa-gem"></i>
+                <span class="amount">100</span>
+                <span class="price">₹ 172.00</span>
             </div>
-            <div class="diamond-card" onclick="selectPack(this, 200, 344)">
-                <i class="fa-solid fa-gem"></i> <span class="count">200</span> <span class="price">₹ 344.00</span>
+            <div class="card" onclick="selectPack(this, 500, 860)">
+                <i class="fa-solid fa-gem"></i>
+                <span class="amount">500</span>
+                <span class="price">₹ 860.00</span>
             </div>
-            <div class="diamond-card" onclick="selectPack(this, 500, 860)">
-                <i class="fa-solid fa-gem"></i> <span class="count">500</span> <span class="price">₹ 860.00</span>
+            <div class="card" onclick="selectPack(this, 1000, 1711)">
+                <i class="fa-solid fa-gem"></i>
+                <span class="amount">1000</span>
+                <span class="price">₹ 1711.00</span>
             </div>
-            <div class="diamond-card" onclick="selectPack(this, 1000, 1711)">
-                <i class="fa-solid fa-gem"></i> <span class="count">1000</span> <span class="price">₹ 1711.00</span>
+            <div class="card" onclick="selectPack(this, 10000, 17000)">
+                <i class="fa-solid fa-gem"></i>
+                <span class="amount">10000</span>
+                <span class="price">₹ 17000.00</span>
             </div>
         </div>
 
-        <div class="summary-box">
-            <div class="summary-row">
-                <span>Total credits:</span>
-                <span id="finalCredits">0 💎</span>
+        <div class="summary">
+            <div class="row">
+                <span>Total Credits:</span>
+                <span id="finalCredits" style="font-weight: bold;">0 💎</span>
             </div>
-            <div class="summary-row">
+            <div class="row" style="margin-top: 10px;">
                 <span style="font-weight: bold;">Total Amount:</span>
-                <span class="total-price" id="finalAmount">₹ 0.00</span>
+                <span class="total-val" id="finalAmount">₹ 0.00</span>
             </div>
         </div>
 
-        <button class="btn-proceed" onclick="handlePayment()">Proceed to Pay</button>
+        <button class="btn-pay" onclick="payNow()">
+            <i class="fa-solid fa-shield-halved"></i> Proceed to Pay
+        </button>
     </div>
 
-    <div class="footer">
-        <p>Need Help? <a href="https://wa.me/916382371168"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a></p>
-        <p>Email: kamal6382371168@gmail.com</p>
-    </div>
+    <footer>
+        <a href="https://wa.me/916382371168" class="support-link">
+            <i class="fa-brands fa-whatsapp"></i> Contact Support
+        </a>
+        <a href="mailto:kamal6382371168@gmail.com" class="email-link">kamal6382371168@gmail.com</a>
+    </footer>
 </div>
 
 <script>
-    let selectedAmount = 0;
+    let selectedPrice = 0;
+    let selectedQty = 0;
 
-    function selectPack(element, credits, price) {
-        // Remove active class from all
-        document.querySelectorAll('.diamond-card').forEach(card => card.classList.remove('active'));
-        // Add to current
+    function selectPack(element, qty, price) {
+        // Reset active cards
+        document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
+        // Set current card active
         element.classList.add('active');
         
-        selectedAmount = price;
-        document.getElementById('finalCredits').innerText = credits + " 💎";
+        selectedPrice = price;
+        selectedQty = qty;
+        
+        document.getElementById('finalCredits').innerText = qty + " 💎";
         document.getElementById('finalAmount').innerText = "₹ " + price.toFixed(2);
     }
 
-    function handlePayment() {
-        const id = document.getElementById('imoId').value;
+    function payNow() {
+        const id = document.getElementById('profileId').value;
+        const apiKey = "cc5f8334-7d76-4ec3-9385-5f763948cec8";
+
         if (!id) {
-            alert("தயவுசெய்து உங்கள் IMO ID-ஐ உள்ளிடவும்!");
+            alert("Please enter your Profile ID Number!");
             return;
         }
-        if (selectedAmount === 0) {
-            alert("ஒரு டைமண்ட் பேக்கை தேர்ந்தெடுக்கவும்!");
+        if (selectedPrice === 0) {
+            alert("Please select a Diamond Pack!");
             return;
         }
+
+        // Direct Payment Link for UPIGateway
+        const gatewayURL = `https://upigateway.com/pay?api_key=${apiKey}&amount=${selectedPrice}&client_id=${id}&product=Diamond_${selectedQty}`;
         
-        alert("Payment Gateway-க்கு செல்கிறது... (API Key: cc5f8334-7d76-4ec3-9385-5f763948cec8)");
-        // இங்கே உங்கள் UPIGateway லிங்க் வரும்
+        // Redirect to payment
+        window.location.href = gatewayURL;
     }
 </script>
 

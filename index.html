@@ -3,142 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamal Diamond Reseller | Fast & Secure</title>
+    <title>Kamal Diamond Reseller | Secure Payments</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #1e3a8a;
-            --secondary: #3b82f6;
-            --accent: #00d2ff;
-            --bg: #f3f4f6;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 480px;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            overflow: hidden;
-            margin: 10px;
-        }
-
-        /* Header Styling */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        header h1 { margin: 0; font-size: 24px; letter-spacing: 1px; text-transform: uppercase; }
-        .badge {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 6px 15px;
-            border-radius: 50px;
-            font-size: 12px;
-            display: inline-block;
-            margin-top: 10px;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-
-        /* Content Area */
-        .content { padding: 25px; }
-
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #444; font-size: 14px; }
-        .form-group input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            box-sizing: border-box;
-            font-size: 16px;
-            transition: 0.3s;
-        }
-        .form-group input:focus { border-color: var(--secondary); outline: none; }
-
-        /* Diamond Selection Grid */
-        .section-title { font-weight: 700; margin-bottom: 15px; display: block; color: #333; }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background: #fff;
-            border: 2px solid #f1f1f1;
-            border-radius: 15px;
-            padding: 15px 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .card i { color: var(--accent); font-size: 22px; margin-bottom: 8px; display: block; }
-        .card .amount { font-weight: 800; font-size: 15px; display: block; color: #1f2937; }
-        .card .price { color: #6b7280; font-size: 12px; font-weight: 500; }
-
-        .card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .card.active {
-            border-color: var(--secondary);
-            background-color: #eff6ff;
-            transform: scale(1.05);
-        }
-
-        /* Order Summary */
-        .summary {
-            background: #f9fafb;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
-            border-left: 5px solid var(--secondary);
-        }
-
-        .row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; }
-        .total-val { font-size: 20px; color: var(--primary); font-weight: 900; }
-
-        /* Action Button */
-        .btn-pay {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
-            transition: 0.3s;
-        }
-
-        .btn-pay:active { transform: scale(0.98); }
-
-        /* Footer Info */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #fcfcfc;
-            border-top: 1px solid #eee;
-        }
-
-        .support-link { color: #25d366; text-decoration: none; font-weight: 600; display: block; margin-bottom: 5px; }
-        .email-link { color: #666; font-size: 12px; text-decoration: none; }
+        :root { --primary: #0a2e5c; --secondary: #1e4eb8; --accent: #00d2ff; --bg: #f0f2f5; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .container { width: 100%; max-width: 450px; background: #fff; border-radius: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); overflow: hidden; margin: 15px; border: 1px solid #ddd; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 35px 20px; text-align: center; }
+        header h1 { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1.5px; }
+        .badge { background: rgba(255, 255, 255, 0.15); padding: 8px 15px; border-radius: 50px; font-size: 12px; display: inline-block; margin-top: 12px; border: 1px solid rgba(255,255,255,0.2); }
+        .content { padding: 30px; }
+        .form-group { margin-bottom: 25px; }
+        .form-group label { display: block; margin-bottom: 10px; font-weight: 700; color: #333; font-size: 15px; }
+        .form-group input { width: 100%; padding: 15px; border: 2px solid #eee; border-radius: 15px; box-sizing: border-box; font-size: 16px; transition: 0.3s; background: #fafafa; }
+        .form-group input:focus { border-color: var(--secondary); outline: none; background: #fff; }
+        .section-title { font-weight: 800; margin-bottom: 15px; display: block; color: #222; font-size: 16px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
+        .card { background: #fff; border: 2px solid #f1f1f1; border-radius: 18px; padding: 18px 5px; text-align: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .card i { color: var(--accent); font-size: 24px; margin-bottom: 8px; display: block; }
+        .card .amount { font-weight: 800; font-size: 16px; display: block; color: #111; }
+        .card .price { color: #777; font-size: 13px; font-weight: 600; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); border-color: var(--accent); }
+        .card.active { border-color: var(--secondary); background-color: #f0f7ff; transform: scale(1.05); box-shadow: 0 10px 25px rgba(30, 78, 184, 0.2); }
+        .summary { background: #f8faff; border-radius: 20px; padding: 20px; margin-bottom: 30px; border: 1px solid #e1e8f5; }
+        .row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; color: #444; }
+        .total-val { font-size: 22px; color: var(--secondary); font-weight: 900; }
+        .btn-pay { width: 100%; padding: 20px; background: linear-gradient(to right, var(--primary), var(--secondary)); color: white; border: none; border-radius: 15px; font-size: 19px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 20px rgba(30, 78, 184, 0.3); transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .btn-pay:active { transform: scale(0.97); }
+        footer { text-align: center; padding: 25px; background: #fff; border-top: 1px solid #eee; }
+        .support-link { color: #25d366; text-decoration: none; font-weight: 700; font-size: 15px; display: flex; justify-content: center; align-items: center; gap: 8px; }
     </style>
 </head>
 <body>
@@ -146,112 +39,67 @@
 <div class="container">
     <header>
         <h1>Kamal Diamond Reseller</h1>
-        <div class="badge">
-            <i class="fa-solid fa-clock"></i> 24/7 Available | Fast Delivery
-        </div>
+        <div class="badge"><i class="fa-solid fa-bolt"></i> 24/7 FAST SERVICE</div>
     </header>
 
     <div class="content">
         <div class="form-group">
-            <label><i class="fa-solid fa-user-tag"></i> Profile ID Number</label>
-            <input type="number" id="profileId" placeholder="Enter your ID (e.g. 154356)">
+            <label><i class="fa-solid fa-id-card"></i> IMO Profile ID</label>
+            <input type="number" id="profileId" placeholder="Enter ID Number (e.g. 154356)">
         </div>
 
-        <span class="section-title"><i class="fa-solid fa-gem"></i> Select Diamond Pack</span>
-        <div class="grid" id="packGrid">
-            <div class="card" onclick="selectPack(this, 10, 30)">
-                <i class="fa-solid fa-gem"></i>
-                <span class="amount">10</span>
-                <span class="price">₹ 30.00</span>
-            </div>
-            <div class="card" onclick="selectPack(this, 50, 90)">
-                <i class="fa-solid fa-gem"></i>
-                <span class="amount">50</span>
-                <span class="price">₹ 90.00</span>
-            </div>
-            <div class="card" onclick="selectPack(this, 100, 172)">
-                <i class="fa-solid fa-gem"></i>
-                <span class="amount">100</span>
-                <span class="price">₹ 172.00</span>
-            </div>
-            <div class="card" onclick="selectPack(this, 500, 860)">
-                <i class="fa-solid fa-gem"></i>
-                <span class="amount">500</span>
-                <span class="price">₹ 860.00</span>
-            </div>
-            <div class="card" onclick="selectPack(this, 1000, 1711)">
-                <i class="fa-solid fa-gem"></i>
-                <span class="amount">1000</span>
-                <span class="price">₹ 1711.00</span>
-            </div>
-            <div class="card" onclick="selectPack(this, 10000, 17000)">
-                <i class="fa-solid fa-gem"></i>
-                <span class="amount">10000</span>
-                <span class="price">₹ 17000.00</span>
-            </div>
+        <span class="section-title"><i class="fa-solid fa-gem"></i> Select Credits</span>
+        <div class="grid">
+            <div class="card" onclick="selectPack(this, 10, 30)"><i class="fa-solid fa-gem"></i><span class="amount">10</span><span class="price">₹30</span></div>
+            <div class="card" onclick="selectPack(this, 50, 90)"><i class="fa-solid fa-gem"></i><span class="amount">50</span><span class="price">₹90</span></div>
+            <div class="card" onclick="selectPack(this, 100, 172)"><i class="fa-solid fa-gem"></i><span class="amount">100</span><span class="price">₹172</span></div>
+            <div class="card" onclick="selectPack(this, 500, 860)"><i class="fa-solid fa-gem"></i><span class="amount">500</span><span class="price">₹860</span></div>
+            <div class="card" onclick="selectPack(this, 1000, 1711)"><i class="fa-solid fa-gem"></i><span class="amount">1000</span><span class="price">₹1711</span></div>
+            <div class="card" onclick="selectPack(this, 10000, 17000)"><i class="fa-solid fa-gem"></i><span class="amount">10000</span><span class="price">₹17000</span></div>
         </div>
 
         <div class="summary">
-            <div class="row">
-                <span>Total Credits:</span>
-                <span id="finalCredits" style="font-weight: bold;">0 💎</span>
-            </div>
-            <div class="row" style="margin-top: 10px;">
-                <span style="font-weight: bold;">Total Amount:</span>
-                <span class="total-val" id="finalAmount">₹ 0.00</span>
-            </div>
+            <div class="row"><span>Selected Credits:</span><span id="finalCredits" style="font-weight: 700;">0 💎</span></div>
+            <div class="row"><span>Final Price:</span><span class="total-val" id="finalAmount">₹ 0.00</span></div>
         </div>
 
-        <button class="btn-pay" onclick="payNow()">
-            <i class="fa-solid fa-shield-halved"></i> Proceed to Pay
+        <button class="btn-pay" onclick="initiatePayment()">
+            <i class="fa-solid fa-cart-shopping"></i> PAY NOW
         </button>
     </div>
 
     <footer>
-        <a href="https://wa.me/916382371168" class="support-link">
-            <i class="fa-brands fa-whatsapp"></i> Contact Support
-        </a>
-        <a href="mailto:kamal6382371168@gmail.com" class="email-link">kamal6382371168@gmail.com</a>
+        <a href="https://wa.me/916382371168" class="support-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
     </footer>
 </div>
 
 <script>
-    let selectedPrice = 0;
-    let selectedQty = 0;
+    let amount = 0;
+    let credits = 0;
 
-    function selectPack(element, qty, price) {
-        // Reset active cards
+    function selectPack(el, qty, pr) {
         document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-        // Set current card active
-        element.classList.add('active');
-        
-        selectedPrice = price;
-        selectedQty = qty;
-        
+        el.classList.add('active');
+        amount = pr;
+        credits = qty;
         document.getElementById('finalCredits').innerText = qty + " 💎";
-        document.getElementById('finalAmount').innerText = "₹ " + price.toFixed(2);
+        document.getElementById('finalAmount').innerText = "₹ " + pr.toFixed(2);
     }
 
-    function payNow() {
-        const id = document.getElementById('profileId').value;
+    function initiatePayment() {
+        const userId = document.getElementById('profileId').value;
         const apiKey = "cc5f8334-7d76-4ec3-9385-5f763948cec8";
 
-        if (!id) {
-            alert("Please enter your Profile ID Number!");
-            return;
-        }
-        if (selectedPrice === 0) {
-            alert("Please select a Diamond Pack!");
-            return;
-        }
+        if (!userId) { alert("Please enter your IMO ID!"); return; }
+        if (amount === 0) { alert("Please select a pack!"); return; }
 
-        // Direct Payment Link for UPIGateway
-        const gatewayURL = `https://upigateway.com/pay?api_key=${apiKey}&amount=${selectedPrice}&client_id=${id}&product=Diamond_${selectedQty}`;
+        /* முக்கியமானது: இந்த URL உங்கள் UPIGateway-ன் API ஸ்ட்ரக்சர் படி இருக்க வேண்டும்.
+           பொதுவாக 'Direct Intent' வேலை செய்ய இந்த பார்மட் உதவும்:
+        */
+        const paymentUrl = `https://upigateway.com/order/pay?api_key=${apiKey}&amount=${amount}&client_id=${userId}&product_name=Diamond_${credits}`;
         
-        // Redirect to payment
-        window.location.href = gatewayURL;
+        window.location.href = paymentUrl;
     }
 </script>
-
 </body>
 </html>

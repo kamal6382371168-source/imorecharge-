@@ -3,78 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamal Diamond Reseller | Official Store</title>
+    <title>Kamal Diamond Reseller | Contact Us</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --accent: #00d2ff; --gold: #ffd700; --bg: #0f0f0f; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; margin: 0; padding: 15px; text-align: center; }
-        .header { padding: 25px 10px; border-bottom: 2px solid var(--accent); margin-bottom: 20px; }
-        .header h1 { margin: 0; font-size: 26px; color: var(--accent); text-transform: uppercase; }
-        .container { max-width: 450px; margin: auto; background: #1a1a1a; padding: 25px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.8); }
-        input { width: 100%; padding: 15px; margin: 15px 0; border-radius: 10px; border: 1px solid #333; background: #252525; color: white; font-size: 16px; box-sizing: border-box; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-        .pack { background: #252525; padding: 15px; border-radius: 12px; cursor: pointer; border: 2px solid transparent; transition: 0.2s; }
-        .pack.active { border-color: var(--gold); background: #333; transform: scale(1.03); }
-        .pack b { display: block; color: var(--gold); font-size: 17px; }
-        .pay-btn { width: 100%; background: var(--accent); color: #000; border: none; padding: 18px; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 15px; }
-        .footer { margin-top: 30px; font-size: 13px; color: #555; }
+        :root {
+            --primary-bg: #0a0a0a;
+            --accent-blue: #00d2ff;
+            --whatsapp-green: #25D366;
+            --text-main: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .main-card {
+            text-align: center;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            background: #151515;
+            border-radius: 30px;
+            border: 1px solid #333;
+            box-shadow: 0 10px 50px rgba(0, 210, 255, 0.15);
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            color: var(--accent-blue);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .status-tag {
+            display: inline-block;
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff4d4d;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .message {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            color: #ccc;
+        }
+
+        .whatsapp-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--whatsapp-green);
+            color: white;
+            text-decoration: none;
+            padding: 20px 40px;
+            border-radius: 50px;
+            font-size: 22px;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-btn i {
+            font-size: 30px;
+            margin-right: 15px;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        .contact-details {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+
+        .contact-details p {
+            font-size: 14px;
+            color: #777;
+            margin: 5px 0;
+        }
+
+        /* Animation for the button */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        .whatsapp-btn {
+            animation: pulse 2s infinite;
+        }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>Kamal Diamond Reseller</h1>
-    <p>24/7 Fast Service | English Version</p>
-</div>
-
-<div class="container">
-    <label>IMO ID Number (Mandatory)</label>
-    <input type="text" id="cust_id" placeholder="Enter your IMO ID" autocomplete="off">
-
-    <label>Select Diamond Pack</label>
-    <div class="grid">
-        <div class="pack" onclick="select(this, 30, '10 Diamonds')"><b>10 Diamonds</b>₹ 30.00</div>
-        <div class="pack" onclick="select(this, 90, '50 Diamonds')"><b>50 Diamonds</b>₹ 90.00</div>
-        <div class="pack" onclick="select(this, 172, '100 Diamonds')"><b>100 Diamonds</b>₹ 172.00</div>
-        <div class="pack" onclick="select(this, 344, '200 Diamonds')"><b>200 Diamonds</b>₹ 344.00</div>
-        <div class="pack" onclick="select(this, 860, '500 Diamonds')"><b>500 Diamonds</b>₹ 860.00</div>
-        <div class="pack" onclick="select(this, 1711, '1000 Diamonds')"><b>1000 Diamonds</b>₹ 1711.00</div>
-        <div class="pack" onclick="select(this, 3422, '2000 Diamonds')"><b>2000 Diamonds</b>₹ 3422.00</div>
-        <div class="pack" onclick="select(this, 17000, '10000 Diamonds')"><b>10000 Diamonds</b>₹ 17000.00</div>
-    </div>
-
-    <button class="pay-btn" onclick="process()">PAY NOW</button>
-</div>
-
-<div class="footer">
-    Support: +916382371168 | kamal6382371168@gmail.com
-</div>
-
-<script>
-    let amt = 0; let pk = "";
-    function select(el, a, p) {
-        document.querySelectorAll('.pack').forEach(x => x.classList.remove('active'));
-        el.classList.add('active');
-        amt = a; pk = p;
-    }
-
-    function process() {
-        const id = document.getElementById('cust_id').value;
-        if (!id) { alert("Enter IMO ID!"); return; }
-        if (amt === 0) { alert("Select a pack!"); return; }
-
-        // 404 எரர் வராமல் இருக்க ஒரு Random Order ID
-        const orderId = "KD" + Math.floor(Math.random() * 1000000);
-        const apiKey = "cc5f8334-7d76-4ec3-9385-5f763948cec8";
+    <div class="main-card">
+        <div class="logo">
+            <h1>Kamal Diamond Reseller</h1>
+        </div>
         
-        // உங்கள் 11-வது பாயிண்ட்: மெசேஜில் ID மற்றும் பேக் விவரம்
-        const note = encodeURIComponent(`ID:${id} Pack:${pk}`);
+        <div class="status-tag">Website Currently Closed</div>
 
-        // சரியான Gateway URL அமைப்பு
-        const finalUrl = `https://upigateway.com/pay?api_key=${apiKey}&order_id=${orderId}&amount=${amt}&name=KamalReseller&note=${note}`;
+        <div class="message">
+            Our automated payment system is temporarily offline. <br>
+            <strong>For fast Diamond Top-up, please contact us directly on WhatsApp.</strong>
+        </div>
 
-        window.location.href = finalUrl;
-    }
-</script>
+        <div class="whatsapp-container">
+            <a href="https://wa.me/916382371168?text=Hi%20Kamal,%20I%20want%20to%20buy%20Diamonds" class="whatsapp-btn">
+                <i class="fab fa-whatsapp"></i> CONTACT ON WHATSAPP
+            </a>
+        </div>
+
+        <div class="contact-details">
+            <p><i class="fas fa-headset"></i> 24/7 Fast Customer Service</p>
+            <p><i class="fas fa-envelope"></i> kamal6382371168@gmail.com</p>
+        </div>
+    </div>
 
 </body>
 </html>

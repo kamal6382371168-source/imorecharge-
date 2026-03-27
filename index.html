@@ -1,152 +1,221 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IMO Diamond Recharge - Fast & Secure</title>
+    <title>Kamal Diamond Reseller - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --primary-blue: #0056b3; --inactive-grey: #bdc3c7; --light-blue: #e7f1ff; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f8f9fa; margin: 0; padding: 0; }
-        .header { background: #1a1a1a; color: white; padding: 15px; display: flex; align-items: center; position: sticky; top: 0; z-index: 100; }
-        .header i { margin-right: 15px; }
-        
-        .container { max-width: 500px; margin: auto; background: white; min-height: 100vh; padding-bottom: 50px; box-shadow: 0 0 15px rgba(0,0,0,0.1); }
-        
-        .section-box { padding: 20px; border-bottom: 8px solid #f0f2f5; }
-        .input-label { font-weight: bold; margin-bottom: 10px; display: block; font-size: 14px; }
-        .input-field { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none; transition: 0.3s; }
-        .input-field:focus { border-color: var(--primary-blue); }
+        :root {
+            --primary-blue: #1a4a8e;
+            --bg-gray: #f8f9fa;
+        }
 
-        .grid-title { padding: 15px 20px; font-weight: bold; background: #fff; }
-        .diamond-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 0 20px; }
-        .diamond-card { border: 1px solid #eee; border-radius: 10px; padding: 15px 5px; text-align: center; cursor: pointer; transition: 0.3s; }
-        .diamond-card.active { border: 2px solid var(--primary-blue); background: var(--light-blue); transform: scale(1.05); }
-        .diamond-card i { color: #00bcd4; margin-bottom: 5px; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-gray);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-        /* Summary & Quantity Section */
-        .order-summary { padding: 20px; background: #fff; border-top: 1px solid #eee; margin-top: 20px; }
-        .qty-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-        .qty-btn { width: 40px; height: 40px; border: 1px solid #ddd; border-radius: 50%; background: white; font-size: 20px; cursor: pointer; font-weight: bold; }
-        .qty-input { width: 50px; text-align: center; border: none; font-weight: bold; font-size: 20px; }
-        
-        .total-info { text-align: right; font-size: 15px; margin-bottom: 20px; border-top: 1px dashed #ccc; padding-top: 10px; }
-        .total-info b { font-size: 18px; color: var(--primary-blue); }
+        .main-container {
+            width: 100%;
+            max-width: 450px;
+            background: #fff;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 15px;
+        }
 
-        /* Proceed Button Style Changes */
-        .proceed-btn { width: 100%; border: none; padding: 16px; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: not-allowed; transition: 0.5s; background-color: var(--inactive-grey); color: #fff; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .proceed-btn.enabled { background-color: var(--primary-blue); cursor: pointer; transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,86,179,0.3); }
+        /* Header Section */
+        header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-        .help-section { padding: 20px; border-top: 8px solid #f0f2f5; margin-top: 20px; }
-        .support-card { border: 1px solid #eee; border-radius: 12px; padding: 12px; margin-top: 10px; display: flex; align-items: center; text-decoration: none; color: inherit; font-size: 14px; }
-        .support-card i { font-size: 20px; margin-right: 15px; }
-        .fa-whatsapp { color: #25d366; }
+        header h1 { margin: 0; font-size: 22px; }
+        .status-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        /* Form Content */
+        .content { padding: 20px; }
+
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        /* Diamond Grid */
+        .recharge-label { font-weight: bold; margin-bottom: 15px; display: block; }
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .diamond-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 15px 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .diamond-card:hover { border-color: var(--primary-blue); background: #f0f7ff; }
+        .diamond-card.active {
+            border: 2px solid var(--primary-blue);
+            background: #eef4ff;
+        }
+
+        .diamond-card i { color: #00c3ff; margin-bottom: 5px; display: block; }
+        .diamond-card .count { font-weight: bold; display: block; font-size: 14px; }
+        .diamond-card .price { color: #666; font-size: 12px; }
+
+        /* Calculation Section */
+        .summary-box {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px dashed #ccc;
+        }
+
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .total-price { font-size: 18px; color: var(--primary-blue); font-weight: bold; }
+
+        /* Action Buttons */
+        .btn-proceed {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Footer / Customer Care */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f1f1f1;
+            font-size: 13px;
+        }
+
+        .footer a { color: #25D366; text-decoration: none; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <i class="fas fa-arrow-left"></i>
-        <span>Imo diamond recharge</span>
-    </div>
+<div class="main-container">
+    <header>
+        <h1>கமல் டைமண்ட் ரிசெல்லர்</h1>
+        <div class="status-badge">
+            <i class="fa-solid fa-bolt"></i> 24 ஹவர்ஸ் அவைலபிள் | ஃபாஸ்ட் சர்வீஸ்
+        </div>
+    </header>
 
-    <div class="section-box">
-        <label class="input-label">Profile ID Number / Mobile Number</label>
-        <input type="text" id="userId" class="input-field" placeholder="Enter ID or Mobile Number" oninput="checkRequirement()">
-    </div>
+    <div class="content">
+        <div class="input-group">
+            <label for="imoId">Profile ID Number</label>
+            <input type="text" id="imoId" placeholder="Enter your IMO ID here...">
+        </div>
 
-    <div class="grid-title">Select Recharge credit List</div>
-    <div class="diamond-grid" id="diamondGrid"></div>
-
-    <div class="order-summary">
-        <div class="qty-row">
-            <div>
-                <button class="qty-btn" onclick="changeQty(-1)">-</button>
-                <input type="text" id="qtyVal" class="qty-input" value="1" readonly>
-                <button class="qty-btn" onclick="changeQty(1)">+</button>
+        <span class="recharge-label">Select Recharge credit List</span>
+        <div class="diamond-grid">
+            <div class="diamond-card" onclick="selectPack(this, 10, 30)">
+                <i class="fa-solid fa-gem"></i> <span class="count">10</span> <span class="price">₹ 30.00</span>
             </div>
-            <div class="total-info">
-                Total Credits: <b id="displayCredits">0</b><br>
-                Total Amount: <b id="displayAmnt">₹0.00</b>
+            <div class="diamond-card" onclick="selectPack(this, 50, 90)">
+                <i class="fa-solid fa-gem"></i> <span class="count">50</span> <span class="price">₹ 90.00</span>
+            </div>
+            <div class="diamond-card" onclick="selectPack(this, 100, 172)">
+                <i class="fa-solid fa-gem"></i> <span class="count">100</span> <span class="price">₹ 172.00</span>
+            </div>
+            <div class="diamond-card" onclick="selectPack(this, 200, 344)">
+                <i class="fa-solid fa-gem"></i> <span class="count">200</span> <span class="price">₹ 344.00</span>
+            </div>
+            <div class="diamond-card" onclick="selectPack(this, 500, 860)">
+                <i class="fa-solid fa-gem"></i> <span class="count">500</span> <span class="price">₹ 860.00</span>
+            </div>
+            <div class="diamond-card" onclick="selectPack(this, 1000, 1711)">
+                <i class="fa-solid fa-gem"></i> <span class="count">1000</span> <span class="price">₹ 1711.00</span>
             </div>
         </div>
 
-        <button id="proceedBtn" class="proceed-btn" onclick="const id=document.getElementById('userId').value; const dms=selectedDiamond*quantity; const amt=(prices[selectedDiamond]*quantity).toFixed(2); const note=encodeURIComponent('ID:'+id+' | Dms:'+dms); window.location.href='intent://pay?pa=Q433892283@ybl&pn=KamalSeller&am='+amt+'&tn='+note+'&cu=INR#Intent;scheme=upi;end';" disabled>Proceed to Pay</button>
+        <div class="summary-box">
+            <div class="summary-row">
+                <span>Total credits:</span>
+                <span id="finalCredits">0 💎</span>
+            </div>
+            <div class="summary-row">
+                <span style="font-weight: bold;">Total Amount:</span>
+                <span class="total-price" id="finalAmount">₹ 0.00</span>
+            </div>
+        </div>
 
-</div>
-        
-</div>
-        
+        <button class="btn-proceed" onclick="handlePayment()">Proceed to Pay</button>
     </div>
 
-    <div class="help-section">
-        <h4 style="margin: 0;">Need Help & Support?</h4>
-        <a href="https://wa.me/916382371168" class="support-card"><i class="fab fa-whatsapp"></i> WhatsApp: +91 6382371168</a>
-        <a href="mailto:kamal6382371168@gmail.com" class="support-card"><i class="fas fa-envelope"></i> kamal6382371168@gmail.com</a>
+    <div class="footer">
+        <p>Need Help? <a href="https://wa.me/916382371168"><i class="fa-brands fa-whatsapp"></i> WhatsApp Us</a></p>
+        <p>Email: kamal6382371168@gmail.com</p>
     </div>
 </div>
 
 <script>
-    const upiId = "Q433892283@ybl";
-    const prices = { 10: 30, 50: 90, 100: 172, 200: 344, 500: 860, 1000: 1720, 2000: 3400, 5000: 8500, 10000: 17000, 20000: 34000 };
-    
-    let selectedDiamond = null;
-    let quantity = 1;
+    let selectedAmount = 0;
 
-    // Load Grid
-    const grid = document.getElementById('diamondGrid');
-    Object.keys(prices).sort((a,b)=>a-b).forEach(qty => {
-        const card = document.createElement('div');
-        card.className = 'diamond-card';
-        card.innerHTML = `<i class="fas fa-gem"></i><br><b>${qty}</b><br><span style="font-size:12px;">₹${prices[qty]}</span>`;
-        card.onclick = () => {
-            document.querySelectorAll('.diamond-card').forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
-            selectedDiamond = qty;
-            updateUI();
-        };
-        grid.appendChild(card);
-    });
-
-    function changeQty(val) {// Line 136: Keep it empty or delete the initiatePayment function.
-    
-        quantity = Math.max(1, quantity + val);
-        document.getElementById('qtyVal').value = quantity;
-        updateUI();
-    }
-
-    function updateUI() {
-        if (selectedDiamond) {
-            document.getElementById('displayCredits').innerText = selectedDiamond * quantity;
-            document.getElementById('displayAmnt').innerText = "₹" + (prices[selectedDiamond] * quantity).toFixed(2);
-        }
-        checkRequirement();
-    }
-
-    // Button Color Change Logic
-    function checkRequirement() {
-        const userId = document.getElementById('userId').value.trim();
-        const btn = document.getElementById('proceedBtn');
+    function selectPack(element, credits, price) {
+        // Remove active class from all
+        document.querySelectorAll('.diamond-card').forEach(card => card.classList.remove('active'));
+        // Add to current
+        element.classList.add('active');
         
-        if (userId.length >= 4 && selectedDiamond !== null) {
-            btn.disabled = false;
-            btn.classList.add('enabled'); // பட்டன் நீல நிறமாகும்
-        } else {
-            btn.disabled = true;
-            btn.classList.remove('enabled'); // பட்டன் டல் கலரில் இருக்கும்
-        }
+        selectedAmount = price;
+        document.getElementById('finalCredits').innerText = credits + " 💎";
+        document.getElementById('finalAmount').innerText = "₹ " + price.toFixed(2);
     }
 
-    function initiatePayment() {
-        const userId = document.getElementById('userId').value;
-        const finalAmnt = prices[selectedDiamond] * quantity;
-        const totalGem = selectedDiamond * quantity;
+    function handlePayment() {
+        const id = document.getElementById('imoId').value;
+        if (!id) {
+            alert("தயவுசெய்து உங்கள் IMO ID-ஐ உள்ளிடவும்!");
+            return;
+        }
+        if (selectedAmount === 0) {
+            alert("ஒரு டைமண்ட் பேக்கை தேர்ந்தெடுக்கவும்!");
+            return;
+        }
         
-        // Final UPI Link with Note
-        const upiUrl = `upi://pay?pa=${upiId}&pn=IMO_RECHARGE&am=${finalAmnt}&cu=INR&tn=ID_${userId}_DIAMONDS_${totalGem}`;
-        window.location.href = upiUrl;
+        alert("Payment Gateway-க்கு செல்கிறது... (API Key: cc5f8334-7d76-4ec3-9385-5f763948cec8)");
+        // இங்கே உங்கள் UPIGateway லிங்க் வரும்
     }
 </script>
+
 </body>
 </html>

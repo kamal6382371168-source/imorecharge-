@@ -3,102 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamal Diamond Reseller | Secure Payments</title>
+    <title>Kamal Diamond Reseller | Official</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --primary: #0a2e5c; --secondary: #1e4eb8; --accent: #00d2ff; --bg: #f0f2f5; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { width: 100%; max-width: 450px; background: #fff; border-radius: 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); overflow: hidden; margin: 15px; border: 1px solid #ddd; }
-        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 35px 20px; text-align: center; }
-        header h1 { margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1.5px; }
-        .badge { background: rgba(255, 255, 255, 0.15); padding: 8px 15px; border-radius: 50px; font-size: 12px; display: inline-block; margin-top: 12px; border: 1px solid rgba(255,255,255,0.2); }
-        .content { padding: 30px; }
-        .form-group { margin-bottom: 25px; }
-        .form-group label { display: block; margin-bottom: 10px; font-weight: 700; color: #333; font-size: 15px; }
-        .form-group input { width: 100%; padding: 15px; border: 2px solid #eee; border-radius: 15px; box-sizing: border-box; font-size: 16px; transition: 0.3s; background: #fafafa; }
-        .form-group input:focus { border-color: var(--secondary); outline: none; background: #fff; }
-        .section-title { font-weight: 800; margin-bottom: 15px; display: block; color: #222; font-size: 16px; }
-        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
-        .card { background: #fff; border: 2px solid #f1f1f1; border-radius: 18px; padding: 18px 5px; text-align: center; cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
-        .card i { color: var(--accent); font-size: 24px; margin-bottom: 8px; display: block; }
-        .card .amount { font-weight: 800; font-size: 16px; display: block; color: #111; }
-        .card .price { color: #777; font-size: 13px; font-weight: 600; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); border-color: var(--accent); }
-        .card.active { border-color: var(--secondary); background-color: #f0f7ff; transform: scale(1.05); box-shadow: 0 10px 25px rgba(30, 78, 184, 0.2); }
-        .summary { background: #f8faff; border-radius: 20px; padding: 20px; margin-bottom: 30px; border: 1px solid #e1e8f5; }
-        .row { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 15px; color: #444; }
-        .total-val { font-size: 22px; color: var(--secondary); font-weight: 900; }
-        .btn-pay { width: 100%; padding: 20px; background: linear-gradient(to right, var(--primary), var(--secondary)); color: white; border: none; border-radius: 15px; font-size: 19px; font-weight: 800; cursor: pointer; box-shadow: 0 10px 20px rgba(30, 78, 184, 0.3); transition: 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; }
-        .btn-pay:active { transform: scale(0.97); }
-        footer { text-align: center; padding: 25px; background: #fff; border-top: 1px solid #eee; }
-        .support-link { color: #25d366; text-decoration: none; font-weight: 700; font-size: 15px; display: flex; justify-content: center; align-items: center; gap: 8px; }
+        :root { --primary: #0a2e5c; --secondary: #1e4eb8; --bg: #f0f2f5; }
+        body { font-family: sans-serif; background: var(--bg); margin: 0; padding: 10px; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 450px; background: #fff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 25px; text-align: center; }
+        .content { padding: 20px; }
+        .form-group { margin-bottom: 20px; }
+        input { width: 100%; padding: 15px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; font-size: 16px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 20px 0; }
+        .card { border: 2px solid #f1f1f1; border-radius: 12px; padding: 15px 5px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .card.active { border-color: var(--secondary); background: #f0f7ff; transform: scale(1.05); }
+        .card i { color: #00d2ff; display: block; margin-bottom: 5px; }
+        .summary { background: #f9f9f9; padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 1px dashed #ccc; }
+        .btn-pay { width: 100%; padding: 18px; background: var(--secondary); color: white; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; cursor: pointer; }
+        footer { text-align: center; padding: 15px; font-size: 14px; color: #666; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>Kamal Diamond Reseller</h1>
-        <div class="badge"><i class="fa-solid fa-bolt"></i> 24/7 FAST SERVICE</div>
+        <h2 style="margin:0">Kamal Diamond Reseller</h2>
+        <div style="font-size:12px; margin-top:5px;"><i class="fa-solid fa-bolt"></i> 24/7 FAST RECHARGE</div>
     </header>
 
     <div class="content">
         <div class="form-group">
-            <label><i class="fa-solid fa-id-card"></i> IMO Profile ID</label>
-            <input type="number" id="profileId" placeholder="Enter ID Number (e.g. 154356)">
+            <label style="font-weight:bold; display:block; margin-bottom:5px;">IMO Profile ID</label>
+            <input type="number" id="profileId" placeholder="Enter Profile ID Number">
         </div>
 
-        <span class="section-title"><i class="fa-solid fa-gem"></i> Select Credits</span>
         <div class="grid">
-            <div class="card" onclick="selectPack(this, 10, 30)"><i class="fa-solid fa-gem"></i><span class="amount">10</span><span class="price">₹30</span></div>
-            <div class="card" onclick="selectPack(this, 50, 90)"><i class="fa-solid fa-gem"></i><span class="amount">50</span><span class="price">₹90</span></div>
-            <div class="card" onclick="selectPack(this, 100, 172)"><i class="fa-solid fa-gem"></i><span class="amount">100</span><span class="price">₹172</span></div>
-            <div class="card" onclick="selectPack(this, 500, 860)"><i class="fa-solid fa-gem"></i><span class="amount">500</span><span class="price">₹860</span></div>
-            <div class="card" onclick="selectPack(this, 1000, 1711)"><i class="fa-solid fa-gem"></i><span class="amount">1000</span><span class="price">₹1711</span></div>
-            <div class="card" onclick="selectPack(this, 10000, 17000)"><i class="fa-solid fa-gem"></i><span class="amount">10000</span><span class="price">₹17000</span></div>
+            <div class="card" onclick="select(this, 10, 30)"><i class="fa-solid fa-gem"></i>10<br><small>₹30</small></div>
+            <div class="card" onclick="select(this, 50, 90)"><i class="fa-solid fa-gem"></i>50<br><small>₹90</small></div>
+            <div class="card" onclick="select(this, 100, 172)"><i class="fa-solid fa-gem"></i>100<br><small>₹172</small></div>
+            <div class="card" onclick="select(this, 500, 860)"><i class="fa-solid fa-gem"></i>500<br><small>₹860</small></div>
+            <div class="card" onclick="select(this, 1000, 1711)"><i class="fa-solid fa-gem"></i>1000<br><small>₹1711</small></div>
+            <div class="card" onclick="select(this, 10000, 17000)"><i class="fa-solid fa-gem"></i>10000<br><small>₹17000</small></div>
         </div>
 
         <div class="summary">
-            <div class="row"><span>Selected Credits:</span><span id="finalCredits" style="font-weight: 700;">0 💎</span></div>
-            <div class="row"><span>Final Price:</span><span class="total-val" id="finalAmount">₹ 0.00</span></div>
+            <div style="display:flex; justify-content:space-between"><span>Selected:</span><span id="txtQty" style="font-weight:bold">0 💎</span></div>
+            <div style="display:flex; justify-content:space-between; margin-top:10px;"><span>Total:</span><span id="txtAmt" style="color:var(--secondary); font-weight:bold; font-size:20px;">₹ 0.00</span></div>
         </div>
 
-        <button class="btn-pay" onclick="initiatePayment()">
-            <i class="fa-solid fa-cart-shopping"></i> PAY NOW
-        </button>
+        <button class="btn-pay" onclick="createOrder()">PROCEED TO PAY</button>
     </div>
 
     <footer>
-        <a href="https://wa.me/916382371168" class="support-link"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
+        <i class="fa-brands fa-whatsapp"></i> Support: +916382371168
     </footer>
 </div>
 
 <script>
-    let amount = 0;
-    let credits = 0;
-
-    function selectPack(el, qty, pr) {
+    let amt = 0; let qty = 0;
+    function select(el, q, p) {
         document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
         el.classList.add('active');
-        amount = pr;
-        credits = qty;
-        document.getElementById('finalCredits').innerText = qty + " 💎";
-        document.getElementById('finalAmount').innerText = "₹ " + pr.toFixed(2);
+        amt = p; qty = q;
+        document.getElementById('txtQty').innerText = q + " 💎";
+        document.getElementById('txtAmt').innerText = "₹ " + p.toFixed(2);
     }
 
-    function initiatePayment() {
-        const userId = document.getElementById('profileId').value;
+    async function createOrder() {
+        const id = document.getElementById('profileId').value;
         const apiKey = "cc5f8334-7d76-4ec3-9385-5f763948cec8";
 
-        if (!userId) { alert("Please enter your IMO ID!"); return; }
-        if (amount === 0) { alert("Please select a pack!"); return; }
+        if (!id || amt === 0) { alert("Please enter ID and select pack!"); return; }
 
-        /* முக்கியமானது: இந்த URL உங்கள் UPIGateway-ன் API ஸ்ட்ரக்சர் படி இருக்க வேண்டும்.
-           பொதுவாக 'Direct Intent' வேலை செய்ய இந்த பார்மட் உதவும்:
-        */
-        const paymentUrl = `https://upigateway.com/order/pay?api_key=${apiKey}&amount=${amount}&client_id=${userId}&product_name=Diamond_${credits}`;
-        
-        window.location.href = paymentUrl;
+        // Merchant Connection ஸ்கிரீன்ஷாட்டில் உள்ளபடி JSON Data
+        const orderData = {
+            key: apiKey,
+            client_txn_id: "TXN" + Date.now(), // Unique ID
+            amount: amt.toString(),
+            p_info: "Diamond_" + qty,
+            customer_name: "Customer_" + id,
+            customer_email: "kamal6382371168@gmail.com",
+            customer_mobile: "6382371168",
+            redirect_url: "https://kamalseller.com/success"
+        };
+
+        try {
+            const response = await fetch('https://api.ekqr.in/api/create_order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            });
+
+            const result = await response.json();
+            if (result.status && result.data.payment_url) {
+                // இதுதான் ஜிபே/போன்பே ஓப்பன் செய்யும் உண்மையான லிங்க்
+                window.location.href = result.data.payment_url;
+            } else {
+                alert("Error: " + result.msg);
+            }
+        } catch (error) {
+            console.error("Payment Error:", error);
+            alert("Payment Gateway connection failed!");
+        }
     }
 </script>
 </body>

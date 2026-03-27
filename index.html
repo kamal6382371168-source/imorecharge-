@@ -3,235 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kamal Diamond Reseller | Fast & Secure Recharge</title>
+    <title>Kamal Diamond Reseller</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #0d2546;
-            --secondary: #1a56db;
-            --accent: #00d2ff;
-            --light-bg: #f3f6ff;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #eef2f7;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .main-card {
-            width: 100%;
-            max-width: 450px;
-            background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-            margin: 15px;
-        }
-
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            padding: 30px 20px;
-            text-align: center;
-        }
-
-        header h1 { margin: 0; font-size: 22px; text-transform: uppercase; letter-spacing: 1px; }
-        .badge {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 6px 15px;
-            border-radius: 50px;
-            font-size: 12px;
-            display: inline-block;
-            margin-top: 10px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .content { padding: 25px; }
-
-        .input-box { margin-bottom: 20px; }
-        .input-box label { display: block; margin-bottom: 8px; font-weight: 700; color: #333; font-size: 14px; }
-        .input-box input {
-            width: 100%;
-            padding: 15px;
-            border: 2px solid #eee;
-            border-radius: 12px;
-            box-sizing: border-box;
-            font-size: 16px;
-            background: #fafafa;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .diamond-card {
-            background: #fff;
-            border: 2px solid #f0f0f0;
-            border-radius: 15px;
-            padding: 15px 5px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .diamond-card i { color: var(--accent); font-size: 20px; margin-bottom: 5px; display: block; }
-        .diamond-card b { font-size: 15px; display: block; }
-        .diamond-card span { font-size: 12px; color: #777; font-weight: 600; }
-
-        .diamond-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-        .diamond-card.active {
-            border-color: var(--secondary);
-            background-color: #f0f7ff;
-            box-shadow: 0 5px 15px rgba(26, 86, 219, 0.15);
-        }
-
-        .summary {
-            background: var(--light-bg);
-            border-radius: 15px;
-            padding: 15px;
-            margin-top: 25px;
-            border: 1px solid #e1e8f5;
-        }
-
-        .row { display: flex; justify-content: space-between; margin-bottom: 8px; }
-        .total-text { font-size: 22px; color: var(--secondary); font-weight: 800; }
-
-        .btn-proceed {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-top: 20px;
-            box-shadow: 0 8px 20px rgba(13, 37, 70, 0.2);
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background: #fff;
-            border-top: 1px solid #eee;
-            font-size: 14px;
-        }
-
-        footer a { color: #25d366; text-decoration: none; font-weight: 700; }
+        :root { --primary: #0d2546; --secondary: #1a56db; }
+        body { font-family: sans-serif; background: #eef2f7; display: flex; justify-content: center; margin: 0; padding: 10px; }
+        .card-box { width: 100%; max-width: 450px; background: #fff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
+        header { background: linear-gradient(135deg, var(--primary), var(--secondary)); color: white; padding: 25px; text-align: center; }
+        .content { padding: 20px; }
+        input { width: 100%; padding: 15px; border: 2px solid #eee; border-radius: 12px; box-sizing: border-box; font-size: 16px; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
+        .diamond-item { border: 2px solid #f0f0f0; border-radius: 12px; padding: 15px 5px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .diamond-item.active { border-color: var(--secondary); background: #f0f7ff; transform: scale(1.05); }
+        .diamond-item i { color: #00d2ff; display: block; margin-bottom: 5px; }
+        .summary { background: #f3f6ff; padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #e1e8f5; }
+        .btn-pay { width: 100%; padding: 18px; background: var(--secondary); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 5px 15px rgba(26, 86, 219, 0.3); }
+        footer { text-align: center; padding: 15px; background: #fff; border-top: 1px solid #eee; }
     </style>
 </head>
 <body>
 
-<div class="main-card">
+<div class="card-box">
     <header>
-        <h1>Kamal Diamond Reseller</h1>
-        <div class="badge"><i class="fa-solid fa-bolt"></i> 24/7 INSTANT DELIVERY</div>
+        <h1 style="margin:0; font-size:22px;">Kamal Diamond Reseller</h1>
+        <small><i class="fa-solid fa-bolt"></i> 24/7 Fast Delivery</small>
     </header>
 
     <div class="content">
-        <div class="input-box">
-            <label><i class="fa-solid fa-id-card"></i> Profile ID Number</label>
-            <input type="number" id="profileId" placeholder="Enter ID (e.g. 135379)">
-        </div>
+        <label style="font-weight:bold; display:block; margin-bottom:8px;">IMO Profile ID</label>
+        <input type="number" id="profileId" placeholder="Enter ID (e.g. 135379)">
 
-        <label style="font-weight: 700; color: #333;">Select Recharge List</label>
+        <label style="font-weight:bold; display:block; margin-bottom:8px;">Select Pack</label>
         <div class="grid">
-            <div class="diamond-card" onclick="selectPack(this, 10, 30)">
-                <i class="fa-solid fa-gem"></i><b>10</b><span>₹ 30.00</span>
-            </div>
-            <div class="diamond-card" onclick="selectPack(this, 50, 90)">
-                <i class="fa-solid fa-gem"></i><b>50</b><span>₹ 90.00</span>
-            </div>
-            <div class="diamond-card" onclick="selectPack(this, 100, 172)">
-                <i class="fa-solid fa-gem"></i><b>100</b><span>₹ 172.00</span>
-            </div>
-            <div class="diamond-card" onclick="selectPack(this, 200, 344)">
-                <i class="fa-solid fa-gem"></i><b>200</b><span>₹ 344.00</span>
-            </div>
-            <div class="diamond-card" onclick="selectPack(this, 500, 860)">
-                <i class="fa-solid fa-gem"></i><b>500</b><span>₹ 860.00</span>
-            </div>
-            <div class="diamond-card" onclick="selectPack(this, 1000, 1711)">
-                <i class="fa-solid fa-gem"></i><b>1000</b><span>₹ 1711.00</span>
-            </div>
+            <div class="diamond-item" onclick="select(this, 10, 30)"><i class="fa-solid fa-gem"></i>10<br>₹30</div>
+            <div class="diamond-item" onclick="select(this, 50, 90)"><i class="fa-solid fa-gem"></i>50<br>₹90</div>
+            <div class="diamond-item" onclick="select(this, 100, 172)"><i class="fa-solid fa-gem"></i>100<br>₹172</div>
+            <div class="diamond-item" onclick="select(this, 500, 860)"><i class="fa-solid fa-gem"></i>500<br>₹860</div>
+            <div class="diamond-item" onclick="select(this, 1000, 1711)"><i class="fa-solid fa-gem"></i>1000<br>₹1711</div>
+            <div class="diamond-item" onclick="select(this, 10000, 17000)"><i class="fa-solid fa-gem"></i>10000<br>₹17000</div>
         </div>
 
         <div class="summary">
-            <div class="row"><span>Credits:</span><span id="displayQty" style="font-weight:bold">0 💎</span></div>
-            <div class="row" style="margin-top:10px;">
-                <span style="font-weight:bold">Total Amount:</span>
-                <span class="total-text" id="displayAmt">₹ 0.00</span>
-            </div>
+            <div style="display:flex; justify-content:space-between"><span>Selected:</span><span id="q" style="font-weight:bold">0 💎</span></div>
+            <div style="display:flex; justify-content:space-between; margin-top:10px;"><span>Total Amount:</span><span id="a" style="color:var(--secondary); font-weight:bold; font-size:20px;">₹ 0.00</span></div>
         </div>
 
-        <button class="btn-proceed" onclick="submitPayment()">PROCEED TO PAY</button>
+        <button class="btn-pay" onclick="pay()">PROCEED TO PAY</button>
     </div>
 
     <footer>
-        <a href="https://wa.me/916382371168"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
-        <div style="margin-top:5px; color:#999; font-size:12px;">kamal6382371168@gmail.com</div>
+        <a href="https://wa.me/916382371168" style="color:#25d366; text-decoration:none; font-weight:bold;"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
     </footer>
 </div>
 
 <script>
-    let selectedPrice = 0;
-    let selectedQty = 0;
-
-    function selectPack(element, qty, price) {
-        document.querySelectorAll('.diamond-card').forEach(c => c.classList.remove('active'));
-        element.classList.add('active');
-        selectedPrice = price;
-        selectedQty = qty;
-        document.getElementById('displayQty').innerText = qty + " 💎";
-        document.getElementById('displayAmt').innerText = "₹ " + price.toFixed(2);
+    let amt = 0; let qty = 0;
+    function select(el, q, p) {
+        document.querySelectorAll('.diamond-item').forEach(c => c.classList.remove('active'));
+        el.classList.add('active');
+        amt = p; qty = q;
+        document.getElementById('q').innerText = q + " 💎";
+        document.getElementById('txtAmt').innerText = "₹ " + p.toFixed(2);
     }
 
-    function submitPayment() {
-        const userId = document.getElementById('profileId').value;
+    // இதான் மிக முக்கியமான பகுதி (Automatic Link Opener)
+    async function pay() {
+        const id = document.getElementById('profileId').value;
+        if (!id || amt === 0) { alert("Please enter ID and select a pack!"); return; }
+
         const apiKey = "cc5f8334-7d76-4ec3-9385-5f763948cec8";
-
-        if (!userId || selectedPrice === 0) {
-            alert("Please enter Profile ID and select a pack!");
-            return;
-        }
-
-        // Creating hidden form to submit as POST - This avoids CORS errors
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = 'https://api.ekqr.in/api/create_order';
-
-        const data = {
+        const orderData = {
             key: apiKey,
-            client_txn_id: "TXN_" + Date.now(),
-            amount: selectedPrice.toString(),
-            p_info: "Diamond_" + selectedQty,
-            customer_name: "ID_" + userId,
+            client_txn_id: "TXN" + Date.now(),
+            amount: amt.toString(),
+            p_info: "Diamond_" + qty,
+            customer_name: "User_" + id,
             customer_email: "kamal6382371168@gmail.com",
             customer_mobile: "6382371168",
             redirect_url: "https://kamalseller.com/success"
         };
 
-        for (const key in data) {
-            const hiddenField = document.createElement('input');
-            hiddenField.type = 'hidden';
-            hiddenField.name = key;
-            hiddenField.value = data[key];
-            form.appendChild(hiddenField);
-        }
+        try {
+            const response = await fetch('https://api.ekqr.in/api/create_order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            });
 
-        document.body.appendChild(form);
-        form.submit();
+            const result = await response.json();
+            
+            // இப்போது அந்த பிளாக் ஸ்கிரீன் வராமல், நேரடியாக பேமெண்ட் லிங்க் ஓப்பன் ஆகும்
+            if (result.status && result.data.payment_url) {
+                window.location.href = result.data.payment_url; 
+            } else {
+                alert("Order failed: " + result.msg);
+            }
+        } catch (e) {
+            alert("Connection error! Please check your internet.");
+        }
     }
 </script>
-
 </body>
 </html>

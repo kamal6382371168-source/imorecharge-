@@ -3,236 +3,452 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<meta name="theme-color" content="#0a0a0c"/>
+<meta name="theme-color" content="#08080b"/>
 <title>Kamal Diamond Reseller — 24/7 Fast Service</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --gold:       #d4a742;
-  --gold-lt:    #f5d98b;
-  --gold-dk:    #9a7320;
-  --gold-glow:  rgba(212,167,66,.3);
-  --bg:         #08080b;
-  --bg2:        #0e0e13;
-  --bg3:        #141419;
-  --card:       #16161e;
-  --card2:      #1e1e28;
-  --border:     rgba(212,167,66,.2);
-  --border-dim: rgba(212,167,66,.09);
-  --text:       #ede8dc;
-  --muted:      #6e6860;
-  --blue:       #1a6cf8;
-  --blue-dk:    #1458d4;
-  --green:      #22c55e;
-  --red:        #ef4444;
-  --white:      #ffffff;
-  --r:          14px;
+/* ═══════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════ */
+:root{
+  --gold:#d4a742;--gold-lt:#f5d98b;--gold-dk:#9a7320;
+  --gold-glow:rgba(212,167,66,.32);
+  --bg:#08080b;--bg2:#0e0e13;--bg3:#141419;
+  --card:#16161e;--border:rgba(212,167,66,.2);--border-dim:rgba(212,167,66,.09);
+  --text:#ede8dc;--muted:#6e6860;
+  --blue:#1a6cf8;--blue-dk:#1255d0;
+  --green:#22c55e;--red:#ef4444;
+  --white:#ffffff;--r:14px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);
+  min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
 button{font-family:'DM Sans',sans-serif;cursor:pointer}
-input{font-family:'DM Sans',sans-serif}
+input,select,textarea{font-family:'DM Sans',sans-serif}
 
-/* ── ATMOSPHERE ── */
+/* ═══════════════════════════════════════
+   ATMOSPHERE
+═══════════════════════════════════════ */
 .atmos{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(ellipse 100% 55% at 50% -5%,rgba(212,167,66,.13) 0%,transparent 65%),
-             radial-gradient(ellipse 50% 50% at 100% 100%,rgba(212,167,66,.05) 0%,transparent 60%),var(--bg)}
+             radial-gradient(ellipse 50% 50% at 95% 95%,rgba(212,167,66,.06) 0%,transparent 60%),
+             var(--bg)}
 .atmos::after{content:'';position:absolute;inset:0;
   background-image:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(212,167,66,.022) 60px),
                    repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(212,167,66,.022) 60px)}
 
-/* ── LOADER ── */
-#loader{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  background:var(--bg);gap:18px;transition:opacity .5s,visibility .5s}
+/* ═══════════════════════════════════════
+   LOADER
+═══════════════════════════════════════ */
+#loader{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--bg);gap:18px;
+  transition:opacity .5s,visibility .5s}
 #loader.out{opacity:0;visibility:hidden}
-.ld-gem{font-size:52px;animation:gem-float 1.4s ease-in-out infinite}
-.ld-title{font-family:'Cinzel Decorative',serif;font-size:13px;letter-spacing:.2em;
+.ld-gem{font-size:54px;animation:gem-float 1.4s ease-in-out infinite}
+.ld-brand{font-family:'Cinzel Decorative',serif;font-size:13px;letter-spacing:.2em;
   background:linear-gradient(135deg,var(--gold-lt),var(--gold),var(--gold-dk));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.ld-track{width:140px;height:2px;background:rgba(212,167,66,.12);border-radius:99px;overflow:hidden}
-.ld-fill{height:100%;background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt));animation:ld-run 1.2s ease forwards}
+.ld-bar{width:140px;height:2px;background:rgba(212,167,66,.12);border-radius:99px;overflow:hidden}
+.ld-fill{height:100%;background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt));animation:ld-run 1.3s ease forwards}
 @keyframes ld-run{from{width:0}to{width:100%}}
 
-/* ── STEPS ── */
-.steps-wrap{position:sticky;top:0;z-index:20;background:rgba(8,8,11,.92);
-  backdrop-filter:blur(12px);border-bottom:1px solid var(--border-dim);padding:10px 16px}
-.steps{display:flex;align-items:center;justify-content:center;max-width:480px;margin:0 auto}
+/* ═══════════════════════════════════════
+   STEP PROGRESS NAV
+═══════════════════════════════════════ */
+.steps-nav{position:sticky;top:0;z-index:30;
+  background:rgba(8,8,11,.94);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border-dim);padding:10px 16px}
+.steps{display:flex;align-items:center;justify-content:center;max-width:500px;margin:0 auto}
 .step{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;position:relative}
-.step::after{content:'';position:absolute;top:13px;left:calc(50% + 14px);width:calc(100% - 28px);
-  height:1.5px;background:var(--border-dim);transition:background .4s}
+.step::after{content:'';position:absolute;top:13px;left:calc(50% + 15px);
+  width:calc(100% - 30px);height:1.5px;background:var(--border-dim);transition:background .4s}
 .step:last-child::after{display:none}
 .step.done::after{background:var(--gold)}
 .step-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   font-size:11px;font-weight:700;border:1.5px solid var(--muted);color:var(--muted);
   background:var(--bg2);transition:all .3s;z-index:1}
-.step.active .step-dot{border-color:var(--gold);color:var(--gold);box-shadow:0 0 12px var(--gold-glow);background:rgba(212,167,66,.1)}
+.step.active .step-dot{border-color:var(--gold);color:var(--gold);background:rgba(212,167,66,.1);box-shadow:0 0 12px var(--gold-glow)}
 .step.done .step-dot{border-color:var(--gold);background:var(--gold);color:#000}
 .step-lbl{font-size:9px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;font-weight:600;transition:color .3s;white-space:nowrap}
 .step.active .step-lbl{color:var(--gold)}
-.step.done .step-lbl{color:rgba(212,167,66,.7)}
+.step.done .step-lbl{color:rgba(212,167,66,.65)}
 
-/* ── HEADER ── */
-header{position:relative;z-index:5;text-align:center;padding:28px 20px 22px}
-.hdr-gem{font-size:44px;display:block;filter:drop-shadow(0 0 20px rgba(212,167,66,.6));animation:gem-float 3s ease-in-out infinite;margin-bottom:8px}
-.brand{font-family:'Cinzel Decorative',serif;font-size:clamp(15px,4.5vw,26px);font-weight:900;letter-spacing:.05em;
+/* ═══════════════════════════════════════
+   HEADER
+═══════════════════════════════════════ */
+header{position:relative;z-index:5;text-align:center;padding:28px 20px 20px}
+.hdr-gem{font-size:46px;display:block;
+  filter:drop-shadow(0 0 22px rgba(212,167,66,.65));
+  animation:gem-float 3s ease-in-out infinite;margin-bottom:8px}
+.brand{font-family:'Cinzel Decorative',serif;
+  font-size:clamp(15px,4.5vw,27px);font-weight:900;letter-spacing:.05em;
   background:linear-gradient(135deg,var(--gold-lt) 0%,var(--gold) 45%,var(--gold-dk) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.tagline{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-top:5px}
+.tagline{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.35em;
+  text-transform:uppercase;color:var(--gold);opacity:.7;margin-top:5px}
 .hdr-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
-.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(212,167,66,.07);border:1px solid var(--border);
-  border-radius:999px;padding:5px 13px;font-size:11px;color:var(--gold-lt);text-decoration:none;transition:background .2s,box-shadow .2s}
+.chip{display:inline-flex;align-items:center;gap:6px;background:rgba(212,167,66,.07);
+  border:1px solid var(--border);border-radius:999px;padding:5px 14px;
+  font-size:11px;color:var(--gold-lt);text-decoration:none;transition:background .2s,box-shadow .2s}
 .chip:hover{background:rgba(212,167,66,.15);box-shadow:0 0 14px rgba(212,167,66,.18)}
 
-/* ── MAIN ── */
+/* ═══════════════════════════════════════
+   MAIN LAYOUT
+═══════════════════════════════════════ */
 main{position:relative;z-index:5;max-width:500px;margin:0 auto;padding:24px 14px 80px}
+
 .sec-hd{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
   color:var(--gold);opacity:.75;display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.sec-hd::before,.sec-hd::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,167,66,.35),transparent)}
+.sec-hd::before,.sec-hd::after{content:'';flex:1;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(212,167,66,.35),transparent)}
 
-/* ── PACK GRID ── */
+/* ═══════════════════════════════════════
+   PACK GRID
+═══════════════════════════════════════ */
 .pack-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:24px}
-.pack{background:var(--card);border:1.5px solid var(--border-dim);border-radius:var(--r);padding:14px 12px 13px;
-  cursor:pointer;position:relative;overflow:hidden;
-  transition:border-color .2s,transform .15s,box-shadow .2s,background .2s;-webkit-user-select:none;user-select:none}
-.pack::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(212,167,66,.09) 0%,transparent 60%);opacity:0;transition:opacity .2s}
+.pack{background:var(--card);border:1.5px solid var(--border-dim);border-radius:var(--r);
+  padding:14px 12px 13px;cursor:pointer;position:relative;overflow:hidden;
+  transition:border-color .2s,transform .15s,box-shadow .2s,background .2s;
+  -webkit-user-select:none;user-select:none}
+.pack::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(212,167,66,.09) 0%,transparent 60%);opacity:0;transition:opacity .2s}
 .pack:hover{border-color:rgba(212,167,66,.45);transform:translateY(-2px);box-shadow:0 6px 22px rgba(212,167,66,.1)}
 .pack:hover::before{opacity:1}
-.pack.sel{border-color:var(--gold);background:rgba(212,167,66,.09);box-shadow:0 0 0 1px var(--gold),0 8px 28px rgba(212,167,66,.2)}
+.pack.sel{border-color:var(--gold);background:rgba(212,167,66,.09);
+  box-shadow:0 0 0 1px var(--gold),0 8px 28px rgba(212,167,66,.22)}
 .pack.sel::before{opacity:1}
-.pack-badge{position:absolute;top:8px;right:8px;background:var(--gold);color:#000;font-size:8px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:99px}
+.pack-badge{position:absolute;top:8px;right:8px;background:var(--gold);color:#000;
+  font-size:8px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:99px}
 .pack-ico{font-size:20px;display:block;margin-bottom:5px}
-.pack-name{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--gold-lt);margin-bottom:3px}
-.pack-price{font-size:17px;font-weight:800;color:var(--white);letter-spacing:-.01em}
-.pack-check{position:absolute;bottom:8px;right:8px;width:18px;height:18px;border-radius:50%;
-  background:var(--gold);color:#000;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;
-  opacity:0;transform:scale(0);transition:all .2s cubic-bezier(.34,1.56,.64,1)}
-.pack.sel .pack-check{opacity:1;transform:scale(1)}
+.pack-nm{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--gold-lt);margin-bottom:3px}
+.pack-pr{font-size:17px;font-weight:800;color:var(--white);letter-spacing:-.01em}
+.pack-chk{position:absolute;bottom:8px;right:8px;width:18px;height:18px;border-radius:50%;
+  background:var(--gold);color:#000;font-size:10px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:scale(0);transition:all .22s cubic-bezier(.34,1.56,.64,1)}
+.pack.sel .pack-chk{opacity:1;transform:scale(1)}
 
-/* ── FORM CARD ── */
-.form-card{background:var(--card);border:1px solid var(--border-dim);border-radius:18px;padding:22px 18px;box-shadow:0 12px 50px rgba(0,0,0,.5)}
+/* ═══════════════════════════════════════
+   FORM CARD
+═══════════════════════════════════════ */
+.form-card{background:var(--card);border:1px solid var(--border-dim);border-radius:18px;
+  padding:22px 18px;box-shadow:0 12px 50px rgba(0,0,0,.5);margin-bottom:0}
 .fl{margin-bottom:16px}
-.fl:last-child{margin-bottom:0}
-.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:7px}
+.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gold);opacity:.85;margin-bottom:7px}
 .inp{width:100%;background:var(--bg3);border:1.5px solid var(--border-dim);border-radius:10px;
-  padding:13px 15px;font-size:15px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s}
+  padding:13px 15px;font-size:15px;color:var(--text);outline:none;
+  transition:border-color .2s,box-shadow .2s}
 .inp::placeholder{color:var(--muted)}
 .inp:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,167,66,.14)}
 .inp.valid{border-color:rgba(34,197,94,.6)}
 .inp.invalid{border-color:rgba(239,68,68,.5)}
-.pack-display{background:var(--bg3);border:1.5px dashed var(--border-dim);border-radius:10px;padding:12px 15px;
-  display:flex;align-items:center;gap:8px;font-size:14px;min-height:48px;color:var(--muted);transition:border-color .3s,color .3s}
-.pack-display.has-val{border-color:var(--border);border-style:solid;color:var(--gold-lt);font-weight:600}
+.pack-disp{background:var(--bg3);border:1.5px dashed var(--border-dim);border-radius:10px;
+  padding:12px 15px;display:flex;align-items:center;gap:8px;font-size:14px;
+  min-height:48px;color:var(--muted);transition:all .3s}
+.pack-disp.has{border-color:var(--border);border-style:solid;color:var(--gold-lt);font-weight:600}
 .imo-hint{font-size:11px;margin-top:5px;align-items:center;gap:4px;display:none}
 .imo-hint.ok{color:var(--green);display:flex}
 .imo-hint.err{color:var(--red);display:flex}
 
-/* ── PAY BUTTON ── */
-.btn-pay{width:100%;border:none;border-radius:12px;padding:16px;font-family:'Cinzel',serif;
-  font-size:14px;font-weight:700;letter-spacing:.1em;color:#000;
+.btn-pay{width:100%;border:none;border-radius:12px;padding:16px;
+  font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:.1em;color:#000;
   background:linear-gradient(135deg,var(--gold-dk),var(--gold) 50%,var(--gold-lt));
-  box-shadow:0 4px 20px rgba(212,167,66,.35);transition:opacity .2s,transform .15s,box-shadow .2s,filter .2s;position:relative;overflow:hidden}
-.btn-pay::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent);opacity:0;transition:opacity .2s}
+  box-shadow:0 4px 20px rgba(212,167,66,.35);
+  transition:opacity .2s,transform .15s,box-shadow .2s,filter .2s;position:relative;overflow:hidden}
+.btn-pay::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);opacity:0;transition:opacity .2s}
 .btn-pay:hover:not(:disabled)::after{opacity:1}
 .btn-pay:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 32px rgba(212,167,66,.5)}
 .btn-pay:active:not(:disabled){transform:translateY(0)}
-.btn-pay:disabled{opacity:.32;cursor:not-allowed;filter:grayscale(.4)}
+.btn-pay:disabled{opacity:.3;cursor:not-allowed;filter:grayscale(.5)}
+
 .trust{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
 .trust-item{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
 .trust-item em{color:var(--gold);font-style:normal;font-size:13px}
 
-/* ── OVERLAY / SHEET ── */
-.overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);
-  display:flex;align-items:flex-end;justify-content:center;padding:0;opacity:0;pointer-events:none;transition:opacity .3s}
+/* ═══════════════════════════════════════
+   OVERLAY
+═══════════════════════════════════════ */
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.86);
+  backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .3s;padding:0}
 .overlay.on{opacity:1;pointer-events:all}
-.sheet{width:100%;max-width:460px;max-height:92dvh;overflow-y:auto;border-radius:22px 22px 0 0;
-  box-shadow:0 -12px 60px rgba(0,0,0,.8),0 0 0 1px rgba(212,167,66,.15);
-  transform:translateY(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);overscroll-behavior:contain}
+.sheet{width:100%;max-width:460px;max-height:93dvh;overflow-y:auto;
+  border-radius:22px 22px 0 0;
+  box-shadow:0 -12px 60px rgba(0,0,0,.85),0 0 0 1px rgba(212,167,66,.18);
+  transform:translateY(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);
+  overscroll-behavior:contain}
 .overlay.on .sheet{transform:translateY(0)}
-.overlay.center{align-items:center;padding:16px}
-.overlay.center .sheet{border-radius:20px;max-height:90dvh}
+.overlay.center-mode{align-items:center;padding:16px}
+.overlay.center-mode .sheet{border-radius:20px;max-height:90dvh}
 
-/* ── PAYMENT SHEET ── */
-.pay-head{background:#0d0d11;padding:16px 20px 14px;display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;z-index:2}
-.pay-title{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--white)}
-.pay-sub{font-size:11px;color:var(--muted);margin-top:2px}
+/* ═══════════════════════════════════════
+   PAYMENT CONFIRMATION PAGE
+═══════════════════════════════════════ */
+
+/* ── Dark sheet header ── */
+.pay-hdr{background:#0c0c10;padding:16px 20px 14px;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;z-index:10}
+.pay-hdr-info .pay-title{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--white)}
+.pay-hdr-info .pay-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
 .close-x{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);border:none;
   color:var(--text);font-size:15px;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.close-x:hover{background:rgba(255,255,255,.14)}
-.pay-body{background:#fff;padding:22px 20px 20px}
-.amt-row{display:flex;align-items:center;justify-content:space-between;padding-bottom:14px;margin-bottom:16px;border-bottom:1px solid #efefef}
-.amt-pack-lbl{font-size:12px;color:#666;margin-bottom:3px}
-.amt-pack-val{font-size:17px;font-weight:800;color:#111}
-.amt-total{font-size:28px;font-weight:900;color:#111;letter-spacing:-.02em}
-.timer-strip{background:#f7f7f9;border:1px solid #ebebeb;border-radius:10px;padding:9px 15px;
-  display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.timer-lbl{font-size:11px;color:#888;display:flex;align-items:center;gap:5px}
-.timer-val{font-size:20px;font-weight:900;color:var(--blue);font-variant-numeric:tabular-nums;transition:color .3s}
+.close-x:hover{background:rgba(255,255,255,.15)}
+
+/* ── White confirmation body ── */
+.pay-body{background:#fff;padding:0}
+
+/* -- Order summary bar -- */
+.ord-summary-bar{
+  background:linear-gradient(135deg,#0d1a3a 0%,#0f1f4a 100%);
+  padding:16px 22px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.osb-left .osb-label{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+.osb-left .osb-pack{font-size:16px;font-weight:800;color:#fff}
+.osb-right{text-align:right}
+.osb-right .osb-amount-label{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
+.osb-right .osb-amount{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.02em}
+
+/* -- Timer -- */
+.timer-wrap{background:#f5f7ff;border-bottom:1px solid #ebebf5;padding:10px 22px;
+  display:flex;align-items:center;justify-content:space-between}
+.timer-lbl{font-size:11.5px;color:#666;display:flex;align-items:center;gap:6px}
+.timer-val{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums;color:var(--blue);transition:color .3s}
 .timer-val.urgent{color:var(--red);animation:blink 1s ease-in-out infinite}
 .timer-val.done{color:var(--red)}
-.qr-zone{display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:16px}
-.qr-box{width:210px;height:210px;border-radius:14px;border:3px solid #e8e8e8;background:#f5f5f5;
-  display:flex;align-items:center;justify-content:center;overflow:hidden}
-.qr-box img{width:100%;height:100%;object-fit:contain}
-.spin-wrap{display:flex;flex-direction:column;align-items:center;gap:8px;color:#999;font-size:12px}
-.spin{width:34px;height:34px;border:3px solid #e8e8e8;border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite}
-.qr-note{background:#f0f4ff;border:1px solid #d4e0ff;border-radius:8px;padding:7px 12px;
-  font-size:11px;color:#3355aa;font-weight:600;max-width:250px;text-align:center;word-break:break-all;display:none}
-.upi-hint{font-size:11px;color:#888}
-.upi-apps{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
-.upi-tag{background:#f4f4f4;border:1px solid #e2e2e2;border-radius:7px;padding:4px 10px;font-size:10px;font-weight:700;color:#444}
-.btn-upi{width:100%;background:var(--blue);color:#fff;border:none;border-radius:12px;padding:15px;
-  font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;
-  box-shadow:0 4px 16px rgba(26,108,248,.35);transition:background .2s,transform .15s,box-shadow .2s;margin-bottom:2px}
-.btn-upi:hover:not(:disabled){background:var(--blue-dk);transform:translateY(-1px);box-shadow:0 6px 24px rgba(26,108,248,.5)}
-.btn-upi:disabled{opacity:.45;cursor:not-allowed;transform:none}
-.utr-sec{margin-top:18px;padding-top:16px;border-top:1px solid #efefef}
-.utr-lbl{font-size:13px;font-weight:700;color:#222;margin-bottom:8px;display:block}
-.utr-inp{width:100%;border:1.5px solid #ddd;border-radius:10px;padding:12px 14px;font-size:15px;
-  color:#111;outline:none;margin-bottom:10px;transition:border-color .2s,box-shadow .2s}
-.utr-inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,108,248,.12)}
-.btn-confirm{width:100%;background:#0f0f0f;color:#fff;border:none;border-radius:10px;padding:13px;
-  font-size:14px;font-weight:800;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;gap:6px;transition:background .2s,transform .15s}
-.btn-confirm:hover:not(:disabled){background:#222;transform:translateY(-1px)}
-.btn-confirm:disabled{opacity:.5;cursor:not-allowed;transform:none}
 
-/* ── SUCCESS ── */
-.suc-sheet{background:linear-gradient(160deg,#0c1a10 0%,#0a0f0b 100%);border:1px solid rgba(34,197,94,.2);padding:36px 24px 28px;text-align:center}
-.suc-icon{font-size:64px;animation:bounce-in .5s cubic-bezier(.22,1,.36,1);display:block;margin-bottom:14px}
-.suc-title{font-family:'Cinzel',serif;font-size:21px;font-weight:700;color:var(--green);margin-bottom:8px}
-.suc-sub{font-size:14px;color:rgba(134,239,172,.75);line-height:1.65;margin-bottom:22px}
-.ord-box{background:rgba(255,255,255,.04);border:1px solid rgba(34,197,94,.18);border-radius:12px;padding:14px 16px;text-align:left;margin-bottom:20px}
-.ord-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:rgba(134,239,172,.65);padding:4px 0}
-.ord-row strong{color:#c8f0ce;font-weight:700}
-.btn-wa{width:100%;background:#25d366;color:#fff;border:none;border-radius:12px;padding:15px;font-size:16px;font-weight:800;
-  display:flex;align-items:center;justify-content:center;gap:9px;
+/* ── QR SECTION ── */
+.qr-section{padding:22px 22px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;
+  border-bottom:1px solid #f0f0f0}
+
+.qr-method-badge{display:inline-flex;align-items:center;gap:6px;
+  background:#f0f4ff;border:1px solid #d4e0ff;border-radius:99px;
+  padding:5px 14px;font-size:11.5px;font-weight:700;color:#2255cc;margin-bottom:4px}
+
+.qr-card{
+  width:100%;max-width:270px;
+  background:#fff;border-radius:16px;
+  padding:14px;
+  box-shadow:0 4px 24px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.06);
+}
+.qr-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.qr-merchant{font-size:12px;font-weight:700;color:#222;letter-spacing:.01em}
+.qr-upi-logo{font-size:10px;font-weight:800;letter-spacing:.08em;
+  background:linear-gradient(135deg,#25d366,#1a9e55);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.qr-box{width:100%;aspect-ratio:1;border-radius:10px;background:#f8f8f8;border:2px solid #eee;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.qr-box img{width:100%;height:100%;object-fit:contain}
+.qr-spinner-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.qr-spinner{width:36px;height:36px;border:3px solid #eee;border-top-color:var(--blue);
+  border-radius:50%;animation:spin .7s linear infinite}
+.qr-spin-txt{font-size:12px;color:#aaa}
+
+.qr-card-note{
+  margin-top:10px;background:#f0f4ff;border:1px solid #d4dfff;border-radius:8px;
+  padding:7px 10px;font-size:11px;color:#3355bb;font-weight:600;
+  display:none;word-break:break-all;text-align:center}
+
+.qr-scan-hint{font-size:12px;color:#888;text-align:center;line-height:1.5}
+.qr-apps-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.qr-app-chip{background:#f4f4f4;border:1px solid #e2e2e2;border-radius:7px;
+  padding:4px 10px;font-size:10.5px;font-weight:700;color:#555}
+
+/* ═══════════════════════════════════════
+   PAYMENT DETAILS FORM SECTION
+═══════════════════════════════════════ */
+.pform-section{padding:20px 22px 24px}
+.pform-title{font-size:15px;font-weight:800;color:#111;margin-bottom:4px;
+  display:flex;align-items:center;gap:7px}
+.pform-sub{font-size:12px;color:#888;margin-bottom:18px;line-height:1.5}
+
+/* ── Info rows ── */
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.info-box{background:#f8f8fb;border:1px solid #ebebf2;border-radius:10px;padding:11px 14px}
+.info-box-label{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#999;font-weight:700;margin-bottom:3px}
+.info-box-val{font-size:14px;font-weight:800;color:#111}
+
+/* ── Form fields ── */
+.pfl{margin-bottom:14px;position:relative}
+.plbl{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:#333;margin-bottom:7px}
+.pinp{width:100%;border:1.5px solid #ddd;border-radius:10px;padding:12px 14px;
+  font-size:15px;color:#111;outline:none;background:#fafafa;
+  transition:border-color .2s,box-shadow .2s}
+.pinp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,108,248,.12);background:#fff}
+.pinp.valid{border-color:rgba(34,197,94,.55)}
+.pinp.invalid{border-color:rgba(239,68,68,.5)}
+
+/* ── UTR row with ? button ── */
+.utr-row{display:flex;align-items:center;gap:8px}
+.utr-row .pinp{flex:1}
+
+/* ── UTR Help (?) button ── */
+.utr-help-btn{flex-shrink:0;width:28px;height:28px;border-radius:50%;
+  background:var(--blue);border:none;color:#fff;
+  font-size:13px;font-weight:900;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 8px rgba(26,108,248,.4);
+  transition:background .2s,transform .15s,box-shadow .2s;
+  position:relative;z-index:1}
+.utr-help-btn:hover{background:var(--blue-dk);transform:scale(1.1);box-shadow:0 4px 14px rgba(26,108,248,.5)}
+
+/* ── UTR Tooltip / popup ── */
+.utr-tooltip{
+  position:fixed;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%) scale(.92);
+  width:min(340px, 92vw);
+  background:#fff;border-radius:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.08);
+  z-index:500;
+  opacity:0;pointer-events:none;
+  transition:opacity .25s,transform .25s cubic-bezier(.22,1,.36,1);
+  overflow:hidden;
+}
+.utr-tooltip.show{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+.utr-tt-backdrop{position:fixed;inset:0;z-index:499;background:rgba(0,0,0,.5);
+  backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .25s}
+.utr-tt-backdrop.show{opacity:1;pointer-events:all}
+
+.utr-tt-hdr{background:linear-gradient(135deg,var(--blue-dk),var(--blue));
+  padding:14px 18px 12px;display:flex;align-items:center;justify-content:space-between}
+.utr-tt-title{font-size:14px;font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
+.tt-close{background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:50%;
+  width:26px;height:26px;font-size:14px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:background .2s}
+.tt-close:hover{background:rgba(255,255,255,.3)}
+
+.utr-tt-body{padding:16px 18px 18px}
+
+/* ── Annotated screenshot ── */
+.phone-mockup{
+  width:100%;max-width:270px;margin:0 auto 14px;
+  background:#1a1a2e;border-radius:22px;overflow:hidden;
+  border:3px solid #2a2a42;
+  box-shadow:0 8px 30px rgba(0,0,0,.3);
+  position:relative;
+}
+.phone-notch{height:20px;background:#111;display:flex;align-items:center;justify-content:center;gap:6px}
+.phone-notch-dot{width:8px;height:8px;border-radius:50%;background:#333}
+.phone-screen{background:#fff;padding:0;overflow:hidden}
+.gpay-bar{background:#1a73e8;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.gpay-back{font-size:18px;color:#fff;opacity:.85}
+.gpay-title{font-size:13px;font-weight:700;color:#fff}
+.gpay-txn-card{padding:12px 14px;background:#fff}
+.gpay-txn-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.gpay-txn-icon{width:36px;height:36px;border-radius:50%;background:#e8f4fd;
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.gpay-txn-info .gpay-txn-name{font-size:13px;font-weight:700;color:#111}
+.gpay-txn-info .gpay-txn-date{font-size:10px;color:#888;margin-top:1px}
+.gpay-txn-amt{font-size:15px;font-weight:900;color:#1a6cf8;margin-left:auto}
+.gpay-divider{height:1px;background:#f0f0f0;margin:8px 0}
+
+/* ── UTR highlight row ── */
+.gpay-utr-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 10px;border-radius:8px;
+  background:linear-gradient(135deg,#fff8e1,#fff3cd);
+  border:1.5px solid #ffc107;
+  position:relative;
+  margin-top:4px;
+}
+.gpay-utr-lbl{font-size:10px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.06em}
+.gpay-utr-val{font-size:12px;font-weight:900;color:#111;letter-spacing:.03em}
+
+/* ── Red annotation circle + arrow on mockup ── */
+.annotation-wrap{position:absolute;left:0;right:0;bottom:0;top:0;pointer-events:none}
+.ann-circle{
+  position:absolute;
+  border:2.5px solid var(--red);border-radius:50%;
+  animation:ann-pulse 2s ease-in-out infinite;
+}
+.ann-arrow{
+  position:absolute;
+  color:var(--red);font-size:20px;font-weight:900;
+  animation:ann-bounce 1.5s ease-in-out infinite;
+}
+@keyframes ann-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+@keyframes ann-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+
+.utr-find-note{
+  font-size:12.5px;color:#444;line-height:1.6;text-align:center;
+  background:#f8f9ff;border:1px solid #e8ecff;border-radius:10px;
+  padding:10px 14px;
+}
+.utr-find-note strong{color:var(--blue);font-weight:700}
+
+/* ── Confirm button ── */
+.btn-confirm{width:100%;background:#0f0f15;color:#fff;border:none;
+  border-radius:11px;padding:14px;font-size:15px;font-weight:800;
+  letter-spacing:.04em;display:flex;align-items:center;justify-content:center;gap:6px;
+  transition:background .2s,transform .15s;box-shadow:0 4px 16px rgba(0,0,0,.2)}
+.btn-confirm:hover:not(:disabled){background:#1a1a28;transform:translateY(-1px)}
+.btn-confirm:disabled{opacity:.45;cursor:not-allowed;transform:none}
+
+/* -- Security note -- */
+.sec-note{display:flex;align-items:flex-start;gap:8px;background:#f0fff4;
+  border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:10px 13px;margin-top:14px}
+.sec-note-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.sec-note-text{font-size:11.5px;color:#2d6a4f;line-height:1.55}
+
+/* ═══════════════════════════════════════
+   SUCCESS OVERLAY
+═══════════════════════════════════════ */
+#sucOverlay .sheet{
+  background:linear-gradient(160deg,#0c1a10 0%,#08100a 100%);
+  border:1px solid rgba(34,197,94,.2);
+  padding:36px 24px 28px;text-align:center;
+  border-radius:22px 22px 0 0;
+}
+.suc-icon{font-size:68px;animation:bounce-in .55s cubic-bezier(.22,1,.36,1);display:block;margin-bottom:14px}
+.suc-title{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:var(--green);margin-bottom:8px}
+.suc-sub{font-size:13.5px;color:rgba(134,239,172,.75);line-height:1.7;margin-bottom:22px}
+.suc-ord-box{background:rgba(255,255,255,.04);border:1px solid rgba(34,197,94,.18);
+  border-radius:12px;padding:14px 16px;text-align:left;margin-bottom:20px}
+.suc-row{display:flex;justify-content:space-between;align-items:center;
+  font-size:13px;color:rgba(134,239,172,.65);padding:4px 0}
+.suc-row strong{color:#c8f0ce;font-weight:700}
+.btn-wa{width:100%;background:#25d366;color:#fff;border:none;border-radius:12px;padding:15px;
+  font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:9px;
   box-shadow:0 4px 20px rgba(37,211,102,.3);transition:background .2s,transform .15s,box-shadow .2s}
 .btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);box-shadow:0 8px 28px rgba(37,211,102,.45)}
 
-/* ── TOAST ── */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);background:#1c1c26;
-  border:1px solid var(--border);border-radius:12px;padding:11px 18px;font-size:13px;font-weight:500;
-  color:var(--text);z-index:500;opacity:0;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.5);
+/* ═══════════════════════════════════════
+   TOAST
+═══════════════════════════════════════ */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);
+  background:#1c1c26;border:1px solid var(--border);border-radius:12px;
+  padding:11px 20px;font-size:13px;font-weight:500;color:var(--text);
+  z-index:600;opacity:0;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.5);
   transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .3s}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .toast.err{border-color:rgba(239,68,68,.35);color:#fca5a5;background:#1a1015}
 .toast.ok{border-color:rgba(34,197,94,.35);color:#86efac;background:#101a12}
 
-/* ── FOOTER ── */
-footer{position:relative;z-index:5;border-top:1px solid var(--border-dim);padding:20px 16px;text-align:center;font-size:11px;color:var(--muted);line-height:1.8}
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{position:relative;z-index:5;border-top:1px solid var(--border-dim);
+  padding:20px 16px;text-align:center;font-size:11px;color:var(--muted);line-height:1.8}
 footer a{color:var(--gold);text-decoration:none}
 
-/* ── ANIMATIONS ── */
+/* ═══════════════════════════════════════
+   ANIMATIONS
+═══════════════════════════════════════ */
 @keyframes gem-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
 @keyframes bounce-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
 @keyframes fade-up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 .fu{animation:fade-up .55s ease both}
-.fu1{animation-delay:.07s}
-.fu2{animation-delay:.14s}
+.fu1{animation-delay:.07s}.fu2{animation-delay:.14s}
 </style>
 </head>
 <body>
@@ -240,20 +456,20 @@ footer a{color:var(--gold);text-decoration:none}
 <!-- LOADER -->
 <div id="loader">
   <div class="ld-gem">💎</div>
-  <div class="ld-title">KAMAL DIAMOND</div>
-  <div class="ld-track"><div class="ld-fill"></div></div>
+  <div class="ld-brand">KAMAL DIAMOND</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
 <div class="atmos"></div>
 
-<!-- STEP INDICATOR -->
-<nav class="steps-wrap">
+<!-- STEP PROGRESS -->
+<nav class="steps-nav">
   <div class="steps">
-    <div class="step active" id="stp1"><div class="step-dot" id="sd1">1</div><div class="step-lbl">Pack</div></div>
-    <div class="step" id="stp2"><div class="step-dot" id="sd2">2</div><div class="step-lbl">ID</div></div>
-    <div class="step" id="stp3"><div class="step-dot" id="sd3">3</div><div class="step-lbl">Pay</div></div>
-    <div class="step" id="stp4"><div class="step-dot" id="sd4">4</div><div class="step-lbl">UTR</div></div>
-    <div class="step" id="stp5"><div class="step-dot" id="sd5">✓</div><div class="step-lbl">Done</div></div>
+    <div class="step active" id="stp1"><div class="step-dot">1</div><div class="step-lbl">Pack</div></div>
+    <div class="step" id="stp2"><div class="step-dot">2</div><div class="step-lbl">ID</div></div>
+    <div class="step" id="stp3"><div class="step-dot">3</div><div class="step-lbl">QR Pay</div></div>
+    <div class="step" id="stp4"><div class="step-dot">4</div><div class="step-lbl">UTR</div></div>
+    <div class="step" id="stp5"><div class="step-dot">✓</div><div class="step-lbl">Done</div></div>
   </div>
 </nav>
 
@@ -284,22 +500,22 @@ footer a{color:var(--gold);text-decoration:none}
 
     <div class="fl">
       <label class="lbl">Selected Pack</label>
-      <div class="pack-display" id="packDisp">
+      <div class="pack-disp" id="packDisp">
         <span style="font-size:16px">💎</span>
-        <span id="packDispTxt" style="font-weight:400">Choose a pack above first</span>
+        <span style="font-weight:400;color:var(--muted)">Choose a pack above first</span>
       </div>
     </div>
 
     <div class="fl">
       <label class="lbl" for="imoInp">Your IMO / Game ID</label>
       <input class="inp" id="imoInp" type="text" inputmode="numeric"
-             placeholder="Enter your numeric Game / IMO ID"
-             autocomplete="off" spellcheck="false" oninput="onImo(this)"/>
+        placeholder="Enter your numeric Game / IMO ID"
+        autocomplete="off" spellcheck="false" oninput="onImo(this)"/>
       <div class="imo-hint" id="imoHint"></div>
     </div>
 
-    <button class="btn-pay" id="payBtn" disabled onclick="handlePay()">
-      💎 &nbsp;Generate QR &amp; Pay Now
+    <button class="btn-pay" id="payBtn" disabled onclick="openPaySheet()">
+      💎 &nbsp;Proceed to Payment
     </button>
 
     <div class="trust">
@@ -313,71 +529,231 @@ footer a{color:var(--gold);text-decoration:none}
 <footer>
   © 2025 Kamal Diamond Reseller ·
   <a href="mailto:kamal6382371168@gmail.com">kamal6382371168@gmail.com</a><br>
-  All transactions are processed via secure UPI Gateway
+  All transactions are processed via secure UPI QR only
 </footer>
 
-<!-- ══════════ PAYMENT BOTTOM SHEET ══════════ -->
+<!-- ══════════════════════════════════════════
+     PAYMENT CONFIRMATION BOTTOM SHEET
+══════════════════════════════════════════ -->
 <div class="overlay" id="payOverlay">
   <div class="sheet">
-    <div class="pay-head">
-      <div>
-        <div class="pay-title">💎 Complete Payment</div>
-        <div class="pay-sub" id="paySubLbl"></div>
+
+    <!-- Dark header -->
+    <div class="pay-hdr">
+      <div class="pay-hdr-info">
+        <div class="pay-title">🔐 Payment Confirmation</div>
+        <div class="pay-sub" id="paySubLbl">Scan QR · Enter UTR · Done</div>
       </div>
       <button class="close-x" onclick="closePaySheet()">✕</button>
     </div>
 
+    <!-- White body -->
     <div class="pay-body">
-      <div class="amt-row">
-        <div>
-          <div class="amt-pack-lbl">You are buying</div>
-          <div class="amt-pack-val" id="payPackVal"></div>
+
+      <!-- Blue order summary banner -->
+      <div class="ord-summary-bar">
+        <div class="osb-left">
+          <div class="osb-label">Diamond Pack</div>
+          <div class="osb-pack" id="sumPackName">—</div>
         </div>
-        <div class="amt-total" id="payAmt"></div>
+        <div class="osb-right">
+          <div class="osb-amount-label">Pay Exactly</div>
+          <div class="osb-amount" id="sumAmt">₹0</div>
+        </div>
       </div>
 
-      <div class="timer-strip">
-        <span class="timer-lbl">⏱ QR valid for</span>
+      <!-- Timer -->
+      <div class="timer-wrap">
+        <span class="timer-lbl">⏱ QR expires in</span>
         <span class="timer-val" id="timerEl">05:00</span>
       </div>
 
-      <div class="qr-zone">
-        <div class="qr-box" id="qrBox">
-          <div class="spin-wrap" id="qrLoad"><div class="spin"></div><span>Generating QR…</span></div>
-          <img id="qrImg" src="" alt="UPI QR" style="display:none"/>
+      <!-- QR SECTION -->
+      <div class="qr-section">
+        <div class="qr-method-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#2255cc"><path d="M3 3h7v7H3zm0 11h7v7H3zm11-11h7v7h-7zm0 11h7v7h-7zM5 5h3v3H5zm0 11h3v3H5zm11-11h3v3h-3zm0 11h3v3h-3z"/></svg>
+          Scan QR Code to Pay
         </div>
-        <div class="qr-note" id="qrNote"></div>
-        <div class="upi-hint">Scan with any UPI app to pay</div>
-        <div class="upi-apps">
-          <span class="upi-tag">GPay</span>
-          <span class="upi-tag">PhonePe</span>
-          <span class="upi-tag">Paytm</span>
-          <span class="upi-tag">BHIM</span>
-          <span class="upi-tag">Amazon Pay</span>
+
+        <!-- QR card (styled like a real UPI payment terminal) -->
+        <div class="qr-card">
+          <div class="qr-card-top">
+            <div class="qr-merchant">Kamal Diamond Reseller</div>
+            <div class="qr-upi-logo">UPI</div>
+          </div>
+          <div class="qr-box" id="qrBox">
+            <div class="qr-spinner-wrap" id="qrLoad">
+              <div class="qr-spinner"></div>
+              <div class="qr-spin-txt">Generating…</div>
+            </div>
+            <img id="qrImg" src="" alt="UPI QR Code" style="display:none"/>
+          </div>
+          <div class="qr-card-note" id="qrNote"></div>
+        </div>
+
+        <div class="qr-scan-hint">
+          Open any UPI app, tap <strong>Scan QR</strong> and scan<br>
+          the code above to complete payment
+        </div>
+        <div class="qr-apps-row">
+          <span class="qr-app-chip">📱 GPay</span>
+          <span class="qr-app-chip">📱 PhonePe</span>
+          <span class="qr-app-chip">📱 Paytm</span>
+          <span class="qr-app-chip">📱 BHIM</span>
         </div>
       </div>
 
-      <button class="btn-upi" id="upiBtn" onclick="openUpi
+      <!-- ══ PAYMENT DETAILS FORM SECTION ══ -->
+      <div class="pform-section">
+        <div class="pform-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+          Submit Payment Details
+        </div>
+        <div class="pform-sub">After scanning and paying, fill in the details below to confirm your order.</div>
 
-      <div class="utr-sec">
-        <span class="utr-lbl">✅ After paying, enter UTR / Transaction ID</span>
-        <input class="utr-inp" id="utrInp" type="tel" inputmode="numeric"
-               placeholder="Enter your 12-digit UTR number" maxlength="22"/>
-        <button class="btn-confirm" id="confirmBtn" onclick="submitUtr()">
-          Confirm &amp; Submit Order →
+        <!-- Info grid (IMO + Pack auto-filled) -->
+        <div class="info-grid">
+          <div class="info-box">
+            <div class="info-box-label">IMO ID</div>
+            <div class="info-box-val" id="sumImo">—</div>
+          </div>
+          <div class="info-box">
+            <div class="info-box-label">Diamonds</div>
+            <div class="info-box-val" id="sumDiamonds">—</div>
+          </div>
+        </div>
+
+        <!-- Name (optional) -->
+        <div class="pfl">
+          <label class="plbl">Your Name <span style="font-weight:400;text-transform:none;font-size:10px;color:#aaa">(optional)</span></label>
+          <input class="pinp" id="nameInp" type="text" placeholder="e.g. Rajan Kumar"/>
+        </div>
+
+        <!-- 12-digit UTR field with ? -->
+        <div class="pfl">
+          <label class="plbl">Enter 12-Digit UTR Number <span style="color:var(--red)">*</span></label>
+          <div class="utr-row">
+            <input class="pinp" id="utrInp" type="tel" inputmode="numeric"
+              placeholder="e.g. 423156789012" maxlength="16"
+              oninput="onUtr(this)"/>
+            <!-- Blue ? help button -->
+            <button class="utr-help-btn" onclick="toggleUtrHelp()" title="Where to find UTR?">?</button>
+          </div>
+          <div class="imo-hint" id="utrHint"></div>
+        </div>
+
+        <!-- I confirm checkbox -->
+        <div style="display:flex;align-items:flex-start;gap:9px;margin-bottom:18px">
+          <input type="checkbox" id="confirmChk" style="width:16px;height:16px;margin-top:2px;accent-color:var(--blue);cursor:pointer"/>
+          <label for="confirmChk" style="font-size:12.5px;color:#444;line-height:1.55;cursor:pointer">
+            I confirm that I have completed the UPI payment and the above UTR number is correct.
+          </label>
+        </div>
+
+        <!-- Confirm button -->
+        <button class="btn-confirm" id="confirmBtn" onclick="submitOrder()">
+          ✅ &nbsp;Confirm &amp; Submit Order
         </button>
+
+        <!-- Security note -->
+        <div class="sec-note">
+          <span class="sec-note-icon">🔒</span>
+          <div class="sec-note-text">
+            Your details are submitted securely. Diamonds will be delivered to your IMO ID within minutes after verification.
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /pay-body -->
+  </div><!-- /sheet -->
+</div>
+
+<!-- ══════════════════════════════════════════
+     UTR HELP TOOLTIP (popup with annotated screenshot)
+══════════════════════════════════════════ -->
+<div class="utr-tt-backdrop" id="utrBackdrop" onclick="toggleUtrHelp()"></div>
+<div class="utr-tooltip" id="utrTooltip">
+  <div class="utr-tt-hdr">
+    <div class="utr-tt-title">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="10" fill="rgba(255,255,255,.2)"/><path d="M12 17h1v-6h-1zm0-8h1V7h-1z" fill="white"/></svg>
+      Where to find your UTR Number?
+    </div>
+    <button class="tt-close" onclick="toggleUtrHelp()">✕</button>
+  </div>
+  <div class="utr-tt-body">
+
+    <!-- Annotated phone mockup -->
+    <div style="display:flex;justify-content:center">
+      <div class="phone-mockup">
+        <div class="phone-notch">
+          <div class="phone-notch-dot"></div>
+          <div class="phone-notch-dot" style="width:24px;border-radius:4px"></div>
+          <div class="phone-notch-dot"></div>
+        </div>
+        <div class="phone-screen">
+          <!-- GPay-style app screen -->
+          <div class="gpay-bar">
+            <div class="gpay-back">‹</div>
+            <div class="gpay-title">Transaction Details</div>
+          </div>
+          <div class="gpay-txn-card">
+            <div class="gpay-txn-row">
+              <div class="gpay-txn-icon">💎</div>
+              <div class="gpay-txn-info">
+                <div class="gpay-txn-name">Kamal Diamond Reseller</div>
+                <div class="gpay-txn-date">Today, 2:45 PM · Paid</div>
+              </div>
+              <div class="gpay-txn-amt">₹860</div>
+            </div>
+            <div class="gpay-divider"></div>
+            <div style="font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:6px">Transaction Info</div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:#666;margin-bottom:4px">
+              <span>Status</span><span style="color:#2d9e5c;font-weight:700">✓ Success</span>
+            </div>
+            <div style="display:flex;justify-content:space-between;font-size:11px;color:#666;margin-bottom:6px">
+              <span>UPI Ref. No.</span><span style="color:#888">4231 5678 9012</span>
+            </div>
+            <!-- Highlighted UTR row -->
+            <div class="gpay-utr-row">
+              <div>
+                <div class="gpay-utr-lbl">UTR / Transaction ID</div>
+                <div class="gpay-utr-val">423156789012</div>
+              </div>
+              <div style="font-size:16px">📋</div>
+            </div>
+          </div>
+        </div>
+        <!-- Red annotation -->
+        <div class="annotation-wrap">
+          <!-- Red circle around UTR row — positioned bottom of screen -->
+          <div class="ann-circle" style="left:8px;right:8px;bottom:10px;height:42px;border-radius:10px"></div>
+          <!-- Arrow pointing down to it -->
+          <div class="ann-arrow" style="right:14px;bottom:56px;font-size:22px">👇</div>
+        </div>
       </div>
     </div>
+
+    <!-- Description text -->
+    <div class="utr-find-note">
+      <strong>📍 Find this unique number</strong> in your payment app's transaction history.<br><br>
+      In <b>Google Pay</b>: Tap the transaction → <em>"UTR / Transaction ID"</em><br>
+      In <b>PhonePe</b>: History → Tap payment → <em>"UPI Transaction ID"</em><br>
+      In <b>Paytm</b>: Passbook → Tap payment → <em>"Transaction ID"</em><br><br>
+      <span style="color:#888">It is a <b>12-digit numeric code</b> like <code style="background:#eef;padding:1px 5px;border-radius:4px;font-size:11px">423156789012</code></span>
+    </div>
+
   </div>
 </div>
 
-<!-- ══════════ SUCCESS OVERLAY ══════════ -->
-<div class="overlay center" id="sucOverlay">
-  <div class="sheet suc-sheet">
+<!-- ══════════════════════════════════════════
+     SUCCESS OVERLAY
+══════════════════════════════════════════ -->
+<div class="overlay" id="sucOverlay">
+  <div class="sheet" style="background:linear-gradient(160deg,#0c1a10,#08100a);border:1px solid rgba(34,197,94,.2);padding:36px 24px 28px;text-align:center;border-radius:22px 22px 0 0">
     <span class="suc-icon">🎉</span>
     <div class="suc-title">Order Submitted!</div>
-    <div class="suc-sub">Your order has been recorded.<br>Tap below to confirm on WhatsApp for instant delivery.</div>
-    <div class="ord-box" id="ordBox"></div>
+    <div class="suc-sub">Your order has been recorded successfully.<br>Tap below to confirm on WhatsApp for instant diamond delivery.</div>
+    <div class="suc-ord-box" id="ordBox"></div>
     <button class="btn-wa" onclick="goWA()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       Confirm on WhatsApp
@@ -387,87 +763,94 @@ footer a{color:var(--gold);text-decoration:none}
 
 <div class="toast" id="toast"></div>
 
-<!-- ══════════ SCRIPT ══════════ -->
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
 <script>
-// ─── CONFIG ──────────────────────────────────────────────────────────────────
-// ⚠️  IMPORTANT: Replace CFG.upiId with your actual verified UPI ID.
-//    An invalid UPI ID will cause "You are trying to send money to an invalid
-//    UPI ID" errors in UPI apps. Common formats: name@okaxis, name@ybl,
-//    name@paytm, mobilenumber@upi
+/* ─── CONFIG ─────────────────────────────────────────────────────────── */
+// ⚠️ IMPORTANT: Replace upiId below with your actual verified UPI ID
+// Common formats: name@okaxis | name@ybl | name@oksbi | number@upi
+// Check "My UPI ID" in your Google Pay / PhonePe / Paytm app
 const CFG = {
-  apiKey   : 'cc5f8334-7d76-4ec3-9385-5f763948cec8',
-  upiId : 'q433892283@ybl',   // ⚠️ REPLACE with your real verified UPI ID
-  upiName  : 'Kamal Diamond Reseller',
-  waNum    : '916382371168',
-  formUrl  : 'https://docs.google.com/forms/d/e/1FAIpQLScyiGqT7r56UGWLTbNIo88xku_ujRR1rlEfnCKRSG50Dk8WuA/formResponse',
-  fUtr     : 'entry.881415050',
-  fPack    : 'entry.259203416',
-  fImo     : 'entry.685694097',
+  apiKey  : 'cc5f8334-7d76-4ec3-9385-5f763948cec8',
+  upiId   : 'q433892283@ybl',        // ⚠️ REPLACE with your real, verified UPI ID
+  upiName : 'Kamal Diamond Reseller',
+  waNum   : '916382371168',
+  formUrl : 'https://docs.google.com/forms/d/e/1FAIpQLScyiGqT7r56UGWLTbNIo88xku_ujRR1rlEfnCKRSG50Dk8WuA/formResponse',
+  fUtr    : 'entry.881415050',
+  fPack   : 'entry.259203416',
+  fImo    : 'entry.685694097',
 };
 
-// ─── PACKS ────────────────────────────────────────────────────────────────────
 const PACKS = [
-  { id:'p10',    label:'10 Diamonds',    d:10,    price:30    },
-  { id:'p50',    label:'50 Diamonds',    d:50,    price:90    },
-  { id:'p100',   label:'100 Diamonds',   d:100,   price:172   },
-  { id:'p200',   label:'200 Diamonds',   d:200,   price:344   },
-  { id:'p500',   label:'500 Diamonds',   d:500,   price:860,   badge:'Popular'    },
-  { id:'p1000',  label:'1000 Diamonds',  d:1000,  price:1711  },
-  { id:'p2000',  label:'2000 Diamonds',  d:2000,  price:3422  },
-  { id:'p10000', label:'10000 Diamonds', d:10000, price:17000, badge:'Best Value' },
+  {id:'p10',   label:'10 Diamonds',   d:10,   price:30   },
+  {id:'p50',   label:'50 Diamonds',   d:50,   price:90   },
+  {id:'p100',  label:'100 Diamonds',  d:100,  price:172  },
+  {id:'p200',  label:'200 Diamonds',  d:200,  price:344  },
+  {id:'p500',  label:'500 Diamonds',  d:500,  price:860,  badge:'Popular'   },
+  {id:'p1000', label:'1000 Diamonds', d:1000, price:1711 },
+  {id:'p2000', label:'2000 Diamonds', d:2000, price:3422 },
+  {id:'p10000',label:'10000 Diamonds',d:10000,price:17000,badge:'Best Value'},
 ];
 
-// ─── STATE ───────────────────────────────────────────────────────────────────
-let selPack = null, imoOk = false, payLink = null, timerInt = null, ord = {};
+let selPack=null, imoOk=false, utrOk=false, timerInt=null, ord={};
 
-// ─── LOADER ──────────────────────────────────────────────────────────────────
-window.addEventListener('load', () =>
-  setTimeout(() => document.getElementById('loader').classList.add('out'), 1350));
+/* ─── LOADER ────────────────────────────────────────────────────────── */
+window.addEventListener('load',()=>
+  setTimeout(()=>document.getElementById('loader').classList.add('out'),1380));
 
-// ─── PACKS ───────────────────────────────────────────────────────────────────
-(function renderPacks(){
-  document.getElementById('packGrid').innerHTML = PACKS.map(p =>`
+/* ─── RENDER PACKS ──────────────────────────────────────────────────── */
+(function(){
+  document.getElementById('packGrid').innerHTML=PACKS.map(p=>`
     <div class="pack" id="pk-${p.id}" onclick="pickPack('${p.id}')">
       ${p.badge?`<div class="pack-badge">${p.badge}</div>`:''}
       <span class="pack-ico">💎</span>
-      <div class="pack-name">${p.label}</div>
-      <div class="pack-price">₹${p.price.toLocaleString('en-IN')}</div>
-      <div class="pack-check">✓</div>
+      <div class="pack-nm">${p.label}</div>
+      <div class="pack-pr">₹${p.price.toLocaleString('en-IN')}</div>
+      <div class="pack-chk">✓</div>
     </div>`).join('');
 })();
 
 function pickPack(id){
-  selPack = PACKS.find(p=>p.id===id);
+  selPack=PACKS.find(p=>p.id===id);
   document.querySelectorAll('.pack').forEach(el=>el.classList.remove('sel'));
   document.getElementById('pk-'+id).classList.add('sel');
-  const d = document.getElementById('packDisp');
-  d.innerHTML=`<span>💎</span><span id="packDispTxt"><b>${selPack.label}</b>&nbsp;·&nbsp;<span style="color:var(--gold-lt)">₹${selPack.price.toLocaleString('en-IN')}</span></span>`;
-  d.classList.add('has-val');
-  markStep(1);
-  checkBtn();
+  const d=document.getElementById('packDisp');
+  d.innerHTML=`<span>💎</span><span><b>${selPack.label}</b>&nbsp;·&nbsp;<span style="color:var(--gold-lt)">₹${selPack.price.toLocaleString('en-IN')}</span></span>`;
+  d.classList.add('has');
+  markStep(1); checkBtn();
 }
 
-// ─── IMO VALIDATION ──────────────────────────────────────────────────────────
+/* ─── IMO VALIDATION ────────────────────────────────────────────────── */
 function onImo(el){
   const v=el.value.trim(), h=document.getElementById('imoHint');
   if(!v){el.className='inp';h.className='imo-hint';imoOk=false;}
   else if(/^\d{5,15}$/.test(v)){
-    el.className='inp valid';
-    h.className='imo-hint ok';h.innerHTML='✓ &nbsp;Valid IMO ID';
-    imoOk=true;if(selPack)markStep(2);
-  } else {
-    el.className='inp invalid';
-    h.className='imo-hint err';h.innerHTML='✗ &nbsp;Please enter a valid numeric Game / IMO ID (5–15 digits)';
-    imoOk=false;
+    el.className='inp valid';h.className='imo-hint ok';h.innerHTML='✓ &nbsp;Valid Game ID';
+    imoOk=true; if(selPack)markStep(2);
+  }else{
+    el.className='inp invalid';h.className='imo-hint err';
+    h.innerHTML='✗ &nbsp;Must be 5–15 digits only';imoOk=false;
   }
   checkBtn();
 }
+function checkBtn(){ document.getElementById('payBtn').disabled=!(selPack&&imoOk); }
 
-function checkBtn(){
-  document.getElementById('payBtn').disabled=!(selPack&&imoOk);
+/* ─── UTR VALIDATION ────────────────────────────────────────────────── */
+function onUtr(el){
+  const v=el.value.replace(/\D/g,''); el.value=v;
+  const h=document.getElementById('utrHint');
+  if(!v){el.className='pinp';h.className='imo-hint';utrOk=false;}
+  else if(/^\d{12}$/.test(v)){
+    el.className='pinp valid';h.className='imo-hint ok';h.innerHTML='✓ &nbsp;Valid 12-digit UTR';utrOk=true;
+  }else if(v.length>12){
+    el.className='pinp invalid';h.className='imo-hint err';h.innerHTML='✗ &nbsp;UTR must be exactly 12 digits';utrOk=false;
+  }else{
+    el.className='pinp';h.className='imo-hint';utrOk=false;
+  }
 }
 
-// ─── STEP INDICATOR ──────────────────────────────────────────────────────────
+/* ─── STEP INDICATOR ────────────────────────────────────────────────── */
 function markStep(n){
   for(let i=1;i<=5;i++){
     const s=document.getElementById('stp'+i);
@@ -476,163 +859,175 @@ function markStep(n){
   }
 }
 
-// ─── OPEN PAYMENT SHEET ──────────────────────────────────────────────────────
-async function handlePay(){
+/* ─── OPEN PAYMENT SHEET ────────────────────────────────────────────── */
+async function openPaySheet(){
   if(!selPack||!imoOk) return;
   const imo=document.getElementById('imoInp').value.trim();
 
+  // Populate summary
   document.getElementById('paySubLbl').textContent=`${selPack.label} · ₹${selPack.price.toLocaleString('en-IN')}`;
-  document.getElementById('payPackVal').textContent=`${selPack.d.toLocaleString()} Diamonds`;
-  document.getElementById('payAmt').textContent=`₹${selPack.price.toLocaleString('en-IN')}`;
+  document.getElementById('sumPackName').textContent=selPack.label;
+  document.getElementById('sumAmt').textContent=`₹${selPack.price.toLocaleString('en-IN')}`;
+  document.getElementById('sumImo').textContent=imo;
+  document.getElementById('sumDiamonds').textContent=`${selPack.d.toLocaleString()}💎`;
 
-  // Reset UI
+  // Reset QR
   document.getElementById('qrImg').style.display='none';
   document.getElementById('qrLoad').style.display='flex';
   document.getElementById('qrNote').style.display='none';
-  document.getElementById('upiBtn').disabled=true;
   document.getElementById('utrInp').value='';
+  document.getElementById('nameInp').value='';
+  document.getElementById('utrHint').className='imo-hint';
+  document.getElementById('confirmChk').checked=false;
 
   document.getElementById('payOverlay').classList.add('on');
   document.body.style.overflow='hidden';
   markStep(3);
   startTimer(300);
-  await buildQR(selPack,imo);
+  await buildQR(selPack, imo);
 }
 
 function closePaySheet(){
   document.getElementById('payOverlay').classList.remove('on');
   document.body.style.overflow='';
   clearInterval(timerInt);
+  closeUtrHelp();
 }
 
-// ─── QR GENERATION ───────────────────────────────────────────────────────────
-async function buildQR(pack,imo){
+/* ─── QR GENERATION ─────────────────────────────────────────────────── */
+async function buildQR(pack, imo){
   const note=`ID: ${imo} - ${pack.d} Diamonds`;
 
-  // Attempt UPIGateway API
+  // Try UPIGateway API (7-sec timeout)
   try{
-    const res=await Promise.race([
+    const res = await Promise.race([
       fetch('https://upigateway.com/api/create-order',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({key:CFG.apiKey,amount:pack.price,
-          order_id:`KDR${Date.now()}`,customer_name:imo,
-          customer_mobile:'',customer_email:'',redirect_url:location.href,udf1:note})}),
-      new Promise((_,r)=>setTimeout(()=>r(new Error('timeout')),7000))
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({
+          key:CFG.apiKey, amount:pack.price,
+          order_id:`KDR${Date.now()}`,
+          customer_name:imo, customer_mobile:'', customer_email:'',
+          redirect_url:location.href, udf1:note
+        })}),
+      new Promise((_,r)=>setTimeout(()=>r('timeout'),7000))
     ]);
     const data=await res.json();
     const qrSrc=data?.qr_image||data?.qr||data?.qrcode||data?.data?.qr_image||data?.data?.qr;
-    const link=data?.payment_url||data?.pay_url||data?.upi_link||data?.data?.payment_url||'';
     if(qrSrc){
-      payLink=link||upiDeepLink(pack,imo);
-      showQR(qrSrc.startsWith('http')?qrSrc:`data:image/png;base64,${qrSrc}`,note);
+      showQR(qrSrc.startsWith('http')?qrSrc:`data:image/png;base64,${qrSrc}`, note);
       return;
     }
   }catch(_){}
 
-  // Fallback: build our own UPI QR
-  useFallback(pack,imo,note);
-}
-
-function upiDeepLink(pack,imo){
-  return `upi://pay?pa=${encodeURIComponent(CFG.upiId)}`+
+  // Fallback: generate QR from UPI deep link via qrserver.com
+  const upiLink = `upi://pay?pa=${encodeURIComponent(CFG.upiId)}`+
     `&pn=${encodeURIComponent(CFG.upiName)}`+
     `&am=${pack.price}&cu=INR`+
-    `&tn=${encodeURIComponent(`ID: ${imo} - ${pack.d} Diamonds`)}`;
+    `&tn=${encodeURIComponent(note)}`;
+  const qrUrl=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=M&margin=10&data=${encodeURIComponent(upiLink)}`;
+  showQR(qrUrl, note);
 }
 
-function useFallback(pack,imo,note){
-  payLink=upiDeepLink(pack,imo);
-  const qrUrl=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=M&margin=12&data=${encodeURIComponent(payLink)}`;
-  showQR(qrUrl,note);
-}
-
-function showQR(src,note){
+function showQR(src, note){
   const img=document.getElementById('qrImg');
   const noteEl=document.getElementById('qrNote');
-  noteEl.textContent='📝 '+note;
+  noteEl.textContent='📝 Note: '+note;
   img.onerror=()=>{
-    document.getElementById('qrLoad').innerHTML='<span style="font-size:12px;color:#999;text-align:center;padding:12px">Could not load QR.<br>Use the button below to pay.</span>';
-    document.getElementById('upiBtn').disabled=false;
+    document.getElementById('qrLoad').innerHTML='<div style="font-size:12px;color:#aaa;text-align:center;padding:14px;line-height:1.6">QR load failed.<br>Please check your internet<br>and try again.</div>';
   };
   img.onload=()=>{
     document.getElementById('qrLoad').style.display='none';
     img.style.display='block';
     noteEl.style.display='block';
-    document.getElementById('upiBtn').disabled=false;
   };
   img.src=src;
 }
 
-function openUpi(){ if(payLink) window.open(payLink,'_blank'); }
-
-// ─── TIMER ───────────────────────────────────────────────────────────────────
+/* ─── TIMER ─────────────────────────────────────────────────────────── */
 function startTimer(secs){
-  clearInterval(timerInt);
-  let rem=secs;
+  clearInterval(timerInt); let rem=secs;
   const el=document.getElementById('timerEl');
   const tick=()=>{
-    const m=String(Math.floor(rem/60)).padStart(2,'0'),s=String(rem%60).padStart(2,'0');
+    const m=String(Math.floor(rem/60)).padStart(2,'0'), s=String(rem%60).padStart(2,'0');
     el.textContent=`${m}:${s}`;
     el.className='timer-val'+(rem<=60?' urgent':'');
     if(rem<=0){clearInterval(timerInt);el.textContent='EXPIRED';el.className='timer-val done';
-      document.getElementById('upiBtn').disabled=true;
-      showToast('QR has expired. Please go back and regenerate.','err');}
+      showToast('QR expired — please close and try again','err');}
     rem--;
   };
   tick(); timerInt=setInterval(tick,1000);
 }
 
-// ─── UTR SUBMIT ──────────────────────────────────────────────────────────────
-async function submitUtr(){
+/* ─── UTR HELP TOOLTIP ───────────────────────────────────────────────── */
+function toggleUtrHelp(){
+  const tt=document.getElementById('utrTooltip');
+  const bd=document.getElementById('utrBackdrop');
+  const showing=tt.classList.contains('show');
+  if(showing){ closeUtrHelp(); }
+  else{ tt.classList.add('show'); bd.classList.add('show'); }
+}
+function closeUtrHelp(){
+  document.getElementById('utrTooltip').classList.remove('show');
+  document.getElementById('utrBackdrop').classList.remove('show');
+}
+
+/* ─── SUBMIT ORDER ──────────────────────────────────────────────────── */
+async function submitOrder(){
   const utr=document.getElementById('utrInp').value.trim();
   const imo=document.getElementById('imoInp').value.trim();
-  if(!utr)          return showToast('Please enter your UTR / Transaction ID','err');
-  if(utr.length<6)  return showToast('UTR number looks too short — please verify','err');
+  const chk=document.getElementById('confirmChk').checked;
+
+  if(!utr||utr.length<12) return showToast('Please enter a valid 12-digit UTR number','err');
+  if(!chk)                 return showToast('Please tick the confirmation checkbox first','err');
 
   const btn=document.getElementById('confirmBtn');
-  btn.disabled=true; btn.textContent='Submitting… ⏳';
+  btn.disabled=true; btn.innerHTML='⏳ &nbsp;Submitting…';
 
-  ord={utr,imo,pack:selPack.label,price:selPack.price,d:selPack.d};
+  ord={utr, imo, pack:selPack.label, price:selPack.price, d:selPack.d};
 
-  // Step 4: Google Form submission (no-cors — form still records it)
+  // Step 4: Post to Google Form (no-cors — form still receives it)
   try{
-    await fetch(CFG.formUrl,{method:'POST',mode:'no-cors',
+    await fetch(CFG.formUrl,{
+      method:'POST', mode:'no-cors',
       headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:new URLSearchParams({[CFG.fUtr]:utr,[CFG.fPack]:selPack.label,[CFG.fImo]:imo}).toString()});
-  }catch(_){/* no-cors always rejects — submission still goes through */}
+      body:new URLSearchParams({
+        [CFG.fUtr]:utr, [CFG.fPack]:selPack.label, [CFG.fImo]:imo
+      }).toString()
+    });
+  }catch(_){/* Expected with no-cors — submission still registers */}
 
-  btn.disabled=false; btn.textContent='Confirm & Submit Order →';
-
+  btn.disabled=false; btn.innerHTML='✅ &nbsp;Confirm &amp; Submit Order';
   clearInterval(timerInt);
+  closeUtrHelp();
   closePaySheet();
   showSuccess();
 }
 
-// ─── SUCCESS ─────────────────────────────────────────────────────────────────
+/* ─── SUCCESS ───────────────────────────────────────────────────────── */
 function showSuccess(){
   markStep(5);
   document.getElementById('ordBox').innerHTML=`
-    <div class="ord-row"><span>💎 Pack</span><strong>${ord.pack}</strong></div>
-    <div class="ord-row"><span>💰 Amount</span><strong>₹${ord.price.toLocaleString('en-IN')}</strong></div>
-    <div class="ord-row"><span>🆔 IMO ID</span><strong>${ord.imo}</strong></div>
-    <div class="ord-row"><span>🧾 UTR No.</span><strong>${ord.utr}</strong></div>`;
+    <div class="suc-row"><span>💎 Pack</span><strong>${ord.pack}</strong></div>
+    <div class="suc-row"><span>💰 Amount Paid</span><strong>₹${ord.price.toLocaleString('en-IN')}</strong></div>
+    <div class="suc-row"><span>🆔 IMO ID</span><strong>${ord.imo}</strong></div>
+    <div class="suc-row"><span>🧾 UTR Number</span><strong>${ord.utr}</strong></div>`;
   document.getElementById('sucOverlay').classList.add('on');
   document.body.style.overflow='hidden';
 }
 
-// Step 5: WhatsApp redirect with exact message format
+// Step 5: WhatsApp redirect with exact message
 function goWA(){
   const msg=encodeURIComponent(
     `Order placed for IMO ID: ${ord.imo} - Pack: ₹${ord.price}. UTR: ${ord.utr}`);
   window.open(`https://wa.me/${CFG.waNum}?text=${msg}`,'_blank');
 }
 
-// ─── TOAST ───────────────────────────────────────────────────────────────────
+/* ─── TOAST ─────────────────────────────────────────────────────────── */
 let tTm;
 function showToast(msg,type=''){
   const t=document.getElementById('toast');
   t.textContent=msg; t.className=`toast ${type} show`;
-  clearTimeout(tTm); tTm=setTimeout(()=>t.classList.remove('show'),3500);
+  clearTimeout(tTm); tTm=setTimeout(()=>t.classList.remove('show'),3600);
 }
 </script>
 </body>

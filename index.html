@@ -2,507 +2,521 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
 <meta name="theme-color" content="#08080b"/>
 <title>Kamal Diamond Reseller — 24/7 Fast Service</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-/* ═══════════════════════════════════════
-   TOKENS
-═══════════════════════════════════════ */
+/* ───────────────────────────────────────────
+   DESIGN TOKENS
+─────────────────────────────────────────── */
 :root{
-  --gold:#d4a742;--gold-lt:#f5d98b;--gold-dk:#9a7320;
+  --gold:#d4a742;--gold-lt:#f5d98b;--gold-dk:#9a7320;--gold-mid:#c49535;
   --gold-glow:rgba(212,167,66,.32);
-  --bg:#08080b;--bg2:#0e0e13;--bg3:#141419;
-  --card:#16161e;--border:rgba(212,167,66,.2);--border-dim:rgba(212,167,66,.09);
-  --text:#ede8dc;--muted:#6e6860;
-  --blue:#1a6cf8;--blue-dk:#1255d0;
-  --green:#22c55e;--red:#ef4444;
-  --white:#ffffff;--r:14px;
+  --bg:#08080b;--bg2:#0d0d12;--bg3:#131318;
+  --card:#15151e;--card2:#1c1c27;
+  --border:rgba(212,167,66,.22);--bdim:rgba(212,167,66,.09);
+  --text:#ede8dc;--muted:#6a6460;
+  --blue:#1a6cf8;--blue2:#1255d0;
+  --green:#22c55e;--green2:#16a34a;
+  --red:#ef4444;--white:#fff;
+  --r:14px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);
-  min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-button{font-family:'DM Sans',sans-serif;cursor:pointer}
-input,select,textarea{font-family:'DM Sans',sans-serif}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button,input{font-family:'DM Sans',sans-serif}
+button{cursor:pointer}
+img{display:block}
 
-/* ═══════════════════════════════════════
+/* ───────────────────────────────────────────
    ATMOSPHERE
-═══════════════════════════════════════ */
+─────────────────────────────────────────── */
 .atmos{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 100% 55% at 50% -5%,rgba(212,167,66,.13) 0%,transparent 65%),
-             radial-gradient(ellipse 50% 50% at 95% 95%,rgba(212,167,66,.06) 0%,transparent 60%),
-             var(--bg)}
+  background:
+    radial-gradient(ellipse 110% 60% at 50% -8%,rgba(212,167,66,.15) 0%,transparent 65%),
+    radial-gradient(ellipse 55% 55% at 95% 95%,rgba(212,167,66,.08) 0%,transparent 55%),
+    var(--bg)}
 .atmos::after{content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(212,167,66,.022) 60px),
-                   repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(212,167,66,.022) 60px)}
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(212,167,66,.022) 60px),
+    repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(212,167,66,.022) 60px)}
 
-/* ═══════════════════════════════════════
+/* ───────────────────────────────────────────
    LOADER
-═══════════════════════════════════════ */
-#loader{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;background:var(--bg);gap:18px;
-  transition:opacity .5s,visibility .5s}
-#loader.out{opacity:0;visibility:hidden}
-.ld-gem{font-size:54px;animation:gem-float 1.4s ease-in-out infinite}
-.ld-brand{font-family:'Cinzel Decorative',serif;font-size:13px;letter-spacing:.2em;
+─────────────────────────────────────────── */
+#ldr{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg);gap:20px;transition:opacity .5s,visibility .5s}
+#ldr.out{opacity:0;visibility:hidden}
+.ldr-gem{font-size:58px;animation:gfloat 1.4s ease-in-out infinite}
+.ldr-name{font-family:'Cinzel Decorative',serif;font-size:13px;letter-spacing:.22em;
   background:linear-gradient(135deg,var(--gold-lt),var(--gold),var(--gold-dk));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.ld-bar{width:140px;height:2px;background:rgba(212,167,66,.12);border-radius:99px;overflow:hidden}
-.ld-fill{height:100%;background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt));animation:ld-run 1.3s ease forwards}
-@keyframes ld-run{from{width:0}to{width:100%}}
+.ldr-bar{width:150px;height:2px;background:rgba(212,167,66,.12);border-radius:99px;overflow:hidden}
+.ldr-fill{height:100%;background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt));animation:lrun 1.4s ease forwards}
+@keyframes lrun{from{width:0}to{width:100%}}
 
-/* ═══════════════════════════════════════
+/* ───────────────────────────────────────────
    STEP PROGRESS NAV
-═══════════════════════════════════════ */
-.steps-nav{position:sticky;top:0;z-index:30;
-  background:rgba(8,8,11,.94);backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--border-dim);padding:10px 16px}
+─────────────────────────────────────────── */
+.snav{position:sticky;top:0;z-index:30;background:rgba(8,8,11,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdim);padding:10px 16px}
 .steps{display:flex;align-items:center;justify-content:center;max-width:500px;margin:0 auto}
-.step{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;position:relative}
-.step::after{content:'';position:absolute;top:13px;left:calc(50% + 15px);
-  width:calc(100% - 30px);height:1.5px;background:var(--border-dim);transition:background .4s}
-.step:last-child::after{display:none}
-.step.done::after{background:var(--gold)}
-.step-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  font-size:11px;font-weight:700;border:1.5px solid var(--muted);color:var(--muted);
-  background:var(--bg2);transition:all .3s;z-index:1}
-.step.active .step-dot{border-color:var(--gold);color:var(--gold);background:rgba(212,167,66,.1);box-shadow:0 0 12px var(--gold-glow)}
-.step.done .step-dot{border-color:var(--gold);background:var(--gold);color:#000}
-.step-lbl{font-size:9px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;font-weight:600;transition:color .3s;white-space:nowrap}
-.step.active .step-lbl{color:var(--gold)}
-.step.done .step-lbl{color:rgba(212,167,66,.65)}
+.st{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;position:relative}
+.st::after{content:'';position:absolute;top:13px;left:calc(50% + 15px);width:calc(100% - 30px);height:1.5px;background:var(--bdim);transition:background .4s}
+.st:last-child::after{display:none}
+.st.done::after{background:var(--gold)}
+.st-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1.5px solid var(--muted);color:var(--muted);background:var(--bg2);transition:all .3s;z-index:1}
+.st.active .st-dot{border-color:var(--gold);color:var(--gold);background:rgba(212,167,66,.1);box-shadow:0 0 12px var(--gold-glow)}
+.st.done .st-dot{border-color:var(--gold);background:var(--gold);color:#000}
+.st-lbl{font-size:9px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;font-weight:600;transition:color .3s;white-space:nowrap}
+.st.active .st-lbl{color:var(--gold)}
+.st.done .st-lbl{color:rgba(212,167,66,.65)}
 
-/* ═══════════════════════════════════════
+/* ───────────────────────────────────────────
    HEADER
-═══════════════════════════════════════ */
+─────────────────────────────────────────── */
 header{position:relative;z-index:5;text-align:center;padding:28px 20px 20px}
-.hdr-gem{font-size:46px;display:block;
-  filter:drop-shadow(0 0 22px rgba(212,167,66,.65));
-  animation:gem-float 3s ease-in-out infinite;margin-bottom:8px}
-.brand{font-family:'Cinzel Decorative',serif;
-  font-size:clamp(15px,4.5vw,27px);font-weight:900;letter-spacing:.05em;
+.hgem{font-size:48px;display:block;filter:drop-shadow(0 0 24px rgba(212,167,66,.7));animation:gfloat 3s ease-in-out infinite;margin-bottom:8px}
+.brand{font-family:'Cinzel Decorative',serif;font-size:clamp(15px,4.5vw,27px);font-weight:900;letter-spacing:.05em;
   background:linear-gradient(135deg,var(--gold-lt) 0%,var(--gold) 45%,var(--gold-dk) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.tagline{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.35em;
-  text-transform:uppercase;color:var(--gold);opacity:.7;margin-top:5px}
-.hdr-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
-.chip{display:inline-flex;align-items:center;gap:6px;background:rgba(212,167,66,.07);
-  border:1px solid var(--border);border-radius:999px;padding:5px 14px;
-  font-size:11px;color:var(--gold-lt);text-decoration:none;transition:background .2s,box-shadow .2s}
-.chip:hover{background:rgba(212,167,66,.15);box-shadow:0 0 14px rgba(212,167,66,.18)}
+.tagline{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-top:5px}
+.hchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+.hchip{display:inline-flex;align-items:center;gap:6px;background:rgba(212,167,66,.07);border:1px solid var(--border);border-radius:99px;padding:5px 14px;font-size:11px;color:var(--gold-lt);text-decoration:none;transition:background .2s,box-shadow .2s}
+.hchip:hover{background:rgba(212,167,66,.15);box-shadow:0 0 14px rgba(212,167,66,.18)}
 
-/* ═══════════════════════════════════════
+/* ───────────────────────────────────────────
    MAIN LAYOUT
-═══════════════════════════════════════ */
+─────────────────────────────────────────── */
 main{position:relative;z-index:5;max-width:500px;margin:0 auto;padding:24px 14px 80px}
+.sechd{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);opacity:.75;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sechd::before,.sechd::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,167,66,.38),transparent)}
 
-.sec-hd{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--gold);opacity:.75;display:flex;align-items:center;gap:10px;margin-bottom:14px}
-.sec-hd::before,.sec-hd::after{content:'';flex:1;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(212,167,66,.35),transparent)}
+/* ───────────────────────────────────────────
+   PACK SELECTOR
+─────────────────────────────────────────── */
+.sel-card{background:var(--card);border:1px solid var(--bdim);border-radius:18px;padding:22px 18px;margin-bottom:18px;box-shadow:0 12px 50px rgba(0,0,0,.45)}
 
-/* ═══════════════════════════════════════
-   PACK GRID
-═══════════════════════════════════════ */
-.pack-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-bottom:24px}
-.pack{background:var(--card);border:1.5px solid var(--border-dim);border-radius:var(--r);
-  padding:14px 12px 13px;cursor:pointer;position:relative;overflow:hidden;
-  transition:border-color .2s,transform .15s,box-shadow .2s,background .2s;
-  -webkit-user-select:none;user-select:none}
-.pack::before{content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(212,167,66,.09) 0%,transparent 60%);opacity:0;transition:opacity .2s}
-.pack:hover{border-color:rgba(212,167,66,.45);transform:translateY(-2px);box-shadow:0 6px 22px rgba(212,167,66,.1)}
-.pack:hover::before{opacity:1}
-.pack.sel{border-color:var(--gold);background:rgba(212,167,66,.09);
-  box-shadow:0 0 0 1px var(--gold),0 8px 28px rgba(212,167,66,.22)}
-.pack.sel::before{opacity:1}
-.pack-badge{position:absolute;top:8px;right:8px;background:var(--gold);color:#000;
-  font-size:8px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:99px}
-.pack-ico{font-size:20px;display:block;margin-bottom:5px}
-.pack-nm{font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:var(--gold-lt);margin-bottom:3px}
-.pack-pr{font-size:17px;font-weight:800;color:var(--white);letter-spacing:-.01em}
-.pack-chk{position:absolute;bottom:8px;right:8px;width:18px;height:18px;border-radius:50%;
-  background:var(--gold);color:#000;font-size:10px;font-weight:900;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;transform:scale(0);transition:all .22s cubic-bezier(.34,1.56,.64,1)}
-.pack.sel .pack-chk{opacity:1;transform:scale(1)}
+/* +/- stepper */
+.stepper{display:flex;align-items:center;justify-content:center;gap:0;margin-bottom:22px}
+.st-btn{width:48px;height:48px;border:2px solid var(--border);background:var(--card2);color:var(--gold);font-size:26px;font-weight:700;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;line-height:1;user-select:none}
+.st-btn:hover:not(:disabled){background:rgba(212,167,66,.15);border-color:var(--gold);box-shadow:0 0 14px var(--gold-glow)}
+.st-btn:active:not(:disabled){transform:scale(.94)}
+.st-btn:disabled{opacity:.25;cursor:not-allowed}
+.st-display{flex:1;text-align:center;padding:0 16px}
+.std-gems{font-family:'Cinzel',serif;font-size:30px;font-weight:700;color:var(--gold-lt);line-height:1;letter-spacing:-.01em}
+.std-lbl{font-size:10px;color:var(--muted);margin-top:2px;letter-spacing:.08em;text-transform:uppercase}
+.std-price{font-size:24px;font-weight:800;color:var(--white);margin-top:5px;letter-spacing:-.01em}
 
-/* ═══════════════════════════════════════
+/* pill strip */
+.pill-strip{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.pill-strip::-webkit-scrollbar{display:none}
+.ppill{flex-shrink:0;background:var(--card2);border:1.5px solid var(--bdim);border-radius:99px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s;white-space:nowrap}
+.ppill:hover{border-color:rgba(212,167,66,.4);color:var(--gold-lt)}
+.ppill.sel{border-color:var(--gold);background:rgba(212,167,66,.12);color:var(--gold-lt);box-shadow:0 0 10px rgba(212,167,66,.18)}
+
+/* ───────────────────────────────────────────
    FORM CARD
-═══════════════════════════════════════ */
-.form-card{background:var(--card);border:1px solid var(--border-dim);border-radius:18px;
-  padding:22px 18px;box-shadow:0 12px 50px rgba(0,0,0,.5);margin-bottom:0}
+─────────────────────────────────────────── */
+.form-card{background:var(--card);border:1px solid var(--bdim);border-radius:18px;padding:22px 18px;box-shadow:0 12px 50px rgba(0,0,0,.45)}
 .fl{margin-bottom:16px}
-.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--gold);opacity:.85;margin-bottom:7px}
-.inp{width:100%;background:var(--bg3);border:1.5px solid var(--border-dim);border-radius:10px;
-  padding:13px 15px;font-size:15px;color:var(--text);outline:none;
-  transition:border-color .2s,box-shadow .2s}
+.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:7px}
+.inp{width:100%;background:var(--bg3);border:1.5px solid var(--bdim);border-radius:10px;padding:13px 15px;font-size:15px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s}
 .inp::placeholder{color:var(--muted)}
 .inp:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,167,66,.14)}
-.inp.valid{border-color:rgba(34,197,94,.6)}
-.inp.invalid{border-color:rgba(239,68,68,.5)}
-.pack-disp{background:var(--bg3);border:1.5px dashed var(--border-dim);border-radius:10px;
-  padding:12px 15px;display:flex;align-items:center;gap:8px;font-size:14px;
-  min-height:48px;color:var(--muted);transition:all .3s}
-.pack-disp.has{border-color:var(--border);border-style:solid;color:var(--gold-lt);font-weight:600}
-.imo-hint{font-size:11px;margin-top:5px;align-items:center;gap:4px;display:none}
-.imo-hint.ok{color:var(--green);display:flex}
-.imo-hint.err{color:var(--red);display:flex}
+.inp.ok{border-color:rgba(34,197,94,.6)}
+.inp.no{border-color:rgba(239,68,68,.5)}
+.fhint{font-size:11px;margin-top:5px;align-items:center;gap:4px;display:none}
+.fhint.ok{color:var(--green);display:flex}
+.fhint.no{color:var(--red);display:flex}
 
-.btn-pay{width:100%;border:none;border-radius:12px;padding:16px;
-  font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:.1em;color:#000;
-  background:linear-gradient(135deg,var(--gold-dk),var(--gold) 50%,var(--gold-lt));
-  box-shadow:0 4px 20px rgba(212,167,66,.35);
-  transition:opacity .2s,transform .15s,box-shadow .2s,filter .2s;position:relative;overflow:hidden}
-.btn-pay::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);opacity:0;transition:opacity .2s}
+/* Pack summary display */
+.packdisp{background:var(--bg3);border:1.5px dashed var(--bdim);border-radius:10px;padding:12px 15px;display:flex;align-items:center;gap:9px;min-height:48px;transition:all .3s}
+.packdisp.has{border-style:solid;border-color:var(--border)}
+
+.btn-pay{width:100%;border:none;border-radius:13px;padding:17px;font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:.1em;color:#000;background:linear-gradient(135deg,var(--gold-dk),var(--gold) 50%,var(--gold-lt));box-shadow:0 4px 24px rgba(212,167,66,.38);transition:opacity .2s,transform .15s,box-shadow .2s,filter .2s;position:relative;overflow:hidden}
+.btn-pay::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2),transparent);opacity:0;transition:opacity .2s}
 .btn-pay:hover:not(:disabled)::after{opacity:1}
-.btn-pay:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 32px rgba(212,167,66,.5)}
+.btn-pay:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 10px 34px rgba(212,167,66,.52)}
 .btn-pay:active:not(:disabled){transform:translateY(0)}
-.btn-pay:disabled{opacity:.3;cursor:not-allowed;filter:grayscale(.5)}
+.btn-pay:disabled{opacity:.28;cursor:not-allowed;filter:grayscale(.6)}
 
-.trust{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-.trust-item{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.trust-item em{color:var(--gold);font-style:normal;font-size:13px}
+.trustrow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
+.titem{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
+.titem em{color:var(--gold);font-style:normal;font-size:13px}
 
-/* ═══════════════════════════════════════
-   OVERLAY
-═══════════════════════════════════════ */
-.overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.86);
-  backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;
-  opacity:0;pointer-events:none;transition:opacity .3s;padding:0}
+/* ───────────────────────────────────────────
+   OVERLAY / BOTTOM SHEET
+─────────────────────────────────────────── */
+.overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.88);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
 .overlay.on{opacity:1;pointer-events:all}
-.sheet{width:100%;max-width:460px;max-height:93dvh;overflow-y:auto;
-  border-radius:22px 22px 0 0;
-  box-shadow:0 -12px 60px rgba(0,0,0,.85),0 0 0 1px rgba(212,167,66,.18);
-  transform:translateY(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);
-  overscroll-behavior:contain}
+.sheet{width:100%;max-width:480px;max-height:93dvh;overflow-y:auto;border-radius:24px 24px 0 0;box-shadow:0 -14px 60px rgba(0,0,0,.85),0 0 0 1px rgba(212,167,66,.15);transform:translateY(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);overscroll-behavior:contain}
 .overlay.on .sheet{transform:translateY(0)}
-.overlay.center-mode{align-items:center;padding:16px}
-.overlay.center-mode .sheet{border-radius:20px;max-height:90dvh}
 
-/* ═══════════════════════════════════════
-   PAYMENT CONFIRMATION PAGE
-═══════════════════════════════════════ */
+/* ───────────────────────────────────────────
+   PAYMENT SHEET
+─────────────────────────────────────────── */
+.phdr{background:#0b0b0f;padding:17px 20px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;z-index:10}
+.phdr-title{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--white)}
+.phdr-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.cx{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:var(--text);font-size:15px;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.cx:hover{background:rgba(255,255,255,.18)}
+.pbody{background:#fff;padding:0}
 
-/* ── Dark sheet header ── */
-.pay-hdr{background:#0c0c10;padding:16px 20px 14px;
-  display:flex;align-items:center;justify-content:space-between;
-  border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;z-index:10}
-.pay-hdr-info .pay-title{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:var(--white)}
-.pay-hdr-info .pay-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
-.close-x{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);border:none;
-  color:var(--text);font-size:15px;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.close-x:hover{background:rgba(255,255,255,.15)}
+/* order banner */
+.obanner{background:linear-gradient(135deg,#0c1840 0%,#0f2258 100%);padding:17px 22px;display:flex;align-items:center;justify-content:space-between}
+.obl-lbl{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+.obl-val{font-size:17px;font-weight:800;color:#fff}
+.obr{text-align:right}
+.obr-lbl{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.obr-amt{font-size:30px;font-weight:900;color:#fff;letter-spacing:-.02em}
 
-/* ── White confirmation body ── */
-.pay-body{background:#fff;padding:0}
+/* timer bar */
+.twrap{background:#f4f6ff;border-bottom:1px solid #e6eaf5;padding:10px 22px;display:flex;align-items:center;justify-content:space-between}
+.tlbl{font-size:11.5px;color:#666;display:flex;align-items:center;gap:6px}
+.tval{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums;color:var(--blue);transition:color .3s}
+.tval.urgent{color:var(--red);animation:blink 1s ease-in-out infinite}
+.tval.done{color:var(--red)}
 
-/* -- Order summary bar -- */
-.ord-summary-bar{
-  background:linear-gradient(135deg,#0d1a3a 0%,#0f1f4a 100%);
-  padding:16px 22px;
-  display:flex;align-items:center;justify-content:space-between;
+/* ───────────────────────────────────────────
+   PREMIUM QR SECTION
+─────────────────────────────────────────── */
+.qrsec{padding:22px 22px 18px;display:flex;flex-direction:column;align-items:center;gap:14px;border-bottom:1px solid #efefef}
+
+.qr-method-tag{display:inline-flex;align-items:center;gap:7px;background:#f0f5ff;border:1px solid #d0e0ff;border-radius:99px;padding:6px 16px;font-size:12px;font-weight:700;color:#1a44bb;letter-spacing:.03em}
+
+/* ── QR DOWNLOAD CARD (the premium downloadable element) ── */
+#qrDownloadCard{
+  width:100%;max-width:300px;
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,.22);
+  background:#fff;
+  /* gradient border via padding trick */
+  padding:3px;
+  background:linear-gradient(145deg,#d4a742,#9a7320,#f5d98b,#d4a742);
+  animation:borderShimmer 3s linear infinite;
+  background-size:300% 300%;
 }
-.osb-left .osb-label{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
-.osb-left .osb-pack{font-size:16px;font-weight:800;color:#fff}
-.osb-right{text-align:right}
-.osb-right .osb-amount-label{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
-.osb-right .osb-amount{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.02em}
+@keyframes borderShimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-/* -- Timer -- */
-.timer-wrap{background:#f5f7ff;border-bottom:1px solid #ebebf5;padding:10px 22px;
-  display:flex;align-items:center;justify-content:space-between}
-.timer-lbl{font-size:11.5px;color:#666;display:flex;align-items:center;gap:6px}
-.timer-val{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums;color:var(--blue);transition:color .3s}
-.timer-val.urgent{color:var(--red);animation:blink 1s ease-in-out infinite}
-.timer-val.done{color:var(--red)}
+.qrdc-inner{border-radius:17px;overflow:hidden;background:#fff}
 
-/* ── QR SECTION ── */
-.qr-section{padding:22px 22px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;
-  border-bottom:1px solid #f0f0f0}
-
-.qr-method-badge{display:inline-flex;align-items:center;gap:6px;
-  background:#f0f4ff;border:1px solid #d4e0ff;border-radius:99px;
-  padding:5px 14px;font-size:11.5px;font-weight:700;color:#2255cc;margin-bottom:4px}
-
-.qr-card{
-  width:100%;max-width:270px;
-  background:#fff;border-radius:16px;
-  padding:14px;
-  box-shadow:0 4px 24px rgba(0,0,0,.12),0 0 0 1px rgba(0,0,0,.06);
+/* Card header: dark gold gradient */
+.qrdc-head{
+  background:linear-gradient(135deg,#0d0d1a 0%,#1c1c30 50%,#0d0d1a 100%);
+  padding:14px 18px 12px;
 }
-.qr-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.qr-merchant{font-size:12px;font-weight:700;color:#222;letter-spacing:.01em}
-.qr-upi-logo{font-size:10px;font-weight:800;letter-spacing:.08em;
-  background:linear-gradient(135deg,#25d366,#1a9e55);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.qrdc-head-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.qrdc-brand{font-family:'Cinzel Decorative',serif;font-size:9px;letter-spacing:.15em;
+  background:linear-gradient(135deg,var(--gold-lt),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900}
+.qrdc-badge{background:rgba(212,167,66,.2);border:1px solid rgba(212,167,66,.4);border-radius:6px;padding:2px 9px;font-size:9px;font-weight:800;color:var(--gold);letter-spacing:.08em}
 
-.qr-box{width:100%;aspect-ratio:1;border-radius:10px;background:#f8f8f8;border:2px solid #eee;
-  display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
-.qr-box img{width:100%;height:100%;object-fit:contain}
-.qr-spinner-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
-.qr-spinner{width:36px;height:36px;border:3px solid #eee;border-top-color:var(--blue);
-  border-radius:50%;animation:spin .7s linear infinite}
-.qr-spin-txt{font-size:12px;color:#aaa}
+/* Order info chips inside QR card */
+.qrdc-info{display:flex;gap:6px;flex-wrap:wrap}
+.qrdc-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:6px;padding:4px 10px;font-size:10px;color:rgba(255,255,255,.7);font-weight:600}
+.qrdc-chip strong{color:var(--gold-lt)}
 
-.qr-card-note{
-  margin-top:10px;background:#f0f4ff;border:1px solid #d4dfff;border-radius:8px;
-  padding:7px 10px;font-size:11px;color:#3355bb;font-weight:600;
-  display:none;word-break:break-all;text-align:center}
+/* QR image area */
+.qrdc-qr-wrap{
+  background:#fff;margin:12px;border-radius:12px;
+  padding:12px;position:relative;
+  box-shadow:0 2px 12px rgba(0,0,0,.12);
+}
+/* Decorative corner brackets */
+.qrdc-qr-wrap::before,.qrdc-qr-wrap::after{content:'';position:absolute;width:18px;height:18px;border-color:var(--gold);border-style:solid}
+.qrdc-qr-wrap::before{top:4px;left:4px;border-width:2.5px 0 0 2.5px}
+.qrdc-qr-wrap::after{bottom:4px;right:4px;border-width:0 2.5px 2.5px 0}
+/* Additional pseudo-element via extra elements */
 
-.qr-scan-hint{font-size:12px;color:#888;text-align:center;line-height:1.5}
-.qr-apps-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-.qr-app-chip{background:#f4f4f4;border:1px solid #e2e2e2;border-radius:7px;
-  padding:4px 10px;font-size:10.5px;font-weight:700;color:#555}
+.qr-img-box{width:100%;aspect-ratio:1;position:relative;display:flex;align-items:center;justify-content:center;background:#f8f8f8;border-radius:8px;overflow:hidden}
+.qr-img-box img{width:100%;height:100%;object-fit:contain;display:none;border-radius:8px}
+.qr-spinner-w{display:flex;flex-direction:column;align-items:center;gap:8px}
+.qr-spin{width:36px;height:36px;border:3px solid #e8e8e8;border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite}
+.qr-spin-txt{font-size:11px;color:#aaa}
 
-/* ═══════════════════════════════════════
-   PAYMENT DETAILS FORM SECTION
-═══════════════════════════════════════ */
-.pform-section{padding:20px 22px 24px}
-.pform-title{font-size:15px;font-weight:800;color:#111;margin-bottom:4px;
-  display:flex;align-items:center;gap:7px}
-.pform-sub{font-size:12px;color:#888;margin-bottom:18px;line-height:1.5}
+/* Central logo over QR */
+.qr-center-logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:38px;height:38px;background:#fff;border-radius:9px;display:none;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 10px rgba(0,0,0,.15);border:2px solid rgba(212,167,66,.3)}
 
-/* ── Info rows ── */
+/* QR card footer strip */
+.qrdc-foot{background:linear-gradient(135deg,#0d0d1a,#1c1c30);padding:10px 18px;display:flex;align-items:center;justify-content:space-between}
+.qrdc-merchant{font-size:10px;color:rgba(255,255,255,.55);font-weight:600;letter-spacing:.03em}
+.qrdc-scan-lbl{font-size:9px;color:var(--gold);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+
+/* Corner brackets (via child divs) */
+.qr-corner{position:absolute;width:16px;height:16px;border-color:var(--gold);border-style:solid}
+.c-tl{top:4px;left:4px;border-width:2px 0 0 2px}
+.c-tr{top:4px;right:4px;border-width:2px 2px 0 0}
+.c-bl{bottom:4px;left:4px;border-width:0 0 2px 2px}
+.c-br{bottom:4px;right:4px;border-width:0 2px 2px 0}
+
+/* note below QR */
+.qr-note-tag{background:#eff4ff;border:1px solid #d0dfff;border-radius:9px;padding:8px 13px;font-size:11px;color:#2244aa;font-weight:600;text-align:center;max-width:280px;word-break:break-all;display:none}
+
+/* Download QR button */
+.btn-dl-qr{display:flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,#0d0d1a,#1c1c30);
+  color:var(--gold-lt);border:1.5px solid var(--border);border-radius:11px;
+  padding:11px 22px;font-size:13px;font-weight:700;letter-spacing:.04em;
+  transition:all .2s;display:none}
+.btn-dl-qr:hover{background:rgba(212,167,66,.1);box-shadow:0 0 16px rgba(212,167,66,.22)}
+
+.apps-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.apptag{background:#f4f4f4;border:1px solid #e2e2e2;border-radius:8px;padding:4px 11px;font-size:10.5px;font-weight:700;color:#555}
+
+/* ───────────────────────────────────────────
+   PAYMENT DETAILS FORM
+─────────────────────────────────────────── */
+.pfsec{padding:20px 22px 24px}
+.pftitle{font-size:15px;font-weight:800;color:#111;margin-bottom:3px;display:flex;align-items:center;gap:7px}
+.pfsub{font-size:12px;color:#888;margin-bottom:18px;line-height:1.55}
+
 .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-.info-box{background:#f8f8fb;border:1px solid #ebebf2;border-radius:10px;padding:11px 14px}
-.info-box-label{font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#999;font-weight:700;margin-bottom:3px}
-.info-box-val{font-size:14px;font-weight:800;color:#111}
+.ibox{background:#f8f8fc;border:1px solid #ebebf0;border-radius:10px;padding:11px 14px}
+.ibox-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:#999;font-weight:700;margin-bottom:3px}
+.ibox-val{font-size:14px;font-weight:800;color:#111}
 
-/* ── Form fields ── */
-.pfl{margin-bottom:14px;position:relative}
-.plbl{display:block;font-size:11.5px;font-weight:700;letter-spacing:.06em;
-  text-transform:uppercase;color:#333;margin-bottom:7px}
-.pinp{width:100%;border:1.5px solid #ddd;border-radius:10px;padding:12px 14px;
-  font-size:15px;color:#111;outline:none;background:#fafafa;
-  transition:border-color .2s,box-shadow .2s}
+.pfl{margin-bottom:14px}
+.plbl{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#333;margin-bottom:7px}
+.pinp{width:100%;border:1.5px solid #ddd;border-radius:10px;padding:12px 14px;font-size:15px;color:#111;outline:none;background:#fafafa;transition:border-color .2s,box-shadow .2s}
 .pinp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,108,248,.12);background:#fff}
-.pinp.valid{border-color:rgba(34,197,94,.55)}
-.pinp.invalid{border-color:rgba(239,68,68,.5)}
+.pinp.ok{border-color:rgba(34,197,94,.6)}
+.pinp.no{border-color:rgba(239,68,68,.55)}
+.phint{font-size:11px;margin-top:5px;align-items:center;gap:4px;display:none}
+.phint.ok{color:var(--green);display:flex}
+.phint.no{color:var(--red);display:flex}
 
-/* ── UTR row with ? button ── */
-.utr-row{display:flex;align-items:center;gap:8px}
-.utr-row .pinp{flex:1}
+/* UTR row */
+.utrrow{display:flex;align-items:center;gap:9px}
+.utrrow .pinp{flex:1}
+.utr-help{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--blue);border:none;color:#fff;font-size:14px;font-weight:900;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(26,108,248,.4);transition:all .2s}
+.utr-help:hover{background:var(--blue2);transform:scale(1.1);box-shadow:0 4px 16px rgba(26,108,248,.5)}
 
-/* ── UTR Help (?) button ── */
-.utr-help-btn{flex-shrink:0;width:28px;height:28px;border-radius:50%;
-  background:var(--blue);border:none;color:#fff;
-  font-size:13px;font-weight:900;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 2px 8px rgba(26,108,248,.4);
-  transition:background .2s,transform .15s,box-shadow .2s;
-  position:relative;z-index:1}
-.utr-help-btn:hover{background:var(--blue-dk);transform:scale(1.1);box-shadow:0 4px 14px rgba(26,108,248,.5)}
+.chkrow{display:flex;align-items:flex-start;gap:9px;margin-bottom:18px}
+.chkrow input{width:16px;height:16px;margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
+.chkrow label{font-size:12.5px;color:#444;line-height:1.55;cursor:pointer}
 
-/* ── UTR Tooltip / popup ── */
-.utr-tooltip{
-  position:fixed;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%) scale(.92);
-  width:min(340px, 92vw);
-  background:#fff;border-radius:16px;
-  box-shadow:0 20px 60px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.08);
-  z-index:500;
-  opacity:0;pointer-events:none;
-  transition:opacity .25s,transform .25s cubic-bezier(.22,1,.36,1);
-  overflow:hidden;
-}
-.utr-tooltip.show{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
-.utr-tt-backdrop{position:fixed;inset:0;z-index:499;background:rgba(0,0,0,.5);
-  backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .25s}
-.utr-tt-backdrop.show{opacity:1;pointer-events:all}
+.btn-confirm{width:100%;background:#0e0e18;color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:800;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .2s,transform .15s;box-shadow:0 4px 18px rgba(0,0,0,.25)}
+.btn-confirm:hover:not(:disabled){background:#1a1a2a;transform:translateY(-1px)}
+.btn-confirm:disabled{opacity:.42;cursor:not-allowed;transform:none}
 
-.utr-tt-hdr{background:linear-gradient(135deg,var(--blue-dk),var(--blue));
-  padding:14px 18px 12px;display:flex;align-items:center;justify-content:space-between}
-.utr-tt-title{font-size:14px;font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
-.tt-close{background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:50%;
-  width:26px;height:26px;font-size:14px;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:background .2s}
-.tt-close:hover{background:rgba(255,255,255,.3)}
+.secnote{display:flex;align-items:flex-start;gap:9px;background:#f0fff4;border:1px solid rgba(34,197,94,.28);border-radius:11px;padding:11px 14px;margin-top:14px}
+.secnote-txt{font-size:11.5px;color:#2d6a4f;line-height:1.55}
 
-.utr-tt-body{padding:16px 18px 18px}
+/* ───────────────────────────────────────────
+   UTR TOOLTIP POPUP
+─────────────────────────────────────────── */
+.tt-bg{position:fixed;inset:0;z-index:499;background:rgba(0,0,0,.58);backdrop-filter:blur(5px);opacity:0;pointer-events:none;transition:opacity .25s}
+.tt-bg.show{opacity:1;pointer-events:all}
+.tt-pop{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.92);width:min(360px,94vw);background:#fff;border-radius:20px;box-shadow:0 20px 70px rgba(0,0,0,.42),0 0 0 1px rgba(0,0,0,.06);z-index:500;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s cubic-bezier(.22,1,.36,1);overflow:hidden}
+.tt-pop.show{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
+.tt-hdr{background:linear-gradient(135deg,var(--blue2),var(--blue));padding:14px 18px 12px;display:flex;align-items:center;justify-content:space-between}
+.tt-title{font-size:14px;font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
+.tt-cx{background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:50%;width:28px;height:28px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.tt-cx:hover{background:rgba(255,255,255,.3)}
+.tt-body{padding:16px 18px 20px;max-height:70vh;overflow-y:auto}
 
-/* ── Annotated screenshot ── */
-.phone-mockup{
-  width:100%;max-width:270px;margin:0 auto 14px;
-  background:#1a1a2e;border-radius:22px;overflow:hidden;
-  border:3px solid #2a2a42;
-  box-shadow:0 8px 30px rgba(0,0,0,.3);
-  position:relative;
-}
-.phone-notch{height:20px;background:#111;display:flex;align-items:center;justify-content:center;gap:6px}
-.phone-notch-dot{width:8px;height:8px;border-radius:50%;background:#333}
-.phone-screen{background:#fff;padding:0;overflow:hidden}
-.gpay-bar{background:#1a73e8;padding:10px 14px;display:flex;align-items:center;gap:8px}
-.gpay-back{font-size:18px;color:#fff;opacity:.85}
-.gpay-title{font-size:13px;font-weight:700;color:#fff}
-.gpay-txn-card{padding:12px 14px;background:#fff}
-.gpay-txn-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.gpay-txn-icon{width:36px;height:36px;border-radius:50%;background:#e8f4fd;
-  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.gpay-txn-info .gpay-txn-name{font-size:13px;font-weight:700;color:#111}
-.gpay-txn-info .gpay-txn-date{font-size:10px;color:#888;margin-top:1px}
-.gpay-txn-amt{font-size:15px;font-weight:900;color:#1a6cf8;margin-left:auto}
-.gpay-divider{height:1px;background:#f0f0f0;margin:8px 0}
+/* Phone mockup */
+.phone-mock{width:100%;max-width:250px;margin:0 auto 14px;background:#111118;border-radius:22px;overflow:hidden;border:3px solid #1e1e30;box-shadow:0 8px 30px rgba(0,0,0,.3);position:relative}
+.ph-notch{height:18px;background:#0a0a12;display:flex;align-items:center;justify-content:center;gap:6px}
+.ph-dot{width:7px;height:7px;border-radius:50%;background:#2a2a40}
+.gp-bar{background:#1a73e8;padding:10px 14px;display:flex;align-items:center;gap:8px}
+.gp-back{font-size:18px;color:#fff;opacity:.85}
+.gp-title-bar{font-size:13px;font-weight:700;color:#fff}
+.gp-body{padding:12px 14px;background:#fff}
+.gp-txn-row{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+.gp-ico{width:36px;height:36px;border-radius:50%;background:#e8f2ff;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.gp-nm{font-size:12.5px;font-weight:700;color:#111}
+.gp-dt{font-size:9.5px;color:#888;margin-top:1px}
+.gp-amt{font-size:14px;font-weight:900;color:#1a6cf8;margin-left:auto}
+.gp-div{height:1px;background:#f0f0f0;margin:7px 0}
+.gp-sec-lbl{font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.07em;font-weight:700;margin-bottom:5px}
+.gp-item{display:flex;justify-content:space-between;font-size:10.5px;color:#666;margin-bottom:4px}
+/* Highlighted UTR */
+.utr-hl{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;background:linear-gradient(135deg,#fff8e0,#fff2c0);border:2px solid #ffc107;margin-top:5px;position:relative}
+.utr-hl-lbl{font-size:9px;font-weight:800;color:#664400;text-transform:uppercase;letter-spacing:.06em;margin-bottom:2px}
+.utr-hl-val{font-size:12px;font-weight:900;color:#111;letter-spacing:.03em}
+/* Annotation */
+.ann-wrap{position:absolute;inset:0;pointer-events:none}
+.ann-ring{position:absolute;border:2.5px solid var(--red);border-radius:10px;animation:apulse 2s ease-in-out infinite}
+.ann-arr{position:absolute;color:var(--red);font-size:22px;animation:abounce 1.5s ease-in-out infinite}
+@keyframes apulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+@keyframes abounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
 
-/* ── UTR highlight row ── */
-.gpay-utr-row{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:8px 10px;border-radius:8px;
-  background:linear-gradient(135deg,#fff8e1,#fff3cd);
-  border:1.5px solid #ffc107;
-  position:relative;
-  margin-top:4px;
-}
-.gpay-utr-lbl{font-size:10px;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.06em}
-.gpay-utr-val{font-size:12px;font-weight:900;color:#111;letter-spacing:.03em}
+.find-note{font-size:12.5px;color:#333;line-height:1.7;text-align:center;background:#f8f9ff;border:1px solid #e4e8ff;border-radius:11px;padding:12px 15px}
+.find-note strong{color:var(--blue);font-weight:700}
+.find-note code{background:#eef0ff;padding:2px 6px;border-radius:4px;font-size:11px;font-family:monospace}
 
-/* ── Red annotation circle + arrow on mockup ── */
-.annotation-wrap{position:absolute;left:0;right:0;bottom:0;top:0;pointer-events:none}
-.ann-circle{
-  position:absolute;
-  border:2.5px solid var(--red);border-radius:50%;
-  animation:ann-pulse 2s ease-in-out infinite;
-}
-.ann-arrow{
-  position:absolute;
-  color:var(--red);font-size:20px;font-weight:900;
-  animation:ann-bounce 1.5s ease-in-out infinite;
-}
-@keyframes ann-pulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
-@keyframes ann-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-
-.utr-find-note{
-  font-size:12.5px;color:#444;line-height:1.6;text-align:center;
-  background:#f8f9ff;border:1px solid #e8ecff;border-radius:10px;
-  padding:10px 14px;
-}
-.utr-find-note strong{color:var(--blue);font-weight:700}
-
-/* ── Confirm button ── */
-.btn-confirm{width:100%;background:#0f0f15;color:#fff;border:none;
-  border-radius:11px;padding:14px;font-size:15px;font-weight:800;
-  letter-spacing:.04em;display:flex;align-items:center;justify-content:center;gap:6px;
-  transition:background .2s,transform .15s;box-shadow:0 4px 16px rgba(0,0,0,.2)}
-.btn-confirm:hover:not(:disabled){background:#1a1a28;transform:translateY(-1px)}
-.btn-confirm:disabled{opacity:.45;cursor:not-allowed;transform:none}
-
-/* -- Security note -- */
-.sec-note{display:flex;align-items:flex-start;gap:8px;background:#f0fff4;
-  border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:10px 13px;margin-top:14px}
-.sec-note-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-.sec-note-text{font-size:11.5px;color:#2d6a4f;line-height:1.55}
-
-/* ═══════════════════════════════════════
-   SUCCESS OVERLAY
-═══════════════════════════════════════ */
-#sucOverlay .sheet{
-  background:linear-gradient(160deg,#0c1a10 0%,#08100a 100%);
+/* ───────────────────────────────────────────
+   SUCCESS OVERLAY + RECEIPT
+─────────────────────────────────────────── */
+#sucOv .sheet{
+  background:linear-gradient(160deg,#091310 0%,#060d08 100%);
   border:1px solid rgba(34,197,94,.2);
-  padding:36px 24px 28px;text-align:center;
-  border-radius:22px 22px 0 0;
+  border-radius:24px 24px 0 0;
 }
-.suc-icon{font-size:68px;animation:bounce-in .55s cubic-bezier(.22,1,.36,1);display:block;margin-bottom:14px}
-.suc-title{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:var(--green);margin-bottom:8px}
-.suc-sub{font-size:13.5px;color:rgba(134,239,172,.75);line-height:1.7;margin-bottom:22px}
-.suc-ord-box{background:rgba(255,255,255,.04);border:1px solid rgba(34,197,94,.18);
-  border-radius:12px;padding:14px 16px;text-align:left;margin-bottom:20px}
-.suc-row{display:flex;justify-content:space-between;align-items:center;
-  font-size:13px;color:rgba(134,239,172,.65);padding:4px 0}
-.suc-row strong{color:#c8f0ce;font-weight:700}
-.btn-wa{width:100%;background:#25d366;color:#fff;border:none;border-radius:12px;padding:15px;
-  font-size:16px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:9px;
-  box-shadow:0 4px 20px rgba(37,211,102,.3);transition:background .2s,transform .15s,box-shadow .2s}
-.btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);box-shadow:0 8px 28px rgba(37,211,102,.45)}
+.suc-inner{padding:28px 20px 30px;text-align:center}
 
-/* ═══════════════════════════════════════
+/* ── RECEIPT CARD (downloadable) ── */
+#receiptCard{
+  max-width:320px;margin:0 auto 20px;
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 10px 50px rgba(0,0,0,.18);
+  background:#fff;
+}
+
+/* Receipt header — animated green */
+.rc-hdr{
+  background:linear-gradient(135deg,#0a6e35 0%,#13a350 50%,#0a6e35 100%);
+  padding:26px 22px 20px;text-align:center;position:relative;overflow:hidden;
+}
+.rc-hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 18px,rgba(255,255,255,.04) 18px,rgba(255,255,255,.04) 36px)}
+
+/* animated check circle */
+.chk-ring{
+  width:66px;height:66px;border-radius:50%;
+  background:rgba(255,255,255,.15);border:3px solid rgba(255,255,255,.45);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 12px;
+  animation:chk-pop .6s cubic-bezier(.22,1,.36,1) both;
+}
+.chk-ring svg{stroke-dasharray:60;stroke-dashoffset:60;animation:chk-draw .5s .25s ease forwards}
+@keyframes chk-pop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
+@keyframes chk-draw{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
+
+.rc-status{font-size:19px;font-weight:900;color:#fff;letter-spacing:.04em}
+.rc-status-sub{font-size:12px;color:rgba(255,255,255,.72);margin-top:3px}
+
+/* wavy deco */
+.rc-wave{width:100%;height:26px;margin-top:-1px;display:block}
+
+/* receipt body */
+.rc-body{padding:14px 20px 18px;background:#fff}
+.rc-merchant-row{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px;padding-bottom:12px;border-bottom:1.5px dashed #e5e5e5}
+.rc-merchant-ico{font-size:22px}
+.rc-merchant-info .rc-mname{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#1a1a1a;letter-spacing:.04em}
+.rc-merchant-info .rc-mtagline{font-size:9px;color:#aaa;text-transform:uppercase;letter-spacing:.1em;margin-top:1px}
+
+.rc-table{width:100%;border-collapse:collapse}
+.rc-table tr{border-bottom:1px solid #f2f2f2}
+.rc-table tr:last-child{border-bottom:none}
+.rc-table td{padding:9px 4px;font-size:12.5px;vertical-align:middle}
+.rc-table td:first-child{color:#888;font-weight:600;text-transform:uppercase;font-size:10px;letter-spacing:.06em;white-space:nowrap;padding-right:12px}
+.rc-table td:last-child{font-weight:800;color:#111;text-align:right}
+.rc-table .val-green{color:var(--green2)}
+.rc-table .val-blue{color:var(--blue)}
+.rc-table .val-mono{font-size:12px;letter-spacing:.04em}
+
+/* receipt footer */
+.rc-foot{background:linear-gradient(135deg,#f4fff7,#edfff4);padding:11px 20px;border-top:1.5px dashed #c8e6cc;text-align:center}
+.rc-foot-txt{font-size:10.5px;color:#3a7a4a;line-height:1.65}
+
+/* confetti */
+.conf-wrap{position:absolute;top:0;left:0;right:0;height:0;pointer-events:none}
+.conf-dot{position:absolute;width:8px;height:8px;border-radius:2px;animation:conf-drop 2s ease-in both}
+@keyframes conf-drop{0%{opacity:1;transform:translateY(-10px) rotate(0deg) scale(1)}100%{opacity:0;transform:translateY(100px) rotate(360deg) scale(.5)}}
+
+/* action buttons */
+.btn-dl-receipt{width:100%;background:linear-gradient(135deg,var(--green2),var(--green));color:#fff;border:none;border-radius:13px;padding:15px;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 4px 22px rgba(34,197,94,.35);transition:all .2s;margin-bottom:12px}
+.btn-dl-receipt:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(34,197,94,.45)}
+.btn-wa{width:100%;background:#25d366;color:#fff;border:none;border-radius:13px;padding:14px;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:0 4px 18px rgba(37,211,102,.28);transition:all .2s}
+.btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);box-shadow:0 6px 26px rgba(37,211,102,.42)}
+
+/* ───────────────────────────────────────────
    TOAST
-═══════════════════════════════════════ */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);
-  background:#1c1c26;border:1px solid var(--border);border-radius:12px;
-  padding:11px 20px;font-size:13px;font-weight:500;color:var(--text);
-  z-index:600;opacity:0;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.5);
-  transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .3s}
+─────────────────────────────────────────── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(90px);background:#1c1c28;border:1px solid var(--border);border-radius:13px;padding:11px 22px;font-size:13px;font-weight:500;color:var(--text);z-index:600;opacity:0;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.5);transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .3s}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .toast.err{border-color:rgba(239,68,68,.35);color:#fca5a5;background:#1a1015}
 .toast.ok{border-color:rgba(34,197,94,.35);color:#86efac;background:#101a12}
 
-/* ═══════════════════════════════════════
+/* ───────────────────────────────────────────
    FOOTER
-═══════════════════════════════════════ */
-footer{position:relative;z-index:5;border-top:1px solid var(--border-dim);
-  padding:20px 16px;text-align:center;font-size:11px;color:var(--muted);line-height:1.8}
+─────────────────────────────────────────── */
+footer{position:relative;z-index:5;border-top:1px solid var(--bdim);padding:20px 16px;text-align:center;font-size:11px;color:var(--muted);line-height:1.9}
 footer a{color:var(--gold);text-decoration:none}
 
-/* ═══════════════════════════════════════
-   ANIMATIONS
-═══════════════════════════════════════ */
-@keyframes gem-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+/* ───────────────────────────────────────────
+   KEYFRAMES
+─────────────────────────────────────────── */
+@keyframes gfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.5}}
-@keyframes bounce-in{0%{transform:scale(0);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
-@keyframes fade-up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-.fu{animation:fade-up .55s ease both}
-.fu1{animation-delay:.07s}.fu2{animation-delay:.14s}
+@keyframes fadeup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.fu{animation:fadeup .55s ease both}
+.fu1{animation-delay:.07s}
+.fu2{animation-delay:.14s}
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="ld-gem">💎</div>
-  <div class="ld-brand">KAMAL DIAMOND</div>
-  <div class="ld-bar"><div class="ld-fill"></div></div>
+<!-- ═══════ LOADER ═══════ -->
+<div id="ldr">
+  <div class="ldr-gem">💎</div>
+  <div class="ldr-name">KAMAL DIAMOND</div>
+  <div class="ldr-bar"><div class="ldr-fill"></div></div>
 </div>
 
 <div class="atmos"></div>
 
-<!-- STEP PROGRESS -->
-<nav class="steps-nav">
+<!-- ═══════ STEP NAV ═══════ -->
+<nav class="snav">
   <div class="steps">
-    <div class="step active" id="stp1"><div class="step-dot">1</div><div class="step-lbl">Pack</div></div>
-    <div class="step" id="stp2"><div class="step-dot">2</div><div class="step-lbl">ID</div></div>
-    <div class="step" id="stp3"><div class="step-dot">3</div><div class="step-lbl">QR Pay</div></div>
-    <div class="step" id="stp4"><div class="step-dot">4</div><div class="step-lbl">UTR</div></div>
-    <div class="step" id="stp5"><div class="step-dot">✓</div><div class="step-lbl">Done</div></div>
+    <div class="st active" id="st1"><div class="st-dot">1</div><div class="st-lbl">Pack</div></div>
+    <div class="st" id="st2"><div class="st-dot">2</div><div class="st-lbl">ID</div></div>
+    <div class="st" id="st3"><div class="st-dot">3</div><div class="st-lbl">QR Pay</div></div>
+    <div class="st" id="st4"><div class="st-dot">4</div><div class="st-lbl">UTR</div></div>
+    <div class="st" id="st5"><div class="st-dot">✓</div><div class="st-lbl">Done</div></div>
   </div>
 </nav>
 
-<!-- HEADER -->
+<!-- ═══════ HEADER ═══════ -->
 <header class="fu">
-  <span class="hdr-gem">💎</span>
+  <span class="hgem">💎</span>
   <div class="brand">KAMAL DIAMOND RESELLER</div>
   <div class="tagline">✦ 24 / 7 Fast Service ✦</div>
-  <div class="hdr-chips">
-    <a class="chip" href="https://wa.me/916382371168" target="_blank" rel="noopener">
+  <div class="hchips">
+    <a class="hchip" href="https://wa.me/916382371168" target="_blank" rel="noopener">
       <svg width="13" height="13" fill="#25d366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
       WhatsApp Support
     </a>
-    <a class="chip" href="mailto:kamal6382371168@gmail.com">
+    <a class="hchip" href="mailto:kamal6382371168@gmail.com">
       <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
       Email Us
     </a>
   </div>
 </header>
 
-<!-- MAIN -->
+<!-- ═══════ MAIN ═══════ -->
 <main>
-  <div class="sec-hd fu fu1">Select Diamond Pack</div>
-  <div class="pack-grid fu fu1" id="packGrid"></div>
 
+  <!-- PACK SELECTOR -->
+  <div class="sechd fu fu1">Select Diamond Pack</div>
+  <div class="sel-card fu fu1">
+    <!-- Stepper -->
+    <div class="stepper">
+      <button class="st-btn" id="btnMinus" onclick="changeIdx(-1)">−</button>
+      <div class="st-display">
+        <div class="std-gems" id="dispGems">10</div>
+        <div class="std-lbl">Diamonds</div>
+        <div class="std-price" id="dispPrice">₹30.00</div>
+      </div>
+      <button class="st-btn" id="btnPlus" onclick="changeIdx(1)">+</button>
+    </div>
+    <!-- Quick pills -->
+    <div class="pill-strip" id="pillStrip"></div>
+  </div>
+
+  <!-- FORM -->
   <div class="form-card fu fu2">
-    <div class="sec-hd" style="margin-bottom:18px">Order Details</div>
+    <div class="sechd" style="margin-bottom:18px">Order Details</div>
 
     <div class="fl">
       <label class="lbl">Selected Pack</label>
-      <div class="pack-disp" id="packDisp">
+      <div class="packdisp" id="packDisp">
         <span style="font-size:16px">💎</span>
-        <span style="font-weight:400;color:var(--muted)">Choose a pack above first</span>
+        <span id="packDispTxt" style="color:var(--muted);font-size:14px">Choose a pack above</span>
       </div>
     </div>
 
@@ -511,253 +525,297 @@ footer a{color:var(--gold);text-decoration:none}
       <input class="inp" id="imoInp" type="text" inputmode="numeric"
         placeholder="Enter your numeric Game / IMO ID"
         autocomplete="off" spellcheck="false" oninput="onImo(this)"/>
-      <div class="imo-hint" id="imoHint"></div>
+      <div class="fhint" id="imoHint"></div>
     </div>
 
     <button class="btn-pay" id="payBtn" disabled onclick="openPaySheet()">
-      💎 &nbsp;Proceed to Payment
+      💎 &nbsp;Proceed to QR Payment
     </button>
 
-    <div class="trust">
-      <span class="trust-item"><em>🔒</em> Secure UPI</span>
-      <span class="trust-item"><em>⚡</em> Instant Delivery</span>
-      <span class="trust-item"><em>✅</em> 100% Genuine</span>
+    <div class="trustrow">
+      <span class="titem"><em>🔒</em> Secure QR</span>
+      <span class="titem"><em>⚡</em> Instant Delivery</span>
+      <span class="titem"><em>✅</em> 100% Genuine</span>
     </div>
   </div>
 </main>
 
 <footer>
-  © 2025 Kamal Diamond Reseller ·
+  © 2025 <strong>Kamal Diamond Reseller</strong> &nbsp;·&nbsp;
   <a href="mailto:kamal6382371168@gmail.com">kamal6382371168@gmail.com</a><br>
-  All transactions are processed via secure UPI QR only
+  Payment via UPI QR Only &nbsp;·&nbsp; Merchant ID: Q433892283
 </footer>
 
 <!-- ══════════════════════════════════════════
-     PAYMENT CONFIRMATION BOTTOM SHEET
+     PAYMENT BOTTOM SHEET
 ══════════════════════════════════════════ -->
-<div class="overlay" id="payOverlay">
+<div class="overlay" id="payOv">
   <div class="sheet">
 
     <!-- Dark header -->
-    <div class="pay-hdr">
-      <div class="pay-hdr-info">
-        <div class="pay-title">🔐 Payment Confirmation</div>
-        <div class="pay-sub" id="paySubLbl">Scan QR · Enter UTR · Done</div>
+    <div class="phdr">
+      <div>
+        <div class="phdr-title">🔐 Payment Confirmation</div>
+        <div class="phdr-sub" id="paySubLbl">Scan QR · Enter UTR · Done</div>
       </div>
-      <button class="close-x" onclick="closePaySheet()">✕</button>
+      <button class="cx" onclick="closePaySheet()">✕</button>
     </div>
 
-    <!-- White body -->
-    <div class="pay-body">
+    <div class="pbody">
 
-      <!-- Blue order summary banner -->
-      <div class="ord-summary-bar">
-        <div class="osb-left">
-          <div class="osb-label">Diamond Pack</div>
-          <div class="osb-pack" id="sumPackName">—</div>
+      <!-- Blue order banner -->
+      <div class="obanner">
+        <div>
+          <div class="obl-lbl">Diamond Pack</div>
+          <div class="obl-val" id="sumPack">—</div>
         </div>
-        <div class="osb-right">
-          <div class="osb-amount-label">Pay Exactly</div>
-          <div class="osb-amount" id="sumAmt">₹0</div>
+        <div class="obr">
+          <div class="obr-lbl">Pay Exactly</div>
+          <div class="obr-amt" id="sumAmt">₹0</div>
         </div>
       </div>
 
       <!-- Timer -->
-      <div class="timer-wrap">
-        <span class="timer-lbl">⏱ QR expires in</span>
-        <span class="timer-val" id="timerEl">05:00</span>
+      <div class="twrap">
+        <span class="tlbl">⏱ QR valid for</span>
+        <span class="tval" id="timerEl">10:00</span>
       </div>
 
       <!-- QR SECTION -->
-      <div class="qr-section">
-        <div class="qr-method-badge">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#2255cc"><path d="M3 3h7v7H3zm0 11h7v7H3zm11-11h7v7h-7zm0 11h7v7h-7zM5 5h3v3H5zm0 11h3v3H5zm11-11h3v3h-3zm0 11h3v3h-3z"/></svg>
-          Scan QR Code to Pay
+      <div class="qrsec">
+        <div class="qr-method-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#1a44bb"><path d="M3 3h7v7H3zm0 11h7v7H3zm11-11h7v7h-7zm0 11h7v7h-7zM5 5h3v3H5zm0 11h3v3H5zm11-11h3v3h-3zm0 11h3v3h-3z"/></svg>
+          Scan QR Code to Pay Only
         </div>
 
-        <!-- QR card (styled like a real UPI payment terminal) -->
-        <div class="qr-card">
-          <div class="qr-card-top">
-            <div class="qr-merchant">Kamal Diamond Reseller</div>
-            <div class="qr-upi-logo">UPI</div>
-          </div>
-          <div class="qr-box" id="qrBox">
-            <div class="qr-spinner-wrap" id="qrLoad">
-              <div class="qr-spinner"></div>
-              <div class="qr-spin-txt">Generating…</div>
+        <!-- ══ PREMIUM QR DOWNLOAD CARD ══ -->
+        <div id="qrDownloadCard">
+          <div class="qrdc-inner">
+
+            <!-- Card header with branding -->
+            <div class="qrdc-head">
+              <div class="qrdc-head-row">
+                <div class="qrdc-brand">KAMAL DIAMOND RESELLER</div>
+                <div class="qrdc-badge">UPI QR</div>
+              </div>
+              <!-- Order details chips inside card -->
+              <div class="qrdc-info">
+                <div class="qrdc-chip">Pack: <strong id="qdcPack">—</strong></div>
+                <div class="qrdc-chip">Amount: <strong id="qdcAmt">—</strong></div>
+                <div class="qrdc-chip">IMO: <strong id="qdcImo">—</strong></div>
+              </div>
             </div>
-            <img id="qrImg" src="" alt="UPI QR Code" style="display:none"/>
+
+            <!-- QR image -->
+            <div class="qrdc-qr-wrap" style="position:relative">
+              <div class="qr-corner c-tl"></div>
+              <div class="qr-corner c-tr"></div>
+              <div class="qr-corner c-bl"></div>
+              <div class="qr-corner c-br"></div>
+
+              <div class="qr-img-box" id="qrBox">
+                <div class="qr-spinner-w" id="qrSpinner">
+                  <div class="qr-spin"></div>
+                  <div class="qr-spin-txt">Generating QR…</div>
+                </div>
+                <img id="qrImg" src="" alt="UPI QR Code" crossorigin="anonymous"/>
+                <div class="qr-center-logo" id="qrLogo">💎</div>
+              </div>
+            </div>
+
+            <!-- Card footer -->
+            <div class="qrdc-foot">
+              <div class="qrdc-merchant">Merchant ID: Q433892283</div>
+              <div class="qrdc-scan-lbl">▸ SCAN TO PAY</div>
+            </div>
           </div>
-          <div class="qr-card-note" id="qrNote"></div>
         </div>
 
-        <div class="qr-scan-hint">
-          Open any UPI app, tap <strong>Scan QR</strong> and scan<br>
-          the code above to complete payment
+        <!-- Note tag below card -->
+        <div class="qr-note-tag" id="qrNote"></div>
+
+        <div style="font-size:12px;color:#777;text-align:center;line-height:1.7">
+          Open any UPI app → tap <strong>Scan QR</strong> → scan above
         </div>
-        <div class="qr-apps-row">
-          <span class="qr-app-chip">📱 GPay</span>
-          <span class="qr-app-chip">📱 PhonePe</span>
-          <span class="qr-app-chip">📱 Paytm</span>
-          <span class="qr-app-chip">📱 BHIM</span>
+
+        <!-- Download QR Card button -->
+        <button class="btn-dl-qr" id="dlQrBtn" onclick="downloadQRCard()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+          Download QR Card (with Order Details)
+        </button>
+
+        <div class="apps-row">
+          <span class="apptag">📱 GPay</span>
+          <span class="apptag">📱 PhonePe</span>
+          <span class="apptag">📱 Paytm</span>
+          <span class="apptag">📱 BHIM</span>
         </div>
       </div>
 
-      <!-- ══ PAYMENT DETAILS FORM SECTION ══ -->
-      <div class="pform-section">
-        <div class="pform-title">
+      <!-- PAYMENT DETAILS FORM -->
+      <div class="pfsec">
+        <div class="pftitle">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
           Submit Payment Details
         </div>
-        <div class="pform-sub">After scanning and paying, fill in the details below to confirm your order.</div>
+        <div class="pfsub">After scanning & paying, fill in the details below to confirm your order.</div>
 
-        <!-- Info grid (IMO + Pack auto-filled) -->
         <div class="info-grid">
-          <div class="info-box">
-            <div class="info-box-label">IMO ID</div>
-            <div class="info-box-val" id="sumImo">—</div>
-          </div>
-          <div class="info-box">
-            <div class="info-box-label">Diamonds</div>
-            <div class="info-box-val" id="sumDiamonds">—</div>
-          </div>
+          <div class="ibox"><div class="ibox-lbl">IMO ID</div><div class="ibox-val" id="sumImo">—</div></div>
+          <div class="ibox"><div class="ibox-lbl">Diamonds</div><div class="ibox-val" id="sumDiamonds">—</div></div>
         </div>
 
-        <!-- Name (optional) -->
         <div class="pfl">
-          <label class="plbl">Your Name <span style="font-weight:400;text-transform:none;font-size:10px;color:#aaa">(optional)</span></label>
+          <label class="plbl">Your Name <span style="font-weight:400;text-transform:none;font-size:10px;color:#bbb">(optional)</span></label>
           <input class="pinp" id="nameInp" type="text" placeholder="e.g. Rajan Kumar"/>
         </div>
 
-        <!-- 12-digit UTR field with ? -->
+        <!-- UTR + help -->
         <div class="pfl">
           <label class="plbl">Enter 12-Digit UTR Number <span style="color:var(--red)">*</span></label>
-          <div class="utr-row">
+          <div class="utrrow">
             <input class="pinp" id="utrInp" type="tel" inputmode="numeric"
-              placeholder="e.g. 423156789012" maxlength="16"
+              placeholder="e.g. 423156789012" maxlength="12"
               oninput="onUtr(this)"/>
-            <!-- Blue ? help button -->
-            <button class="utr-help-btn" onclick="toggleUtrHelp()" title="Where to find UTR?">?</button>
+            <button class="utr-help" onclick="toggleTip()" title="Where to find UTR?">?</button>
           </div>
-          <div class="imo-hint" id="utrHint"></div>
+          <div class="phint" id="utrHint"></div>
         </div>
 
-        <!-- I confirm checkbox -->
-        <div style="display:flex;align-items:flex-start;gap:9px;margin-bottom:18px">
-          <input type="checkbox" id="confirmChk" style="width:16px;height:16px;margin-top:2px;accent-color:var(--blue);cursor:pointer"/>
-          <label for="confirmChk" style="font-size:12.5px;color:#444;line-height:1.55;cursor:pointer">
-            I confirm that I have completed the UPI payment and the above UTR number is correct.
-          </label>
+        <div class="chkrow">
+          <input type="checkbox" id="confChk"/>
+          <label for="confChk">I confirm I have completed the UPI QR payment and the UTR number entered is correct.</label>
         </div>
 
-        <!-- Confirm button -->
         <button class="btn-confirm" id="confirmBtn" onclick="submitOrder()">
           ✅ &nbsp;Confirm &amp; Submit Order
         </button>
 
-        <!-- Security note -->
-        <div class="sec-note">
-          <span class="sec-note-icon">🔒</span>
-          <div class="sec-note-text">
-            Your details are submitted securely. Diamonds will be delivered to your IMO ID within minutes after verification.
-          </div>
+        <div class="secnote">
+          <span style="font-size:17px;flex-shrink:0;margin-top:1px">🔒</span>
+          <div class="secnote-txt">Details submitted securely. Diamonds delivered to your IMO ID within minutes after verification.</div>
         </div>
       </div>
-
-    </div><!-- /pay-body -->
-  </div><!-- /sheet -->
+    </div><!-- /pbody -->
+  </div>
 </div>
 
 <!-- ══════════════════════════════════════════
-     UTR HELP TOOLTIP (popup with annotated screenshot)
+     UTR HELP TOOLTIP
 ══════════════════════════════════════════ -->
-<div class="utr-tt-backdrop" id="utrBackdrop" onclick="toggleUtrHelp()"></div>
-<div class="utr-tooltip" id="utrTooltip">
-  <div class="utr-tt-hdr">
-    <div class="utr-tt-title">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><circle cx="12" cy="12" r="10" fill="rgba(255,255,255,.2)"/><path d="M12 17h1v-6h-1zm0-8h1V7h-1z" fill="white"/></svg>
-      Where to find your UTR Number?
+<div class="tt-bg" id="ttBg" onclick="toggleTip()"></div>
+<div class="tt-pop" id="ttPop">
+  <div class="tt-hdr">
+    <div class="tt-title">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      Where is my UTR Number?
     </div>
-    <button class="tt-close" onclick="toggleUtrHelp()">✕</button>
+    <button class="tt-cx" onclick="toggleTip()">✕</button>
   </div>
-  <div class="utr-tt-body">
-
-    <!-- Annotated phone mockup -->
+  <div class="tt-body">
     <div style="display:flex;justify-content:center">
-      <div class="phone-mockup">
-        <div class="phone-notch">
-          <div class="phone-notch-dot"></div>
-          <div class="phone-notch-dot" style="width:24px;border-radius:4px"></div>
-          <div class="phone-notch-dot"></div>
+      <div class="phone-mock">
+        <div class="ph-notch">
+          <div class="ph-dot"></div>
+          <div class="ph-dot" style="width:22px;border-radius:4px"></div>
+          <div class="ph-dot"></div>
         </div>
-        <div class="phone-screen">
-          <!-- GPay-style app screen -->
-          <div class="gpay-bar">
-            <div class="gpay-back">‹</div>
-            <div class="gpay-title">Transaction Details</div>
-          </div>
-          <div class="gpay-txn-card">
-            <div class="gpay-txn-row">
-              <div class="gpay-txn-icon">💎</div>
-              <div class="gpay-txn-info">
-                <div class="gpay-txn-name">Kamal Diamond Reseller</div>
-                <div class="gpay-txn-date">Today, 2:45 PM · Paid</div>
-              </div>
-              <div class="gpay-txn-amt">₹860</div>
+        <div style="background:#fff">
+          <div class="gp-bar"><div class="gp-back">‹</div><div class="gp-title-bar">Transaction Details</div></div>
+          <div class="gp-body">
+            <div class="gp-txn-row">
+              <div class="gp-ico">💎</div>
+              <div><div class="gp-nm">Kamal Diamond Reseller</div><div class="gp-dt">Today, 3:22 PM · Paid</div></div>
+              <div class="gp-amt">₹875</div>
             </div>
-            <div class="gpay-divider"></div>
-            <div style="font-size:10px;color:#999;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:6px">Transaction Info</div>
-            <div style="display:flex;justify-content:space-between;font-size:11px;color:#666;margin-bottom:4px">
-              <span>Status</span><span style="color:#2d9e5c;font-weight:700">✓ Success</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;font-size:11px;color:#666;margin-bottom:6px">
-              <span>UPI Ref. No.</span><span style="color:#888">4231 5678 9012</span>
-            </div>
-            <!-- Highlighted UTR row -->
-            <div class="gpay-utr-row">
+            <div class="gp-div"></div>
+            <div class="gp-sec-lbl">Transaction Info</div>
+            <div class="gp-item"><span>Status</span><span style="color:#16a34a;font-weight:700">✓ Success</span></div>
+            <div class="gp-item"><span>UPI Ref No.</span><span>4231 5678 9012</span></div>
+            <div class="gp-item"><span>Date</span><span>Today, 3:22 PM</span></div>
+            <div class="utr-hl">
               <div>
-                <div class="gpay-utr-lbl">UTR / Transaction ID</div>
-                <div class="gpay-utr-val">423156789012</div>
+                <div class="utr-hl-lbl">UTR / UPI Transaction ID</div>
+                <div class="utr-hl-val">423156789012</div>
               </div>
-              <div style="font-size:16px">📋</div>
+              <span style="font-size:17px">📋</span>
             </div>
           </div>
         </div>
-        <!-- Red annotation -->
-        <div class="annotation-wrap">
-          <!-- Red circle around UTR row — positioned bottom of screen -->
-          <div class="ann-circle" style="left:8px;right:8px;bottom:10px;height:42px;border-radius:10px"></div>
-          <!-- Arrow pointing down to it -->
-          <div class="ann-arrow" style="right:14px;bottom:56px;font-size:22px">👇</div>
+        <div class="ann-wrap">
+          <div class="ann-ring" style="left:8px;right:8px;bottom:8px;height:44px;border-radius:10px"></div>
+          <div class="ann-arr" style="right:12px;bottom:55px">👇</div>
         </div>
       </div>
     </div>
-
-    <!-- Description text -->
-    <div class="utr-find-note">
+    <div class="find-note" style="margin-top:14px">
       <strong>📍 Find this unique number</strong> in your payment app's transaction history.<br><br>
-      In <b>Google Pay</b>: Tap the transaction → <em>"UTR / Transaction ID"</em><br>
-      In <b>PhonePe</b>: History → Tap payment → <em>"UPI Transaction ID"</em><br>
-      In <b>Paytm</b>: Passbook → Tap payment → <em>"Transaction ID"</em><br><br>
-      <span style="color:#888">It is a <b>12-digit numeric code</b> like <code style="background:#eef;padding:1px 5px;border-radius:4px;font-size:11px">423156789012</code></span>
+      <b>Google Pay:</b> Tap transaction → <em>"UTR / Transaction ID"</em><br>
+      <b>PhonePe:</b> History → Tap payment → <em>"UPI Transaction ID"</em><br>
+      <b>Paytm:</b> Passbook → Tap payment → <em>"Transaction ID"</em><br><br>
+      <span style="color:#888">It is a <b>12-digit number</b> like <code>423156789012</code></span>
     </div>
-
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════
-     SUCCESS OVERLAY
+     SUCCESS OVERLAY + RECEIPT
 ══════════════════════════════════════════ -->
-<div class="overlay" id="sucOverlay">
-  <div class="sheet" style="background:linear-gradient(160deg,#0c1a10,#08100a);border:1px solid rgba(34,197,94,.2);padding:36px 24px 28px;text-align:center;border-radius:22px 22px 0 0">
-    <span class="suc-icon">🎉</span>
-    <div class="suc-title">Order Submitted!</div>
-    <div class="suc-sub">Your order has been recorded successfully.<br>Tap below to confirm on WhatsApp for instant diamond delivery.</div>
-    <div class="suc-ord-box" id="ordBox"></div>
-    <button class="btn-wa" onclick="goWA()">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Confirm on WhatsApp
-    </button>
+<div class="overlay" id="sucOv">
+  <div class="sheet">
+    <div class="suc-inner">
+
+      <!-- ══ RECEIPT CARD (captured by html2canvas) ══ -->
+      <div id="receiptCard">
+        <div class="rc-hdr">
+          <div class="conf-wrap" id="confWrap"></div>
+          <div class="chk-ring">
+            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <div class="rc-status">Payment Successful!</div>
+          <div class="rc-status-sub">Transaction Verified ✓</div>
+        </div>
+        <!-- Wave SVG divider -->
+        <svg class="rc-wave" viewBox="0 0 400 26" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 26 L0 14 Q50 0 100 14 Q150 26 200 14 Q250 0 300 14 Q350 26 400 14 L400 26 Z" fill="#0a6e35"/>
+        </svg>
+        <div class="rc-body">
+          <div class="rc-merchant-row">
+            <div class="rc-merchant-ico">💎</div>
+            <div class="rc-merchant-info">
+              <div class="rc-mname">Kamal Diamond Reseller</div>
+              <div class="rc-mtagline">Official · 24/7 Fast Service</div>
+            </div>
+          </div>
+          <table class="rc-table">
+            <tr><td>Merchant</td><td>Kamal Seller</td></tr>
+            <tr><td>User ID (IMO)</td><td class="val-blue" id="rcImo">—</td></tr>
+            <tr><td>Package</td><td id="rcPack">—</td></tr>
+            <tr><td>Amount Paid</td><td class="val-green" id="rcAmt">—</td></tr>
+            <tr><td>UTR Number</td><td class="val-mono" id="rcUtr">—</td></tr>
+            <tr><td>Status</td><td class="val-green">✅ Payment Successful</td></tr>
+            <tr><td>Date &amp; Time</td><td style="font-size:11px" id="rcDate">—</td></tr>
+          </table>
+        </div>
+        <div class="rc-foot">
+          <div class="rc-foot-txt">💎 Diamonds will be delivered to your IMO ID shortly<br>Support: +91 63823 71168 | kamal6382371168@gmail.com</div>
+        </div>
+      </div>
+      <!-- END receipt card -->
+
+      <!-- Buttons outside the receipt card (not captured) -->
+      <button class="btn-dl-receipt" onclick="downloadReceipt(event)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        Download Receipt as Image
+      </button>
+
+      <button class="btn-wa" onclick="goWA()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Confirm on WhatsApp
+      </button>
+    </div>
   </div>
 </div>
 
@@ -767,13 +825,16 @@ footer a{color:var(--gold);text-decoration:none}
      JAVASCRIPT
 ══════════════════════════════════════════ -->
 <script>
-/* ─── CONFIG ─────────────────────────────────────────────────────────── */
-// ⚠️ IMPORTANT: Replace upiId below with your actual verified UPI ID
-// Common formats: name@okaxis | name@ybl | name@oksbi | number@upi
-// Check "My UPI ID" in your Google Pay / PhonePe / Paytm app
+/* ═══ CONFIG ═══════════════════════════════════════════════════════════════
+   ⚠️  IMPORTANT: The UPI VPA must exactly match what PhonePe Business shows.
+   Common PhonePe merchant VPA formats:
+     Q433892283@ybl   ← try this first
+     Q433892283@ibl
+     Q433892283@axl
+   Open PhonePe Business app → Profile → "My UPI ID" to get the exact format.
+═══════════════════════════════════════════════════════════════════════════ */
 const CFG = {
-  apiKey  : 'cc5f8334-7d76-4ec3-9385-5f763948cec8',
-  upiId   : 'q433892283@ybl',        // ⚠️ REPLACE with your real, verified UPI ID
+  upiId   : 'Q433892283@ybl',           // ⚠️ Verify in PhonePe Business → My UPI ID
   upiName : 'Kamal Diamond Reseller',
   waNum   : '916382371168',
   formUrl : 'https://docs.google.com/forms/d/e/1FAIpQLScyiGqT7r56UGWLTbNIo88xku_ujRR1rlEfnCKRSG50Dk8WuA/formResponse',
@@ -783,252 +844,335 @@ const CFG = {
 };
 
 const PACKS = [
-  {id:'p10',   label:'10 Diamonds',   d:10,   price:30   },
-  {id:'p50',   label:'50 Diamonds',   d:50,   price:90   },
-  {id:'p100',  label:'100 Diamonds',  d:100,  price:172  },
-  {id:'p200',  label:'200 Diamonds',  d:200,  price:344  },
-  {id:'p500',  label:'500 Diamonds',  d:500,  price:860,  badge:'Popular'   },
-  {id:'p1000', label:'1000 Diamonds', d:1000, price:1711 },
-  {id:'p2000', label:'2000 Diamonds', d:2000, price:3422 },
-  {id:'p5000', label:'5000 Diamonds', d:5000, price:8500 },
-  {id:'p10000',label:'10000 Diamonds',d:10000,price:17000,badge:'Best Value'},
+  {i:0, label:'10 Diamonds',    d:10,    price:30,    str:'₹30.00'    },
+  {i:1, label:'50 Diamonds',    d:50,    price:90,    str:'₹90.00'    },
+  {i:2, label:'100 Diamonds',   d:100,   price:175,   str:'₹175.00'   },
+  {i:3, label:'200 Diamonds',   d:200,   price:350,   str:'₹350.00'   },
+  {i:4, label:'500 Diamonds',   d:500,   price:875,   str:'₹875.00'   },
+  {i:5, label:'1000 Diamonds',  d:1000,  price:1750,  str:'₹1,750.00' },
+  {i:6, label:'2000 Diamonds',  d:2000,  price:3500,  str:'₹3,500.00' },
+  {i:7, label:'5000 Diamonds',  d:5000,  price:8750,  str:'₹8,750.00' },
+  {i:8, label:'10000 Diamonds', d:10000, price:17500, str:'₹17,500.00'},
 ];
 
-let selPack=null, imoOk=false, utrOk=false, timerInt=null, ord={};
+/* ═══ STATE ═══════════════════════════════════════════════════════════════ */
+let idx=0, imoOk=false, timerInt=null, ord={};
 
-/* ─── LOADER ────────────────────────────────────────────────────────── */
-window.addEventListener('load',()=>
-  setTimeout(()=>document.getElementById('loader').classList.add('out'),1380));
+/* ═══ LOADER ══════════════════════════════════════════════════════════════ */
+window.addEventListener('load', () =>
+  setTimeout(() => document.getElementById('ldr').classList.add('out'), 1450));
 
-/* ─── RENDER PACKS ──────────────────────────────────────────────────── */
+/* ═══ RENDER PILLS ════════════════════════════════════════════════════════ */
 (function(){
-  document.getElementById('packGrid').innerHTML=PACKS.map(p=>`
-    <div class="pack" id="pk-${p.id}" onclick="pickPack('${p.id}')">
-      ${p.badge?`<div class="pack-badge">${p.badge}</div>`:''}
-      <span class="pack-ico">💎</span>
-      <div class="pack-nm">${p.label}</div>
-      <div class="pack-pr">₹${p.price.toLocaleString('en-IN')}</div>
-      <div class="pack-chk">✓</div>
-    </div>`).join('');
+  document.getElementById('pillStrip').innerHTML =
+    PACKS.map(p => `<div class="ppill${p.i===0?' sel':''}" id="pill${p.i}" onclick="selectIdx(${p.i})">${p.label}</div>`).join('');
+  refreshDisplay();
 })();
 
-function pickPack(id){
-  selPack=PACKS.find(p=>p.id===id);
-  document.querySelectorAll('.pack').forEach(el=>el.classList.remove('sel'));
-  document.getElementById('pk-'+id).classList.add('sel');
-  const d=document.getElementById('packDisp');
-  d.innerHTML=`<span>💎</span><span><b>${selPack.label}</b>&nbsp;·&nbsp;<span style="color:var(--gold-lt)">₹${selPack.price.toLocaleString('en-IN')}</span></span>`;
-  d.classList.add('has');
-  markStep(1); checkBtn();
+function selectIdx(i) {
+  idx = i;
+  document.querySelectorAll('.ppill').forEach(el => el.classList.remove('sel'));
+  document.getElementById('pill' + i).classList.add('sel');
+  document.getElementById('pill' + i).scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
+  refreshDisplay();
+  if (imoOk) markStep(2);
 }
 
-/* ─── IMO VALIDATION ────────────────────────────────────────────────── */
-function onImo(el){
-  const v=el.value.trim(), h=document.getElementById('imoHint');
-  if(!v){el.className='inp';h.className='imo-hint';imoOk=false;}
-  else if(/^\d{5,15}$/.test(v)){
-    el.className='inp valid';h.className='imo-hint ok';h.innerHTML='✓ &nbsp;Valid Game ID';
-    imoOk=true; if(selPack)markStep(2);
-  }else{
-    el.className='inp invalid';h.className='imo-hint err';
-    h.innerHTML='✗ &nbsp;Must be 5–15 digits only';imoOk=false;
+function changeIdx(dir) {
+  const n = idx + dir;
+  if (n < 0 || n >= PACKS.length) return;
+  selectIdx(n);
+}
+
+function refreshDisplay() {
+  const p = PACKS[idx];
+  document.getElementById('dispGems').textContent  = p.d.toLocaleString('en-IN');
+  document.getElementById('dispPrice').textContent = p.str;
+  document.getElementById('btnMinus').disabled = (idx === 0);
+  document.getElementById('btnPlus').disabled  = (idx === PACKS.length - 1);
+  // Pack display in form
+  document.getElementById('packDisp').classList.add('has');
+  document.getElementById('packDispTxt').innerHTML =
+    `<strong style="color:var(--gold-lt)">${p.label}</strong>&nbsp;·&nbsp;<span style="color:var(--gold)">${p.str}</span>`;
+}
+
+/* ═══ IMO VALIDATION ══════════════════════════════════════════════════════ */
+function onImo(el) {
+  const v = el.value.trim(), h = document.getElementById('imoHint');
+  if (!v) { el.className='inp'; h.className='fhint'; imoOk=false; }
+  else if (/^\d{5,15}$/.test(v)) {
+    el.className='inp ok'; h.className='fhint ok'; h.innerHTML='✓ &nbsp;Valid IMO ID';
+    imoOk = true; markStep(2);
+  } else {
+    el.className='inp no'; h.className='fhint no';
+    h.innerHTML='✗ &nbsp;Must be 5–15 digits'; imoOk = false;
   }
-  checkBtn();
+  document.getElementById('payBtn').disabled = !imoOk;
 }
-function checkBtn(){ document.getElementById('payBtn').disabled=!(selPack&&imoOk); }
 
-/* ─── UTR VALIDATION ────────────────────────────────────────────────── */
-function onUtr(el){
-  const v=el.value.replace(/\D/g,''); el.value=v;
-  const h=document.getElementById('utrHint');
-  if(!v){el.className='pinp';h.className='imo-hint';utrOk=false;}
-  else if(/^\d{12}$/.test(v)){
-    el.className='pinp valid';h.className='imo-hint ok';h.innerHTML='✓ &nbsp;Valid 12-digit UTR';utrOk=true;
-  }else if(v.length>12){
-    el.className='pinp invalid';h.className='imo-hint err';h.innerHTML='✗ &nbsp;UTR must be exactly 12 digits';utrOk=false;
-  }else{
-    el.className='pinp';h.className='imo-hint';utrOk=false;
+/* ═══ UTR VALIDATION ══════════════════════════════════════════════════════ */
+function onUtr(el) {
+  el.value = el.value.replace(/\D/g, '');
+  const v = el.value, h = document.getElementById('utrHint');
+  if (!v)           { el.className='pinp'; h.className='phint'; }
+  else if (v.length===12) { el.className='pinp ok'; h.className='phint ok'; h.innerHTML='✓ &nbsp;Valid 12-digit UTR'; }
+  else              { el.className='pinp'; h.className='phint'; }
+}
+
+/* ═══ STEP INDICATOR ══════════════════════════════════════════════════════ */
+function markStep(n) {
+  for (let i = 1; i <= 5; i++) {
+    document.getElementById('st' + i).classList.toggle('active', i === n);
+    document.getElementById('st' + i).classList.toggle('done', i < n);
   }
 }
 
-/* ─── STEP INDICATOR ────────────────────────────────────────────────── */
-function markStep(n){
-  for(let i=1;i<=5;i++){
-    const s=document.getElementById('stp'+i);
-    s.classList.toggle('active',i===n);
-    s.classList.toggle('done',i<n);
-  }
-}
+/* ═══ OPEN PAYMENT SHEET ══════════════════════════════════════════════════ */
+async function openPaySheet() {
+  if (!imoOk) return;
+  const p = PACKS[idx], imo = document.getElementById('imoInp').value.trim();
 
-/* ─── OPEN PAYMENT SHEET ────────────────────────────────────────────── */
-async function openPaySheet(){
-  if(!selPack||!imoOk) return;
-  const imo=document.getElementById('imoInp').value.trim();
+  // Populate header & banner
+  document.getElementById('paySubLbl').textContent = `${p.label} · ${p.str}`;
+  document.getElementById('sumPack').textContent    = p.label;
+  document.getElementById('sumAmt').textContent     = p.str;
+  document.getElementById('sumImo').textContent     = imo;
+  document.getElementById('sumDiamonds').textContent = `${p.d.toLocaleString('en-IN')} 💎`;
 
-  // Populate summary
-  document.getElementById('paySubLbl').textContent=`${selPack.label} · ₹${selPack.price.toLocaleString('en-IN')}`;
-  document.getElementById('sumPackName').textContent=selPack.label;
-  document.getElementById('sumAmt').textContent=`₹${selPack.price.toLocaleString('en-IN')}`;
-  document.getElementById('sumImo').textContent=imo;
-  document.getElementById('sumDiamonds').textContent=`${selPack.d.toLocaleString()}💎`;
+  // Populate QR card details chips
+  document.getElementById('qdcPack').textContent = p.label;
+  document.getElementById('qdcAmt').textContent  = p.str;
+  document.getElementById('qdcImo').textContent  = imo;
 
-  // Reset QR
-  document.getElementById('qrImg').style.display='none';
-  document.getElementById('qrLoad').style.display='flex';
-  document.getElementById('qrNote').style.display='none';
-  document.getElementById('utrInp').value='';
-  document.getElementById('nameInp').value='';
-  document.getElementById('utrHint').className='imo-hint';
-  document.getElementById('confirmChk').checked=false;
+  // Reset QR state
+  const qrImg = document.getElementById('qrImg');
+  qrImg.style.display = 'none';
+  qrImg.src = '';
+  document.getElementById('qrLogo').style.display    = 'none';
+  document.getElementById('qrSpinner').style.display = 'flex';
+  document.getElementById('qrNote').style.display    = 'none';
+  document.getElementById('dlQrBtn').style.display   = 'none';
 
-  document.getElementById('payOverlay').classList.add('on');
-  document.body.style.overflow='hidden';
+  // Reset form
+  document.getElementById('utrInp').value  = '';
+  document.getElementById('nameInp').value = '';
+  document.getElementById('utrHint').className = 'phint';
+  document.getElementById('confChk').checked  = false;
+
+  document.getElementById('payOv').classList.add('on');
+  document.body.style.overflow = 'hidden';
   markStep(3);
-  startTimer(300);
-  await buildQR(selPack, imo);
+  startTimer(600); // 10 minutes
+  await buildQR(p, imo);
 }
 
-function closePaySheet(){
-  document.getElementById('payOverlay').classList.remove('on');
-  document.body.style.overflow='';
+function closePaySheet() {
+  document.getElementById('payOv').classList.remove('on');
+  document.body.style.overflow = '';
   clearInterval(timerInt);
-  closeUtrHelp();
+  closeTip();
 }
 
-/* ─── QR GENERATION ─────────────────────────────────────────────────── */
-async function buildQR(pack, imo){
-  const note=`ID: ${imo} - ${pack.d} Diamonds`;
+/* ═══ QR GENERATION ═══════════════════════════════════════════════════════ */
+async function buildQR(pack, imo) {
+  const note    = `ID: ${imo} - ${pack.d} Diamonds`;
+  const upiLink = `upi://pay?pa=${encodeURIComponent(CFG.upiId)}&pn=${encodeURIComponent(CFG.upiName)}&am=${pack.price}&cu=INR&tn=${encodeURIComponent(note)}`;
+  // High-quality QR via qrserver.com (ECC=H so center logo doesn't break scan)
+  const qrUrl   = `https://api.qrserver.com/v1/create-qr-code/?size=420x420&ecc=H&margin=10&color=000000&bgcolor=ffffff&data=${encodeURIComponent(upiLink)}`;
+  revealQR(qrUrl, note);
+}
 
-  // Try UPIGateway API (7-sec timeout)
-  try{
-    const res = await Promise.race([
-      fetch('https://upigateway.com/api/create-order',{
-        method:'POST', headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          key:CFG.apiKey, amount:pack.price,
-          order_id:`KDR${Date.now()}`,
-          customer_name:imo, customer_mobile:'', customer_email:'',
-          redirect_url:location.href, udf1:note
-        })}),
-      new Promise((_,r)=>setTimeout(()=>r('timeout'),7000))
-    ]);
-    const data=await res.json();
-    const qrSrc=data?.qr_image||data?.qr||data?.qrcode||data?.data?.qr_image||data?.data?.qr;
-    if(qrSrc){
-      showQR(qrSrc.startsWith('http')?qrSrc:`data:image/png;base64,${qrSrc}`, note);
-      return;
+function revealQR(src, note) {
+  const img = document.getElementById('qrImg');
+  const noteEl = document.getElementById('qrNote');
+  noteEl.textContent = '📝 Note: ' + note;
+  img.onerror = () => {
+    document.getElementById('qrSpinner').innerHTML =
+      '<div style="font-size:12px;color:#aaa;text-align:center;padding:14px;line-height:1.7">Could not generate QR.<br>Check internet &amp; retry.</div>';
+  };
+  img.onload = () => {
+    document.getElementById('qrSpinner').style.display = 'none';
+    img.style.display = 'block';
+    document.getElementById('qrLogo').style.display = 'flex';
+    noteEl.style.display = 'block';
+    document.getElementById('dlQrBtn').style.display = 'flex';
+  };
+  img.src = src;
+}
+
+/* ═══ DOWNLOAD QR CARD ════════════════════════════════════════════════════ */
+async function downloadQRCard() {
+  const btn = document.getElementById('dlQrBtn');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '⏳ Capturing card…'; btn.disabled = true;
+  try {
+    const card = document.getElementById('qrDownloadCard');
+    const canvas = await html2canvas(card, {
+      scale:3, useCORS:true, allowTaint:true,
+      backgroundColor:'#ffffff',
+      logging:false,
+    });
+    const a = document.createElement('a');
+    a.download = `Kamal_Diamond_QR_${PACKS[idx].d}Diamonds_${Date.now()}.png`;
+    a.href = canvas.toDataURL('image/png', 1.0);
+    a.click();
+    showToast('✅ QR Card downloaded!', 'ok');
+  } catch(e) {
+    // Fallback: open QR image directly for manual save
+    const img = document.getElementById('qrImg');
+    if (img.src) window.open(img.src, '_blank');
+    showToast('Long-press the QR image to save', 'ok');
+  }
+  btn.innerHTML = orig; btn.disabled = false;
+}
+
+/* ═══ TIMER ═══════════════════════════════════════════════════════════════ */
+function startTimer(secs) {
+  clearInterval(timerInt);
+  let rem = secs;
+  const el = document.getElementById('timerEl');
+  const tick = () => {
+    const m = String(Math.floor(rem / 60)).padStart(2, '0');
+    const s = String(rem % 60).padStart(2, '0');
+    el.textContent = `${m}:${s}`;
+    el.className   = 'tval' + (rem <= 60 ? ' urgent' : '');
+    if (rem <= 0) {
+      clearInterval(timerInt);
+      el.textContent = 'EXPIRED'; el.className = 'tval done';
+      showToast('QR expired — please close and try again', 'err');
     }
-  }catch(_){}
-
-  // Fallback: generate QR from UPI deep link via qrserver.com
-  const upiLink = `upi://pay?pa=${encodeURIComponent(CFG.upiId)}`+
-    `&pn=${encodeURIComponent(CFG.upiName)}`+
-    `&am=${pack.price}&cu=INR`+
-    `&tn=${encodeURIComponent(note)}`;
-  const qrUrl=`https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=M&margin=10&data=${encodeURIComponent(upiLink)}`;
-  showQR(qrUrl, note);
-}
-
-function showQR(src, note){
-  const img=document.getElementById('qrImg');
-  const noteEl=document.getElementById('qrNote');
-  noteEl.textContent='📝 Note: '+note;
-  img.onerror=()=>{
-    document.getElementById('qrLoad').innerHTML='<div style="font-size:12px;color:#aaa;text-align:center;padding:14px;line-height:1.6">QR load failed.<br>Please check your internet<br>and try again.</div>';
-  };
-  img.onload=()=>{
-    document.getElementById('qrLoad').style.display='none';
-    img.style.display='block';
-    noteEl.style.display='block';
-  };
-  img.src=src;
-}
-
-/* ─── TIMER ─────────────────────────────────────────────────────────── */
-function startTimer(secs){
-  clearInterval(timerInt); let rem=secs;
-  const el=document.getElementById('timerEl');
-  const tick=()=>{
-    const m=String(Math.floor(rem/60)).padStart(2,'0'), s=String(rem%60).padStart(2,'0');
-    el.textContent=`${m}:${s}`;
-    el.className='timer-val'+(rem<=60?' urgent':'');
-    if(rem<=0){clearInterval(timerInt);el.textContent='EXPIRED';el.className='timer-val done';
-      showToast('QR expired — please close and try again','err');}
     rem--;
   };
-  tick(); timerInt=setInterval(tick,1000);
+  tick(); timerInt = setInterval(tick, 1000);
 }
 
-/* ─── UTR HELP TOOLTIP ───────────────────────────────────────────────── */
-function toggleUtrHelp(){
-  const tt=document.getElementById('utrTooltip');
-  const bd=document.getElementById('utrBackdrop');
-  const showing=tt.classList.contains('show');
-  if(showing){ closeUtrHelp(); }
-  else{ tt.classList.add('show'); bd.classList.add('show'); }
+/* ═══ UTR TOOLTIP ═════════════════════════════════════════════════════════ */
+function toggleTip() {
+  const showing = document.getElementById('ttPop').classList.contains('show');
+  document.getElementById('ttPop').classList.toggle('show', !showing);
+  document.getElementById('ttBg').classList.toggle('show', !showing);
 }
-function closeUtrHelp(){
-  document.getElementById('utrTooltip').classList.remove('show');
-  document.getElementById('utrBackdrop').classList.remove('show');
+function closeTip() {
+  document.getElementById('ttPop').classList.remove('show');
+  document.getElementById('ttBg').classList.remove('show');
 }
 
-/* ─── SUBMIT ORDER ──────────────────────────────────────────────────── */
-async function submitOrder(){
-  const utr=document.getElementById('utrInp').value.trim();
-  const imo=document.getElementById('imoInp').value.trim();
-  const chk=document.getElementById('confirmChk').checked;
+/* ═══ SUBMIT ORDER ════════════════════════════════════════════════════════ */
+async function submitOrder() {
+  const utr  = document.getElementById('utrInp').value.trim();
+  const imo  = document.getElementById('imoInp').value.trim();
+  const name = document.getElementById('nameInp').value.trim();
+  const chk  = document.getElementById('confChk').checked;
+  const p    = PACKS[idx];
 
-  if(!utr||utr.length<12) return showToast('Please enter a valid 12-digit UTR number','err');
-  if(!chk)                 return showToast('Please tick the confirmation checkbox first','err');
+  if (utr.length !== 12) return showToast('Please enter a valid 12-digit UTR number', 'err');
+  if (!chk)               return showToast('Please tick the confirmation checkbox', 'err');
 
-  const btn=document.getElementById('confirmBtn');
-  btn.disabled=true; btn.innerHTML='⏳ &nbsp;Submitting…';
+  const btn = document.getElementById('confirmBtn');
+  btn.disabled = true; btn.innerHTML = '⏳ &nbsp;Submitting…';
 
-  ord={utr, imo, pack:selPack.label, price:selPack.price, d:selPack.d};
+  ord = { utr, imo, name, pack: p.label, price: p.price, str: p.str, d: p.d };
 
-  // Step 4: Post to Google Form (no-cors — form still receives it)
-  try{
-    await fetch(CFG.formUrl,{
+  // Step 4: Google Form (no-cors)
+  try {
+    await fetch(CFG.formUrl, {
       method:'POST', mode:'no-cors',
       headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:new URLSearchParams({
-        [CFG.fUtr]:utr, [CFG.fPack]:selPack.label, [CFG.fImo]:imo
-      }).toString()
+      body: new URLSearchParams({ [CFG.fUtr]:utr, [CFG.fPack]:p.label, [CFG.fImo]:imo }).toString()
     });
-  }catch(_){/* Expected with no-cors — submission still registers */}
+  } catch(_) { /* no-cors always throws — submission still records */ }
 
-  btn.disabled=false; btn.innerHTML='✅ &nbsp;Confirm &amp; Submit Order';
+  btn.disabled = false; btn.innerHTML = '✅ &nbsp;Confirm &amp; Submit Order';
   clearInterval(timerInt);
-  closeUtrHelp();
+  closeTip();
   closePaySheet();
-  showSuccess();
+  showReceipt();
 }
 
-/* ─── SUCCESS ───────────────────────────────────────────────────────── */
-function showSuccess(){
+/* ═══ SHOW RECEIPT ════════════════════════════════════════════════════════ */
+function showReceipt() {
   markStep(5);
-  document.getElementById('ordBox').innerHTML=`
-    <div class="suc-row"><span>💎 Pack</span><strong>${ord.pack}</strong></div>
-    <div class="suc-row"><span>💰 Amount Paid</span><strong>₹${ord.price.toLocaleString('en-IN')}</strong></div>
-    <div class="suc-row"><span>🆔 IMO ID</span><strong>${ord.imo}</strong></div>
-    <div class="suc-row"><span>🧾 UTR Number</span><strong>${ord.utr}</strong></div>`;
-  document.getElementById('sucOverlay').classList.add('on');
-  document.body.style.overflow='hidden';
+  const now = new Date();
+  const dateStr =
+    now.toLocaleDateString('en-IN', {day:'2-digit', month:'short', year:'numeric'}) +
+    ' · ' +
+    now.toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit', hour12:true});
+
+  document.getElementById('rcImo').textContent  = ord.imo;
+  document.getElementById('rcPack').textContent = ord.pack;
+  document.getElementById('rcAmt').textContent  = ord.str;
+  document.getElementById('rcUtr').textContent  = ord.utr;
+  document.getElementById('rcDate').textContent = dateStr;
+
+  spawnConfetti();
+  document.getElementById('sucOv').classList.add('on');
+  document.body.style.overflow = 'hidden';
 }
 
-// Step 5: WhatsApp redirect with exact message
-function goWA(){
-  const msg=encodeURIComponent(
-    `Order placed for IMO ID: ${ord.imo} - Pack: ₹${ord.price}. UTR: ${ord.utr}`);
-  window.open(`https://wa.me/${CFG.waNum}?text=${msg}`,'_blank');
+/* ═══ CONFETTI ════════════════════════════════════════════════════════════ */
+function spawnConfetti() {
+  const wrap   = document.getElementById('confWrap');
+  wrap.innerHTML = '';
+  const colors = ['#d4a742','#f5d98b','#22c55e','#1a6cf8','#ef4444','#fff','#fbbf24'];
+  for (let i = 0; i < 22; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'conf-dot';
+    dot.style.cssText = `
+      left:${Math.random()*100}%;
+      background:${colors[i % colors.length]};
+      animation-delay:${(Math.random() * 1.2).toFixed(2)}s;
+      animation-duration:${(1.5 + Math.random()).toFixed(2)}s;
+      transform:rotate(${Math.floor(Math.random()*360)}deg);
+      border-radius:${Math.random() > .5 ? '50%' : '2px'};
+    `;
+    wrap.appendChild(dot);
+  }
 }
 
-/* ─── TOAST ─────────────────────────────────────────────────────────── */
+/* ═══ DOWNLOAD RECEIPT ════════════════════════════════════════════════════ */
+async function downloadReceipt(e) {
+  const btn  = e.target.closest('button');
+  const orig = btn.innerHTML;
+  btn.innerHTML = '⏳ &nbsp;Generating image…'; btn.disabled = true;
+  try {
+    const card = document.getElementById('receiptCard');
+    const canvas = await html2canvas(card, {
+      scale: 3,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#ffffff',
+      logging: false,
+      onclone: (doc) => {
+        // Ensure SVG checkmark is drawn in the clone
+        const svg = doc.querySelector('#receiptCard .chk-ring svg');
+        if (svg) svg.style.strokeDashoffset = '0';
+      }
+    });
+    const a = document.createElement('a');
+    a.download = `Kamal_Diamond_Receipt_${ord.utr || Date.now()}.png`;
+    a.href = canvas.toDataURL('image/png', 1.0);
+    a.click();
+    showToast('✅ Receipt downloaded!', 'ok');
+  } catch(err) {
+    showToast('Could not capture receipt — try a screenshot', 'err');
+  }
+  btn.innerHTML = orig; btn.disabled = false;
+}
+
+/* ═══ WHATSAPP REDIRECT ═══════════════════════════════════════════════════ */
+function goWA() {
+  const msg = encodeURIComponent(
+    `Order placed for IMO ID: ${ord.imo} - Pack: ₹${ord.price}. UTR: ${ord.utr}`
+  );
+  window.open(`https://wa.me/${CFG.waNum}?text=${msg}`, '_blank');
+}
+
+/* ═══ TOAST ═══════════════════════════════════════════════════════════════ */
 let tTm;
-function showToast(msg,type=''){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.className=`toast ${type} show`;
-  clearTimeout(tTm); tTm=setTimeout(()=>t.classList.remove('show'),3600);
+function showToast(msg, type='') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = `toast ${type} show`;
+  clearTimeout(tTm); tTm = setTimeout(() => t.classList.remove('show'), 3600);
 }
 </script>
 </body>

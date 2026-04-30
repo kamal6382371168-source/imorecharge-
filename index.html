@@ -1,4 +1,94 @@
 <!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Temporarily Closed</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #0f0c29, #302b63, #24243e);
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Glassmorphism Card */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 90%;
+            width: 500px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #ffcc00;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .status-tag {
+            display: inline-block;
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff4d4d;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            color: #ff4d4d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <span class="icon">🚧</span>
+        <div class="status-tag">தற்காலிகமாக மூடப்பட்டுள்ளது</div>
+        <br><br>
+        <h1>சற்று பொறுங்கள்!</h1>
+        <p>எங்கள் தளம் தற்போது பராமரிப்புப் பணியில் (Maintenance) உள்ளது. மிக விரைவில் மீண்டும் செயல்பாட்டுக்கு வரும்.</p>
+        <p>சிரமத்திற்கு வருந்துகிறோம்.</p>
+    </div>
+
+</body>
+</html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>

@@ -2,1234 +2,1723 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"/>
-<meta name="theme-color" content="#07070a"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<meta name="theme-color" content="#05050a"/>
+<meta name="description" content="Kamal Diamond Reseller — Buy IMO Diamonds 24/7. Fast, Secure, Genuine."/>
 <title>Kamal Diamond Reseller — 24/7 Fast Service</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@400;600;700&family=DM+Sans:wght@300;400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <style>
-/* ══════════════════════════════════════════════════════
-   TOKENS
-══════════════════════════════════════════════════════ */
-:root{
-  --gold:#d4a742;--gold-lt:#f5d98b;--gold-dk:#9a7320;
-  --gold-glow:rgba(212,167,66,.35);
-  --bg:#07070a;--bg2:#0d0d14;--bg3:#121219;
-  --card:#14141f;--card2:#1c1c2c;
-  --glass:rgba(18,18,28,.65);
-  --border:rgba(212,167,66,.24);--bdim:rgba(212,167,66,.09);
-  --text:#eee8dc;--muted:#62605b;
-  --blue:#1a6cf8;--blue2:#1255d0;
-  --green:#22c55e;--green2:#16a34a;
-  --red:#ef4444;--white:#fff;
+/* ═══════════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════════ */
+:root {
+  --gold:#d4a742; --gold-lt:#f5d98b; --gold-dk:#9a7320;
+  --glow:rgba(212,167,66,.35);
+  --bg:#05050a; --bg2:#0c0c16; --bg3:#111120;
+  --glass:rgba(14,14,26,.72); --glass2:rgba(20,20,36,.82);
+  --c-border:rgba(212,167,66,.22); --c-dim:rgba(212,167,66,.09);
+  --text:#ede8dc; --muted:#706860;
+  --blue:#1a6cf8; --blue-dk:#1255d0;
+  --green:#22c55e; --red:#ef4444;
   --r:14px;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-button,input,textarea{font-family:'DM Sans',sans-serif}
-button{cursor:pointer}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html { scroll-behavior:smooth; -webkit-tap-highlight-color:transparent }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg); color:var(--text);
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  min-height:100dvh;
+}
+button,input,select,textarea { font-family:'DM Sans',sans-serif }
+button { cursor:pointer; border:none; background:none }
+a { color:inherit; text-decoration:none }
 
-/* ══ ATMOSPHERE ══ */
-.atmos{position:fixed;inset:0;z-index:0;pointer-events:none;
+/* ═══════════════════════════════════════════════
+   ANIMATED STARFIELD BACKGROUND
+═══════════════════════════════════════════════ */
+#site-bg {
+  position:fixed; inset:0; z-index:0; overflow:hidden;
   background:
-    radial-gradient(ellipse 110% 58% at 50% -8%,rgba(212,167,66,.16) 0%,transparent 65%),
-    radial-gradient(ellipse 55% 55% at 96% 96%,rgba(212,167,66,.07) 0%,transparent 55%),
-    radial-gradient(ellipse 40% 40% at 4% 82%,rgba(26,108,248,.05) 0%,transparent 55%),
-    var(--bg)}
-.atmos::after{content:'';position:absolute;inset:0;
-  background-image:repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(212,167,66,.017) 60px),
-                   repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(212,167,66,.017) 60px)}
+    radial-gradient(ellipse 110% 55% at 50% -8%,rgba(212,167,66,.14) 0%,transparent 65%),
+    radial-gradient(ellipse 60% 50% at 95% 92%,rgba(212,60,40,.06) 0%,transparent 60%),
+    #05050a;
+}
+.bg-grid {
+  position:absolute; inset:0;
+  background-image:
+    repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(212,167,66,.022) 60px),
+    repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(212,167,66,.022) 60px);
+}
+.stars-wrap { position:absolute; inset:0 }
+.star {
+  position:absolute; border-radius:50%; background:#fff;
+  animation:twinkle var(--d,3s) ease-in-out infinite var(--dl,0s);
+}
+@keyframes twinkle {0%,100%{opacity:.1;transform:scale(1)}50%{opacity:.85;transform:scale(1.5)}}
 
-/* ══ LOADER ══ */
-#ldr{position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg);gap:20px;transition:opacity .55s,visibility .55s}
-#ldr.out{opacity:0;visibility:hidden}
-.lg{font-size:56px;animation:gfl 1.4s ease-in-out infinite}
-.lb{font-family:'Cinzel Decorative',serif;font-size:13px;letter-spacing:.22em;
+/* Floating gems */
+.float-gem {
+  position:absolute; font-size:var(--fs,22px); opacity:.065;
+  animation:fg-drift var(--d,9s) ease-in-out infinite var(--dl,0s);
+  pointer-events:none;
+}
+@keyframes fg-drift {0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-28px) rotate(18deg)}}
+
+/* Anime character */
+.char-wrap {
+  position:absolute; bottom:0; right:2%; width:min(320px,50vw);
+  opacity:.17; transform-origin:bottom center;
+  animation:char-sway 5.5s ease-in-out infinite;
+  filter:drop-shadow(0 0 26px rgba(212,167,66,.28)); pointer-events:none;
+}
+@keyframes char-sway {0%,100%{transform:translateY(0) rotate(-1deg)}33%{transform:translateY(-14px) rotate(1.4deg)}66%{transform:translateY(-7px) rotate(-.5deg)}}
+.hair-g { animation:hair-sw 4s ease-in-out infinite }
+@keyframes hair-sw {0%,100%{transform:skewX(0)}50%{transform:skewX(-2.5deg)}}
+.arm-l-g { animation:arm-wv 2.8s ease-in-out infinite }
+.arm-r-g { animation:arm-wv 2.8s ease-in-out infinite .4s }
+@keyframes arm-wv {0%,100%{transform-origin:14% 8%;transform:rotate(0)}50%{transform-origin:14% 8%;transform:rotate(-13deg)}}
+.gem-g { animation:gem-sh 2s ease-in-out infinite }
+@keyframes gem-sh {0%,100%{filter:drop-shadow(0 0 5px #f5d98b)}50%{filter:drop-shadow(0 0 18px #f5d98b) drop-shadow(0 0 34px rgba(245,217,139,.5))}}
+
+/* Glass overlay on top of bg */
+#bg-glass { position:fixed; inset:0; z-index:1; background:rgba(5,5,14,.75); backdrop-filter:blur(3px) }
+
+/* ═══════════════════════════════════════════════
+   LOADER
+═══════════════════════════════════════════════ */
+#loader {
+  position:fixed; inset:0; z-index:3000;
+  background:var(--bg); display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:18px;
+  transition:opacity .6s, visibility .6s;
+}
+#loader.hide { opacity:0; visibility:hidden }
+.ld-gem { font-size:58px; filter:drop-shadow(0 0 20px rgba(212,167,66,.7)); animation:gem-float 1.3s ease-in-out infinite }
+@keyframes gem-float {0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.ld-brand {
+  font-family:'Cinzel Decorative',serif; font-size:13px; letter-spacing:.22em;
   background:linear-gradient(135deg,var(--gold-lt),var(--gold),var(--gold-dk));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.lbar{width:150px;height:2px;background:rgba(212,167,66,.1);border-radius:99px;overflow:hidden}
-.lfill{height:100%;background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt));animation:lrun 1.4s ease forwards}
-@keyframes lrun{from{width:0}to{width:100%}}
-
-/* ══ STEP NAV ══ */
-.snav{position:sticky;top:0;z-index:30;background:rgba(7,7,10,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bdim);padding:10px 16px}
-.steps{display:flex;align-items:center;justify-content:center;max-width:520px;margin:0 auto}
-.st{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;position:relative}
-.st::after{content:'';position:absolute;top:13px;left:calc(50% + 15px);width:calc(100% - 30px);height:1.5px;background:var(--bdim);transition:background .4s}
-.st:last-child::after{display:none}
-.st.done::after{background:var(--gold)}
-.sd{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1.5px solid var(--muted);color:var(--muted);background:var(--bg2);transition:all .3s;z-index:1}
-.st.active .sd{border-color:var(--gold);color:var(--gold);background:rgba(212,167,66,.1);box-shadow:0 0 14px var(--gold-glow)}
-.st.done .sd{border-color:var(--gold);background:var(--gold);color:#000}
-.sl{font-size:9px;letter-spacing:.04em;color:var(--muted);text-transform:uppercase;font-weight:600;transition:color .3s;white-space:nowrap}
-.st.active .sl{color:var(--gold)}.st.done .sl{color:rgba(212,167,66,.6)}
-
-/* ══ HEADER ══ */
-header{position:relative;z-index:5;text-align:center;padding:30px 20px 22px}
-.hgem{font-size:52px;display:block;filter:drop-shadow(0 0 26px rgba(212,167,66,.75));animation:gfl 3s ease-in-out infinite;margin-bottom:8px}
-.brand{font-family:'Cinzel Decorative',serif;font-size:clamp(15px,4.2vw,26px);font-weight:900;letter-spacing:.05em;
-  background:linear-gradient(135deg,var(--gold-lt) 0%,var(--gold) 45%,var(--gold-dk) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.2}
-.tagline{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-top:5px}
-.hchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
-.hchip{display:inline-flex;align-items:center;gap:6px;background:rgba(212,167,66,.07);border:1px solid var(--border);border-radius:99px;padding:5px 14px;font-size:11px;color:var(--gold-lt);text-decoration:none;transition:background .2s,box-shadow .2s}
-.hchip:hover{background:rgba(212,167,66,.15);box-shadow:0 0 14px rgba(212,167,66,.18)}
-
-/* ══ MAIN ══ */
-main{position:relative;z-index:5;max-width:520px;margin:0 auto;padding:24px 14px 120px}
-.sechd{font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);opacity:.75;display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.sechd::before,.sechd::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(212,167,66,.38),transparent)}
-
-/* ══ GLASSMORPHISM PACK GRID ══ */
-.pack-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:24px}
-@media(max-width:360px){.pack-grid{grid-template-columns:repeat(2,1fr)}}
-
-.pcard{
-  position:relative;overflow:hidden;
-  background:linear-gradient(135deg,rgba(20,20,30,.85),rgba(28,28,44,.75));
-  backdrop-filter:blur(12px);
-  border:1.5px solid var(--bdim);border-radius:16px;
-  padding:14px 10px 13px;cursor:pointer;
-  transition:border-color .22s,transform .18s,box-shadow .22s,background .22s;
-  -webkit-user-select:none;user-select:none;text-align:center;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
 }
-.pcard::before{content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(212,167,66,.08) 0%,transparent 60%);
-  opacity:0;transition:opacity .22s}
-.pcard:hover{border-color:rgba(212,167,66,.4);transform:translateY(-2px);box-shadow:0 6px 22px rgba(212,167,66,.1)}
-.pcard:hover::before{opacity:1}
-.pcard.sel{
-  border-color:var(--gold);
-  background:linear-gradient(135deg,rgba(212,167,66,.14),rgba(28,28,44,.85));
-  box-shadow:0 0 0 1px var(--gold),0 8px 28px rgba(212,167,66,.24);
+.ld-bar { width:150px; height:2.5px; background:rgba(212,167,66,.1); border-radius:99px; overflow:hidden }
+.ld-fill { height:100%; background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt)); animation:ld-run 1.5s ease forwards }
+@keyframes ld-run {from{width:0}to{width:100%}}
+
+/* ═══════════════════════════════════════════════
+   ROOT LAYOUT
+═══════════════════════════════════════════════ */
+#root { position:relative; z-index:10; min-height:100dvh; display:flex; flex-direction:column }
+
+/* ═══════════════════════════════════════════════
+   TAB NAVIGATION
+═══════════════════════════════════════════════ */
+.tab-nav {
+  position:sticky; top:0; z-index:50;
+  background:rgba(5,5,14,.94); backdrop-filter:blur(22px);
+  border-bottom:1px solid var(--c-dim); display:flex;
 }
-.pcard.sel::before{opacity:1}
-.pbadge{position:absolute;top:6px;right:6px;background:var(--gold);color:#000;font-size:7.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:99px}
-.pico{font-size:18px;display:block;margin-bottom:4px;line-height:1}
-.pname{font-family:'Cinzel',serif;font-size:11px;font-weight:700;color:var(--gold-lt);margin-bottom:3px;line-height:1.2}
-.pprice{font-size:14px;font-weight:800;color:var(--white);letter-spacing:-.01em}
-.pchk{position:absolute;bottom:6px;right:6px;width:16px;height:16px;border-radius:50%;background:var(--gold);color:#000;font-size:9px;font-weight:900;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(0);transition:all .22s cubic-bezier(.34,1.56,.64,1)}
-.pcard.sel .pchk{opacity:1;transform:scale(1)}
-
-/* ══ QUANTITY MULTIPLIER WIDGET ══ */
-.qty-widget{
-  background:linear-gradient(135deg,rgba(20,20,30,.9),rgba(28,28,44,.8));
-  backdrop-filter:blur(14px);
-  border:1px solid var(--border);border-radius:18px;
-  padding:18px 20px;margin-bottom:18px;
-  display:none;
-  animation:fadeup .3s ease both;
+.tab-btn {
+  flex:1; padding:11px 6px; font-size:11px; font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+  transition:color .22s; display:flex; align-items:center; justify-content:center;
+  gap:4px; position:relative;
 }
-.qty-widget.show{display:block}
-.qty-hd{font-size:12px;font-weight:700;color:var(--gold-lt);margin-bottom:14px;display:flex;align-items:center;gap:6px;letter-spacing:.04em}
-.qty-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.qty-ctrl{display:flex;align-items:center;gap:0;background:var(--bg3);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.qty-btn{width:44px;height:44px;background:transparent;border:none;color:var(--gold);font-size:22px;font-weight:700;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;line-height:1}
-.qty-btn:hover:not(:disabled){background:rgba(212,167,66,.12)}
-.qty-btn:disabled{opacity:.3;cursor:not-allowed}
-.qty-num{width:44px;text-align:center;font-size:20px;font-weight:900;color:var(--white);border-left:1px solid var(--bdim);border-right:1px solid var(--bdim)}
-.qty-totals{flex:1;background:rgba(212,167,66,.07);border:1px solid var(--border);border-radius:10px;padding:10px 14px}
-.qty-total-diamonds{font-size:16px;font-weight:800;color:var(--gold-lt)}
-.qty-total-price{font-size:22px;font-weight:900;color:var(--white);letter-spacing:-.02em;margin-top:2px}
-.qty-note{font-size:10px;color:var(--muted);margin-top:3px}
+.tab-btn.on { color:var(--gold) }
+.tab-btn.on::after {
+  content:''; position:absolute; bottom:0; left:12%; right:12%;
+  height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); border-radius:99px;
+}
 
-/* ══ FORM CARD ══ */
-.fcard{background:linear-gradient(135deg,rgba(20,20,30,.9),rgba(24,24,36,.85));backdrop-filter:blur(14px);border:1px solid var(--bdim);border-radius:18px;padding:22px 18px;box-shadow:0 12px 50px rgba(0,0,0,.45)}
-.fl{margin-bottom:16px}
-.lbl{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);opacity:.85;margin-bottom:7px}
-.inp{width:100%;background:var(--bg3);border:1.5px solid var(--bdim);border-radius:10px;padding:13px 15px;font-size:15px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s}
-.inp::placeholder{color:var(--muted)}
-.inp:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,167,66,.14)}
-.inp.ok{border-color:rgba(34,197,94,.6)}
-.inp.bad{border-color:rgba(239,68,68,.5)}
-.hint{font-size:11px;margin-top:5px;align-items:center;gap:4px;display:none}
-.hint.ok{color:var(--green);display:flex}.hint.err{color:var(--red);display:flex}
+/* ═══════════════════════════════════════════════
+   STEP PROGRESS BAR
+═══════════════════════════════════════════════ */
+.step-bar {
+  background:rgba(5,5,14,.88); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--c-dim); padding:10px 10px;
+}
+.steps { display:flex; align-items:center; justify-content:center; max-width:500px; margin:0 auto }
+.step { display:flex; flex-direction:column; align-items:center; gap:2px; flex:1; position:relative }
+.step::after {
+  content:''; position:absolute; top:13px; left:calc(50% + 14px);
+  width:calc(100% - 28px); height:1.5px; background:var(--c-dim); transition:background .4s;
+}
+.step:last-child::after { display:none }
+.step.done::after { background:var(--gold) }
+.step-dot {
+  width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+  font-size:10.5px; font-weight:700; border:1.5px solid var(--muted); color:var(--muted);
+  background:var(--bg2); transition:all .3s; z-index:1;
+}
+.step.active .step-dot { border-color:var(--gold); color:var(--gold); background:rgba(212,167,66,.1); box-shadow:0 0 12px var(--glow) }
+.step.done .step-dot { border-color:var(--gold); background:var(--gold); color:#000 }
+.step-lbl { font-size:8px; letter-spacing:.04em; color:var(--muted); text-transform:uppercase; font-weight:700; white-space:nowrap; transition:color .3s }
+.step.active .step-lbl { color:var(--gold) }
+.step.done .step-lbl { color:rgba(212,167,66,.6) }
 
-.btn-pay{width:100%;border:none;border-radius:12px;padding:16px;font-family:'Cinzel',serif;font-size:14px;font-weight:700;letter-spacing:.1em;color:#000;
+/* ═══════════════════════════════════════════════
+   PAGE SYSTEM
+═══════════════════════════════════════════════ */
+.page { display:none; flex:1 }
+.page.on { display:block }
+
+/* ═══════════════════════════════════════════════
+   HEADER
+═══════════════════════════════════════════════ */
+.site-hdr { text-align:center; padding:26px 18px 20px; position:relative; z-index:10 }
+.hdr-gem {
+  font-size:50px; display:block;
+  filter:drop-shadow(0 0 24px rgba(212,167,66,.7));
+  animation:gem-float 3s ease-in-out infinite; margin-bottom:8px;
+}
+.hdr-brand {
+  font-family:'Cinzel Decorative',serif; font-size:clamp(13px,4vw,24px); font-weight:900; letter-spacing:.05em;
+  background:linear-gradient(135deg,var(--gold-lt),var(--gold) 45%,var(--gold-dk));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.hdr-tag { font-family:'Cinzel',serif; font-size:9.5px; letter-spacing:.36em; text-transform:uppercase; color:var(--gold); opacity:.7; margin-top:4px }
+.hdr-chips { display:flex; flex-wrap:wrap; gap:7px; justify-content:center; margin-top:13px }
+.chip {
+  display:inline-flex; align-items:center; gap:5px;
+  background:rgba(212,167,66,.07); border:1px solid var(--c-border);
+  border-radius:99px; padding:5px 13px; font-size:10.5px; color:var(--gold-lt);
+  backdrop-filter:blur(8px); transition:background .2s, box-shadow .2s;
+}
+.chip:hover,.chip:active { background:rgba(212,167,66,.16); box-shadow:0 0 14px rgba(212,167,66,.2) }
+
+/* ═══════════════════════════════════════════════
+   MAIN CONTENT
+═══════════════════════════════════════════════ */
+.main-wrap { position:relative; z-index:10; max-width:500px; margin:0 auto; padding:18px 13px 110px }
+
+.sec-hd {
+  font-family:'Cinzel',serif; font-size:9px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--gold); opacity:.82; display:flex; align-items:center; gap:10px; margin-bottom:14px;
+}
+.sec-hd::before,.sec-hd::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(212,167,66,.4),transparent);
+}
+
+/* ═══════════════════════════════════════════════
+   PACK GRID  (2-column, glassmorphism cards)
+═══════════════════════════════════════════════ */
+.pack-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin-bottom:20px }
+
+.pack-card {
+  background:var(--glass); border:1.5px solid var(--c-dim); border-radius:var(--r);
+  padding:14px 12px 13px; cursor:pointer; position:relative; overflow:hidden;
+  backdrop-filter:blur(12px); -webkit-user-select:none; user-select:none;
+  transition:border-color .22s, transform .15s, box-shadow .22s, background .22s;
+}
+.pack-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg,rgba(212,167,66,.1),transparent 65%); opacity:0; transition:opacity .22s;
+}
+.pack-card:hover { border-color:rgba(212,167,66,.45); transform:translateY(-2px); box-shadow:0 6px 22px rgba(212,167,66,.1) }
+.pack-card:hover::before { opacity:1 }
+.pack-card.active {
+  border-color:var(--gold); background:rgba(212,167,66,.11);
+  box-shadow:0 0 0 1.5px var(--gold), 0 6px 30px rgba(212,167,66,.25), 0 0 20px rgba(212,167,66,.1);
+}
+.pack-card.active::before { opacity:1 }
+.pack-badge {
+  position:absolute; top:7px; right:7px; background:var(--gold); color:#000;
+  font-size:7.5px; font-weight:800; letter-spacing:.06em; text-transform:uppercase;
+  padding:2px 6px; border-radius:99px;
+}
+.pack-ico { font-size:20px; display:block; margin-bottom:4px }
+.pack-nm { font-family:'Cinzel',serif; font-size:11.5px; font-weight:700; color:var(--gold-lt); margin-bottom:2px }
+.pack-pr { font-size:17px; font-weight:800; color:#fff }
+.pack-chk {
+  position:absolute; bottom:7px; right:7px; width:18px; height:18px; border-radius:50%;
+  background:var(--gold); color:#000; font-size:9.5px; font-weight:900;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transform:scale(0); transition:all .22s cubic-bezier(.34,1.56,.64,1);
+}
+.pack-card.active .pack-chk { opacity:1; transform:scale(1) }
+
+/* ═══════════════════════════════════════════════
+   QUANTITY SELECTOR
+═══════════════════════════════════════════════ */
+.qty-block {
+  background:var(--glass); border:1px solid var(--c-dim); border-radius:16px;
+  padding:16px 15px; margin-bottom:16px; backdrop-filter:blur(12px);
+}
+.qty-hd { font-size:10.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); opacity:.85; margin-bottom:12px; display:flex; align-items:center; gap:7px }
+.qty-hd small { font-weight:400; color:var(--muted); font-size:9.5px }
+.qty-row { display:flex; align-items:center; justify-content:space-between; gap:10px }
+.qty-info { flex:1 }
+.qty-nm { font-size:14px; font-weight:700; color:#fff; margin-bottom:2px }
+.qty-sub { font-size:11px; color:var(--muted) }
+.qty-ctrl { display:flex; align-items:center; background:rgba(5,5,14,.8); border-radius:12px; border:1px solid var(--c-dim); overflow:hidden }
+.q-btn { width:42px; height:42px; color:var(--gold-lt); font-size:22px; font-weight:300; display:flex; align-items:center; justify-content:center; transition:background .18s; -webkit-user-select:none; user-select:none }
+.q-btn:hover,.q-btn:active { background:rgba(212,167,66,.16) }
+.q-num { width:44px; height:42px; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:800; color:#fff; border-left:1px solid var(--c-dim); border-right:1px solid var(--c-dim) }
+.qty-totals { display:flex; justify-content:space-between; align-items:flex-end; margin-top:14px; padding-top:12px; border-top:1px solid var(--c-dim) }
+.qt-l .qt-lbl,.qt-r .qt-lbl { font-size:9.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.08em; margin-bottom:2px }
+.qt-l .qt-val { font-size:17px; font-weight:800; color:var(--gold-lt) }
+.qt-r { text-align:right }
+.qt-r .qt-val { font-size:22px; font-weight:900; color:var(--gold-lt) }
+
+/* ═══════════════════════════════════════════════
+   FORM CARD
+═══════════════════════════════════════════════ */
+.form-card { background:var(--glass); border:1px solid var(--c-dim); border-radius:18px; padding:20px 16px; backdrop-filter:blur(12px) }
+.fld { margin-bottom:14px }
+.fld:last-child { margin-bottom:0 }
+.fld-lbl { display:block; font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--gold); opacity:.85; margin-bottom:6px }
+.fld-inp {
+  width:100%; background:rgba(5,5,14,.78); border:1.5px solid var(--c-dim);
+  border-radius:10px; padding:12px 14px; font-size:15px; color:var(--text); outline:none;
+  backdrop-filter:blur(6px); transition:border-color .2s, box-shadow .2s;
+}
+.fld-inp::placeholder { color:var(--muted) }
+.fld-inp:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,167,66,.14) }
+.fld-inp.ok { border-color:rgba(34,197,94,.55) }
+.fld-inp.bad { border-color:rgba(239,68,68,.5) }
+.fld-hint { font-size:11px; margin-top:4px; align-items:center; gap:4px; display:none }
+.fld-hint.ok { color:var(--green); display:flex }
+.fld-hint.err { color:var(--red); display:flex }
+
+.pack-disp {
+  background:rgba(5,5,14,.7); border:1.5px dashed var(--c-dim);
+  border-radius:10px; padding:11px 14px; display:flex; align-items:center;
+  gap:8px; font-size:14px; min-height:46px; color:var(--muted); transition:all .3s;
+}
+.pack-disp.has { border-style:solid; border-color:var(--c-border); color:var(--gold-lt); font-weight:600 }
+
+/* PAY NOW BUTTON */
+.btn-pay {
+  width:100%; border-radius:12px; padding:15px;
+  font-family:'Cinzel',serif; font-size:14px; font-weight:700; letter-spacing:.12em; color:#000;
   background:linear-gradient(135deg,var(--gold-dk),var(--gold) 50%,var(--gold-lt));
-  box-shadow:0 4px 22px rgba(212,167,66,.38);
-  transition:opacity .2s,transform .15s,box-shadow .2s,filter .2s;position:relative;overflow:hidden}
-.btn-pay::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.22),transparent);opacity:0;transition:opacity .2s}
-.btn-pay:hover:not(:disabled)::after{opacity:1}
-.btn-pay:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 34px rgba(212,167,66,.52)}
-.btn-pay:active:not(:disabled){transform:translateY(0)}
-.btn-pay:disabled{opacity:.28;cursor:not-allowed;filter:grayscale(.5)}
-
-.trust{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:18px}
-.ti{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:4px}
-.ti em{color:var(--gold);font-style:normal;font-size:13px}
-
-/* ══ PAGE TABS (Refund Policy) ══ */
-.page-tabs{display:flex;gap:8px;margin-bottom:20px;background:rgba(20,20,30,.7);backdrop-filter:blur(10px);border:1px solid var(--bdim);border-radius:12px;padding:5px}
-.ptab{flex:1;padding:9px 12px;border-radius:9px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.04em;cursor:pointer;transition:all .2s;text-align:center}
-.ptab.active{background:rgba(212,167,66,.14);color:var(--gold-lt);border:1px solid var(--border)}
-.page-section{display:none}
-.page-section.show{display:block}
-
-/* ══ REFUND POLICY CARD ══ */
-.policy-card{background:linear-gradient(135deg,rgba(20,20,30,.9),rgba(24,24,36,.85));backdrop-filter:blur(14px);border:1px solid var(--bdim);border-radius:18px;padding:22px 18px;margin-bottom:18px}
-.policy-title{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--gold-lt);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.policy-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--bdim)}
-.policy-item:last-child{border-bottom:none}
-.policy-num{width:24px;height:24px;flex-shrink:0;border-radius:50%;background:rgba(212,167,66,.12);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--gold)}
-.policy-text{font-size:13px;color:rgba(237,232,220,.8);line-height:1.6}
-.policy-text strong{color:var(--gold-lt)}
-
-.refund-form-card{background:linear-gradient(135deg,rgba(20,20,30,.9),rgba(24,24,36,.85));backdrop-filter:blur(14px);border:1px solid var(--bdim);border-radius:18px;padding:22px 18px}
-.rfl{margin-bottom:14px}
-.rlbl{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:7px}
-.rinp{width:100%;background:var(--bg3);border:1.5px solid var(--bdim);border-radius:10px;padding:12px 15px;font-size:14px;color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;resize:none}
-.rinp::placeholder{color:var(--muted)}
-.rinp:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,167,66,.12)}
-.btn-refund{width:100%;background:linear-gradient(135deg,#1a4f2e,#25d366);color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 18px rgba(37,211,102,.3);transition:all .2s}
-.btn-refund:hover{transform:translateY(-1px);box-shadow:0 6px 26px rgba(37,211,102,.45)}
-
-/* ══ OVERLAY ══ */
-.overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.88);backdrop-filter:blur(9px);display:flex;align-items:flex-end;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;padding:0}
-.overlay.on{opacity:1;pointer-events:all}
-.sheet{width:100%;max-width:480px;max-height:93dvh;overflow-y:auto;border-radius:24px 24px 0 0;box-shadow:0 -14px 60px rgba(0,0,0,.9),0 0 0 1px rgba(212,167,66,.2);transform:translateY(100%);transition:transform .4s cubic-bezier(.22,1,.36,1);overscroll-behavior:contain}
-.overlay.on .sheet{transform:translateY(0)}
-.overlay.ctr{align-items:center;padding:16px}
-.overlay.ctr .sheet{border-radius:24px;max-height:92dvh}
-
-/* ══ PAYMENT SHEET ══ */
-.phdr{background:#0a0a0f;padding:16px 20px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.05);position:sticky;top:0;z-index:10}
-.phdr-t{font-family:'Cinzel',serif;font-size:14px;font-weight:700;color:var(--white)}
-.phdr-s{font-size:11px;color:var(--muted);margin-top:2px}
-.cx{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.08);border:none;color:var(--text);font-size:15px;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.cx:hover{background:rgba(255,255,255,.16)}
-.pbody{background:#fff;padding:0}
-
-/* Order banner */
-.obanner{background:linear-gradient(135deg,#0c1840 0%,#0f2258 100%);padding:16px 22px;display:flex;align-items:center;justify-content:space-between}
-.obl .ol{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
-.obl .ov{font-size:16px;font-weight:800;color:#fff}
-.obr{text-align:right}
-.obr .ol{font-size:10px;color:rgba(255,255,255,.5);letter-spacing:.04em;text-transform:uppercase;margin-bottom:2px}
-.obr .oa{font-size:28px;font-weight:900;color:#fff;letter-spacing:-.02em}
-
-/* Timer */
-.twrap{background:#f5f7ff;border-bottom:1px solid #e8ebf5;padding:10px 22px;display:flex;align-items:center;justify-content:space-between}
-.tlbl{font-size:11.5px;color:#666;display:flex;align-items:center;gap:6px}
-.tval{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums;color:var(--blue);transition:color .3s}
-.tval.urg{color:var(--red);animation:blk 1s ease-in-out infinite}
-.tval.done{color:var(--red)}
-
-/* ══ PREMIUM QR SECTION ══ */
-.qrsec{padding:22px 22px 18px;display:flex;flex-direction:column;align-items:center;gap:14px;border-bottom:1px solid #f0f0f0}
-.qr-method-badge{display:inline-flex;align-items:center;gap:7px;background:#f0f4ff;border:1px solid #d4e0ff;border-radius:99px;padding:6px 16px;font-size:11.5px;font-weight:700;color:#2255cc}
-
-/* Premium gold-framed QR download card */
-#qrDownloadCard{
-  width:100%;max-width:300px;
-  background:linear-gradient(145deg,#0c0c18,#181828);
-  border-radius:20px;padding:3px;
-  box-shadow:0 10px 50px rgba(0,0,0,.6),0 0 0 1px rgba(212,167,66,.3);
-  position:relative;overflow:hidden;
+  box-shadow:0 4px 22px rgba(212,167,66,.35);
+  transition:opacity .2s, transform .15s, box-shadow .22s; position:relative; overflow:hidden;
 }
-#qrDownloadCard::before{
-  content:'';position:absolute;inset:0;border-radius:20px;
-  background:linear-gradient(145deg,var(--gold-lt),var(--gold-dk),var(--gold),var(--gold-lt));
-  z-index:0;animation:shimmer 4s linear infinite;background-size:400% 400%;
+.btn-pay::after { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.22),transparent); opacity:0; transition:opacity .2s }
+.btn-pay:hover:not(:disabled)::after { opacity:1 }
+.btn-pay:hover:not(:disabled) { transform:translateY(-2px); box-shadow:0 8px 34px rgba(212,167,66,.55) }
+.btn-pay:disabled { opacity:.28; cursor:not-allowed; filter:grayscale(.5) }
+
+.trust-strip { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:14px }
+.trust-item { font-size:10.5px; color:var(--muted); display:flex; align-items:center; gap:4px }
+.trust-item em { color:var(--gold); font-style:normal }
+
+/* ═══════════════════════════════════════════════
+   OVERLAY / BOTTOM SHEET SYSTEM
+═══════════════════════════════════════════════ */
+.overlay {
+  position:fixed; inset:0; z-index:200; background:rgba(0,0,0,.88);
+  backdrop-filter:blur(10px); display:flex; align-items:flex-end; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .3s;
 }
-@keyframes shimmer{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-.qr-card-inner{position:relative;z-index:1;background:linear-gradient(145deg,#0d0d1c,#181830);border-radius:18px;padding:16px}
-.qr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.qr-merchant-name{font-family:'Cinzel Decorative',serif;font-size:9px;letter-spacing:.14em;
-  background:linear-gradient(135deg,var(--gold-lt),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900}
-.qr-upi-tag{background:rgba(212,167,66,.15);border:1px solid rgba(212,167,66,.3);border-radius:6px;padding:2px 8px;font-size:9px;font-weight:800;color:var(--gold);letter-spacing:.08em}
-
-/* QR image frame */
-.qr-frame{position:relative;background:#fff;border-radius:12px;padding:10px;box-shadow:0 2px 16px rgba(0,0,0,.35)}
-.qr-corner{position:absolute;width:14px;height:14px;border-color:var(--gold);border-style:solid}
-.qr-corner.tl{top:4px;left:4px;border-width:2.5px 0 0 2.5px}
-.qr-corner.tr{top:4px;right:4px;border-width:2.5px 2.5px 0 0}
-.qr-corner.bl{bottom:4px;left:4px;border-width:0 0 2.5px 2.5px}
-.qr-corner.br{bottom:4px;right:4px;border-width:0 2.5px 2.5px 0}
-.qr-img-el{width:180px;height:180px;display:block;border-radius:8px;image-rendering:pixelated}
-.qr-logo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;background:#fff;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 2px 10px rgba(0,0,0,.25);border:2px solid rgba(212,167,66,.3)}
-.qr-spinner{width:180px;height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#f8f8fa;border-radius:8px}
-.spin-ring{width:36px;height:36px;border:3px solid #e8e8e8;border-top-color:var(--blue);border-radius:50%;animation:spin .7s linear infinite}
-.qr-spin-txt{font-size:11px;color:#aaa}
-
-/* Order details inside QR card */
-.qr-order-info{margin-top:10px;padding-top:10px;border-top:1px solid rgba(212,167,66,.18)}
-.qr-info-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0}
-.qr-info-l{font-size:9px;color:rgba(255,255,255,.45);letter-spacing:.05em;text-transform:uppercase}
-.qr-info-v{font-size:10px;font-weight:700;color:rgba(255,255,255,.85)}
-.qr-info-v.gold{color:var(--gold-lt)}
-.qr-bottom-row{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.qr-mid-lbl{font-size:9px;color:rgba(255,255,255,.4);font-weight:600}
-.qr-scan-lbl{font-size:9px;color:var(--gold);font-weight:700;letter-spacing:.1em;text-transform:uppercase}
-
-/* QR note chip */
-.qr-note-chip{background:rgba(26,108,248,.1);border:1px solid rgba(26,108,248,.22);border-radius:8px;padding:7px 12px;font-size:11px;color:#3366cc;font-weight:600;text-align:center;max-width:270px;word-break:break-all;display:none}
-
-/* Download QR btn */
-.btn-dl-qr{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:linear-gradient(135deg,#0d0d1c,#1a1a30);color:var(--gold-lt);border:1.5px solid var(--border);border-radius:10px;padding:10px 20px;font-size:13px;font-weight:700;transition:all .2s;letter-spacing:.04em}
-.btn-dl-qr:hover{background:rgba(212,167,66,.1);box-shadow:0 0 16px rgba(212,167,66,.2);transform:translateY(-1px)}
-
-.qapp-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-.qapp{background:#f4f4f4;border:1px solid #e2e2e2;border-radius:8px;padding:4px 10px;font-size:10.5px;font-weight:700;color:#555}
-
-/* ══ PAYMENT FORM SECTION ══ */
-.pfsec{padding:20px 22px 24px}
-.pftitle{font-size:15px;font-weight:800;color:#111;margin-bottom:3px;display:flex;align-items:center;gap:7px}
-.pfsub{font-size:12px;color:#888;margin-bottom:18px;line-height:1.55}
-.infogrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
-.ibox{background:#f8f8fc;border:1px solid #ebebf2;border-radius:10px;padding:11px 14px}
-.ibox-l{font-size:9.5px;text-transform:uppercase;letter-spacing:.07em;color:#999;font-weight:700;margin-bottom:3px}
-.ibox-v{font-size:14px;font-weight:800;color:#111;word-break:break-all}
-.pfl{margin-bottom:14px;position:relative}
-.plbl{display:block;font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#444;margin-bottom:7px}
-.pinp{width:100%;border:1.5px solid #ddd;border-radius:10px;padding:12px 14px;font-size:15px;color:#111;outline:none;background:#fafafa;transition:border-color .2s,box-shadow .2s}
-.pinp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(26,108,248,.12);background:#fff}
-.pinp.ok{border-color:rgba(34,197,94,.6)}.pinp.bad{border-color:rgba(239,68,68,.5)}
-.utrrow{display:flex;align-items:center;gap:8px}
-.utrrow .pinp{flex:1}
-.utr-qbtn{flex-shrink:0;width:30px;height:30px;border-radius:50%;background:var(--blue);border:none;color:#fff;font-size:14px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(26,108,248,.4);transition:all .2s}
-.utr-qbtn:hover{background:var(--blue2);transform:scale(1.1)}
-.phint{font-size:11px;margin-top:5px;display:none;align-items:center;gap:4px}
-.phint.ok{color:var(--green);display:flex}.phint.err{color:var(--red);display:flex}
-.chkrow{display:flex;align-items:flex-start;gap:9px;margin-bottom:18px}
-.chkrow input{width:16px;height:16px;margin-top:2px;accent-color:var(--blue);cursor:pointer;flex-shrink:0}
-.chkrow label{font-size:12.5px;color:#444;line-height:1.55;cursor:pointer}
-.btn-confirm{width:100%;background:#0e0e1c;color:#fff;border:none;border-radius:11px;padding:15px;font-size:15px;font-weight:800;letter-spacing:.04em;display:flex;align-items:center;justify-content:center;gap:7px;transition:background .2s,transform .15s;box-shadow:0 4px 16px rgba(0,0,0,.25)}
-.btn-confirm:hover:not(:disabled){background:#1a1a2c;transform:translateY(-1px)}
-.btn-confirm:disabled{opacity:.42;cursor:not-allowed;transform:none}
-.secnote{display:flex;align-items:flex-start;gap:8px;background:#f0fff4;border:1px solid rgba(34,197,94,.3);border-radius:10px;padding:10px 13px;margin-top:14px}
-.secnote-t{font-size:11.5px;color:#2d6a4f;line-height:1.55}
-
-/* ══ UTR TOOLTIP ══ */
-.tt-bg{position:fixed;inset:0;z-index:499;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .25s}
-.tt-bg.show{opacity:1;pointer-events:all}
-.tt-pop{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(.92);width:min(350px,94vw);background:#fff;border-radius:18px;box-shadow:0 20px 70px rgba(0,0,0,.4),0 0 0 1px rgba(0,0,0,.08);z-index:500;opacity:0;pointer-events:none;transition:opacity .25s,transform .25s cubic-bezier(.22,1,.36,1);overflow:hidden}
-.tt-pop.show{opacity:1;pointer-events:all;transform:translate(-50%,-50%) scale(1)}
-.tt-hdr{background:linear-gradient(135deg,var(--blue2),var(--blue));padding:14px 18px 12px;display:flex;align-items:center;justify-content:space-between}
-.tt-title{font-size:14px;font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
-.ttcx{background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:50%;width:26px;height:26px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.ttcx:hover{background:rgba(255,255,255,.3)}
-.tt-body{padding:16px 18px 18px}
-.phone-mock{width:100%;max-width:260px;margin:0 auto 14px;background:#111118;border-radius:22px;overflow:hidden;border:3px solid #22223a;box-shadow:0 8px 30px rgba(0,0,0,.3);position:relative}
-.ph-notch{height:18px;background:#0a0a12;display:flex;align-items:center;justify-content:center;gap:6px}
-.ph-dot{width:7px;height:7px;border-radius:50%;background:#2a2a40}
-.gp-bar{background:#1a73e8;padding:10px 14px;display:flex;align-items:center;gap:8px}
-.gp-back{font-size:18px;color:#fff;opacity:.85}
-.gp-t{font-size:13px;font-weight:700;color:#fff}
-.gp-body{padding:12px 14px;background:#fff}
-.gp-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.gp-ico{width:36px;height:36px;border-radius:50%;background:#e8f2ff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
-.gp-nm{font-size:13px;font-weight:700;color:#111}
-.gp-dt{font-size:10px;color:#888;margin-top:1px}
-.gp-amt{font-size:15px;font-weight:900;color:var(--blue);margin-left:auto}
-.gp-div{height:1px;background:#f0f0f0;margin:8px 0}
-.gp-lbl{font-size:9.5px;color:#999;text-transform:uppercase;letter-spacing:.06em;font-weight:700;margin-bottom:6px}
-.gp-item{display:flex;justify-content:space-between;font-size:11px;color:#666;margin-bottom:4px}
-.utr-hl{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:8px;background:linear-gradient(135deg,#fff8e1,#fff3cc);border:2px solid #ffc107;margin-top:4px;position:relative}
-.utr-hl-l{font-size:10px;font-weight:800;color:#665500;text-transform:uppercase;letter-spacing:.05em}
-.utr-hl-v{font-size:12px;font-weight:900;color:#111;letter-spacing:.02em}
-.ann-wrap{position:absolute;inset:0;pointer-events:none}
-.ann-ring{position:absolute;border:2.5px solid var(--red);border-radius:10px;animation:apulse 2s ease-in-out infinite}
-.ann-arr{position:absolute;color:var(--red);font-size:22px;animation:abounce 1.5s ease-in-out infinite}
-@keyframes apulse{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
-@keyframes abounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
-.find-note{font-size:12.5px;color:#444;line-height:1.65;text-align:center;background:#f8f9ff;border:1px solid #e4e8ff;border-radius:10px;padding:11px 14px}
-.find-note strong{color:var(--blue);font-weight:700}
-
-/* ══ RECEIPT OVERLAY ══ */
-#sucOv .sheet{background:linear-gradient(160deg,#0a1510,#060d08);border:1px solid rgba(34,197,94,.18);padding:0;border-radius:24px 24px 0 0}
-.suc-wrap{padding:28px 20px 26px;text-align:center}
-
-/* Receipt card */
-#rcCard{background:linear-gradient(145deg,#fff 0%,#f6fff9 100%);border-radius:18px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.18);margin:0 auto 20px;max-width:320px;position:relative}
-.rc-hdr{background:linear-gradient(135deg,#0a7038 0%,#14a050 50%,#0a7038 100%);padding:26px 20px 20px;text-align:center;position:relative;overflow:hidden}
-.rc-hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,.04) 20px,rgba(255,255,255,.04) 40px)}
-.chk-ring{width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;border:3px solid rgba(255,255,255,.4);animation:chkpop .6s cubic-bezier(.22,1,.36,1) both}
-.chk-ring svg{animation:chkdraw .5s .2s ease both}
-@keyframes chkpop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.12)}100%{transform:scale(1);opacity:1}}
-@keyframes chkdraw{from{stroke-dashoffset:60}to{stroke-dashoffset:0}}
-.rc-status{font-size:18px;font-weight:900;color:#fff;letter-spacing:.04em;margin-bottom:4px}
-.rc-ssub{font-size:12px;color:rgba(255,255,255,.75)}
-.rc-wave{width:100%;height:22px;background:#fff;position:relative;margin-top:-1px}
-.rc-wave svg{width:100%;height:100%;display:block}
-.rc-body{padding:14px 20px 18px;background:#fff}
-.rc-brand{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:14px;padding-bottom:12px;border-bottom:1.5px dashed #e5e5e5}
-.rc-brand-name{font-family:'Cinzel',serif;font-size:13px;font-weight:700;color:#1a1a1a;letter-spacing:.04em}
-.rc-brand-sub{font-size:9px;color:#999;text-transform:uppercase;letter-spacing:.1em;margin-top:1px}
-.rc-rows{display:flex;flex-direction:column;gap:0}
-.rc-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0}
-.rc-row:last-child{border-bottom:none}
-.rc-rl{font-size:10.5px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
-.rc-rv{font-size:13px;font-weight:800;color:#111;text-align:right;max-width:58%}
-.rc-rv.g{color:var(--green2)}.rc-rv.b{color:var(--blue)}
-.rc-foot{background:linear-gradient(135deg,#f0fff6,#e8ffef);padding:11px 20px;border-top:1.5px dashed #c8e8d0;text-align:center}
-.rc-foot-t{font-size:10px;color:#3a7a52;line-height:1.65}
-
-/* Confetti */
-.conf-wrap{position:relative;height:0}
-.conf-p{position:absolute;width:8px;height:8px;border-radius:2px;animation:cffall 2s ease-in both}
-@keyframes cffall{0%{opacity:1;transform:translateY(-20px) rotate(0)}100%{opacity:0;transform:translateY(80px) rotate(360deg)}}
-
-/* Receipt action buttons */
-.btn-dl-receipt{width:100%;background:linear-gradient(135deg,var(--green2),var(--green));color:#fff;border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 20px rgba(34,197,94,.35);transition:all .2s;margin-bottom:12px}
-.btn-dl-receipt:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(34,197,94,.45)}
-.btn-wa{width:100%;background:#25d366;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 18px rgba(37,211,102,.3);transition:all .2s}
-.btn-wa:hover{background:#1ebe5d;transform:translateY(-1px);box-shadow:0 6px 26px rgba(37,211,102,.45)}
-
-/* ══ FLOATING BUTTONS ══ */
-.float-cluster{position:fixed;bottom:24px;right:18px;z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
-
-.float-btn{
-  display:flex;align-items:center;gap:9px;
-  backdrop-filter:blur(14px);
-  border-radius:50px;
-  padding:11px 18px 11px 13px;
-  text-decoration:none;
-  border:1px solid rgba(255,255,255,.15);
-  box-shadow:0 6px 28px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.12);
-  transition:transform .25s cubic-bezier(.22,1,.36,1),box-shadow .25s,border-color .25s;
-  font-weight:700;font-size:13px;letter-spacing:.02em;
-  white-space:nowrap;
+.overlay.on { opacity:1; pointer-events:all }
+.sheet {
+  width:100%; max-width:480px; max-height:94dvh; overflow-y:auto;
+  border-radius:22px 22px 0 0;
+  box-shadow:0 -16px 60px rgba(0,0,0,.9), 0 0 0 1px rgba(212,167,66,.18);
+  transform:translateY(100%); transition:transform .4s cubic-bezier(.22,1,.36,1);
+  overscroll-behavior:contain;
 }
-.float-btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 12px 40px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.16)}
+.overlay.on .sheet { transform:translateY(0) }
+.overlay.ctr { align-items:center; padding:14px }
+.overlay.ctr .sheet { border-radius:20px; max-height:92dvh }
 
-.float-wa{background:rgba(18,58,30,.75);color:#fff}
-.float-wa:hover{border-color:rgba(37,211,102,.45);box-shadow:0 12px 40px rgba(37,211,102,.25),inset 0 1px 0 rgba(255,255,255,.12)}
-.float-imo{background:rgba(10,40,100,.75);color:#fff}
-.float-imo:hover{border-color:rgba(80,140,255,.45);box-shadow:0 12px 40px rgba(80,140,255,.25),inset 0 1px 0 rgba(255,255,255,.12)}
+/* ═══════════════════════════════════════════════
+   PAYMENT SHEET LAYOUT
+═══════════════════════════════════════════════ */
+.pay-hdr {
+  background:#090910; padding:15px 18px 13px;
+  display:flex; align-items:center; justify-content:space-between;
+  border-bottom:1px solid rgba(255,255,255,.05); position:sticky; top:0; z-index:10;
+}
+.pay-ttl { font-family:'Cinzel',serif; font-size:14px; font-weight:700; color:#fff }
+.pay-sub { font-size:10.5px; color:var(--muted); margin-top:1px }
+.x-btn {
+  width:30px; height:30px; border-radius:50%; background:rgba(255,255,255,.07);
+  color:var(--text); font-size:15px; display:flex; align-items:center; justify-content:center; transition:background .2s;
+}
+.x-btn:hover { background:rgba(255,255,255,.15) }
 
-.float-icon{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
-.float-wa .float-icon{background:rgba(37,211,102,.22)}
-.float-imo .float-icon{background:rgba(80,140,255,.22)}
-.float-btn-text{display:flex;flex-direction:column;line-height:1.2}
-.float-label{font-size:10px;opacity:.65;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
-.float-value{font-size:13px;font-weight:800}
+.pay-body { background:#fff; padding:0 }
 
-/* ══ TOAST ══ */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(80px);background:#1c1c2a;border:1px solid var(--border);border-radius:12px;padding:11px 20px;font-size:13px;font-weight:500;color:var(--text);z-index:600;opacity:0;white-space:nowrap;box-shadow:0 8px 32px rgba(0,0,0,.5);transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .3s}
-.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.toast.err{border-color:rgba(239,68,68,.35);color:#fca5a5;background:#1a1015}
-.toast.ok{border-color:rgba(34,197,94,.35);color:#86efac;background:#101a12}
+/* Blue order banner */
+.ord-banner {
+  background:linear-gradient(135deg,#0f1b42,#0d2055);
+  padding:15px 20px; display:flex; align-items:center; justify-content:space-between;
+}
+.ob-l .ob-lbl,.ob-r .ob-lbl { font-size:9.5px; color:rgba(255,255,255,.5); text-transform:uppercase; letter-spacing:.09em; margin-bottom:3px }
+.ob-l .ob-val { font-size:14px; font-weight:800; color:#fff }
+.ob-r { text-align:right }
+.ob-r .ob-val { font-size:28px; font-weight:900; color:#fff; letter-spacing:-.02em }
 
-/* ══ FOOTER ══ */
-footer{position:relative;z-index:5;border-top:1px solid var(--bdim);padding:20px 16px 90px;text-align:center;font-size:11px;color:var(--muted);line-height:1.8}
-footer a{color:var(--gold);text-decoration:none}
+/* Timer strip */
+.tmr-strip { background:#f4f6ff; border-bottom:1px solid #ebeef5; padding:9px 20px; display:flex; align-items:center; justify-content:space-between }
+.tmr-lbl { font-size:11px; color:#777; display:flex; align-items:center; gap:5px }
+.tmr-val { font-size:20px; font-weight:900; font-variant-numeric:tabular-nums; color:var(--blue); transition:color .3s }
+.tmr-val.urgent { color:var(--red); animation:blink 1s ease-in-out infinite }
+.tmr-val.done { color:var(--red) }
+@keyframes blink {0%,100%{opacity:1}50%{opacity:.5}}
 
-/* ══ ANIMATIONS ══ */
-@keyframes gfl{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes blk{0%,100%{opacity:1}50%{opacity:.5}}
-@keyframes fadeup{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-.fu{animation:fadeup .55s ease both}
-.fu1{animation-delay:.07s}.fu2{animation-delay:.14s}
+/* ═══════════════════════════════════════════════
+   PREMIUM QR CARD  (html2canvas target)
+═══════════════════════════════════════════════ */
+.qr-section { padding:20px 18px 14px; border-bottom:1px solid #f0f0f0; display:flex; flex-direction:column; align-items:center; gap:14px }
+
+#qrDlCard { width:100%; max-width:290px; border-radius:20px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,.18),0 0 0 1px rgba(0,0,0,.06) }
+.qc-top {
+  background:linear-gradient(135deg,#b8880a,#d4a742 40%,#f5d98b 60%,#d4a742 80%,#9a7320);
+  padding:10px 14px; display:flex; align-items:center; justify-content:space-between;
+}
+.qc-brand { font-family:'Cinzel Decorative',serif; font-size:9.5px; font-weight:900; color:#3a2800; letter-spacing:.06em }
+.qc-upi-pill { font-size:8px; font-weight:800; letter-spacing:.1em; color:#5a3a00; background:rgba(255,255,255,.32); padding:2px 8px; border-radius:99px }
+.qc-body { background:#fff; padding:14px 14px 10px; display:flex; flex-direction:column; align-items:center; gap:9px }
+.qr-canvas { position:relative; width:185px; height:185px }
+.qr-canvas img { width:100%; height:100%; border-radius:7px; display:block }
+.qr-logo {
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:36px; height:36px; border-radius:50%; background:#fff; border:2px solid var(--gold);
+  box-shadow:0 2px 8px rgba(0,0,0,.15); display:none; align-items:center; justify-content:center; font-size:18px;
+}
+.qr-spin { width:185px; height:185px; background:#f8f8f8; border-radius:7px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px }
+.spinner { width:32px; height:32px; border:3px solid #eee; border-top-color:var(--blue); border-radius:50%; animation:spin .7s linear infinite }
+@keyframes spin {to{transform:rotate(360deg)}}
+.spin-lbl { font-size:11.5px; color:#aaa }
+.qc-merchant { font-size:12.5px; font-weight:800; color:#111 }
+.qr-note-tag { background:#f0f4ff; border:1px solid #cddaff; border-radius:7px; padding:5px 10px; font-size:10px; color:#3355bb; font-weight:600; text-align:center; word-break:break-all; display:none; max-width:240px }
+.qc-meta { width:100%; background:#f8f9ff; border-radius:9px; padding:7px 10px }
+.qc-mrow { display:flex; justify-content:space-between; align-items:center; padding:3.5px 0; border-bottom:1px solid #eeeeff }
+.qc-mrow:last-child { border-bottom:none }
+.qc-mk { font-size:9px; color:#999; text-transform:uppercase; letter-spacing:.07em; font-weight:700 }
+.qc-mv { font-size:11px; font-weight:800; color:#111 }
+.qc-apps { display:flex; gap:5px; flex-wrap:wrap; justify-content:center }
+.qc-atag { background:#f4f4f4; border:1px solid #e2e2e2; border-radius:6px; padding:3px 9px; font-size:9.5px; font-weight:700; color:#555 }
+.qc-bot {
+  background:linear-gradient(135deg,#9a7320,#d4a742 50%,#9a7320);
+  padding:7px 14px; display:flex; align-items:center; justify-content:center; gap:8px;
+}
+.qc-btag { font-size:8px; font-weight:800; color:#3a2800; background:rgba(255,255,255,.32); padding:2px 8px; border-radius:99px; letter-spacing:.05em }
+
+/* Download QR button */
+.btn-dl-qr {
+  display:flex; align-items:center; gap:7px;
+  background:linear-gradient(135deg,var(--blue-dk),var(--blue)); color:#fff;
+  border-radius:10px; padding:9px 18px; font-size:13px; font-weight:700;
+  box-shadow:0 4px 14px rgba(26,108,248,.35); transition:transform .15s, box-shadow .2s, opacity .2s;
+}
+.btn-dl-qr:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(26,108,248,.5) }
+.btn-dl-qr:disabled { opacity:.45; cursor:not-allowed; transform:none }
+.qr-hint-txt { font-size:11.5px; color:#888; text-align:center }
+.qr-apps-row { display:flex; gap:6px; flex-wrap:wrap; justify-content:center }
+.qr-app-chip { background:#f4f4f4; border:1px solid #e2e2e2; border-radius:7px; padding:4px 10px; font-size:10px; font-weight:700; color:#555 }
+
+/* ═══════════════════════════════════════════════
+   PAYMENT DETAILS FORM
+═══════════════════════════════════════════════ */
+.p-form { padding:18px 20px 22px }
+.p-form-ttl { font-size:14.5px; font-weight:800; color:#111; margin-bottom:3px; display:flex; align-items:center; gap:6px }
+.p-form-sub { font-size:11.5px; color:#888; margin-bottom:16px; line-height:1.55 }
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:14px }
+.info-b { background:#f8f8fb; border:1px solid #ebebf2; border-radius:10px; padding:10px 13px }
+.ib-lbl { font-size:9px; text-transform:uppercase; letter-spacing:.08em; color:#999; font-weight:700; margin-bottom:2px }
+.ib-val { font-size:13px; font-weight:800; color:#111 }
+.p-fld { margin-bottom:12px }
+.p-lbl { display:block; font-size:10.5px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:#333; margin-bottom:6px }
+.p-inp {
+  width:100%; border:1.5px solid #ddd; border-radius:10px;
+  padding:11px 13px; font-size:15px; color:#111; outline:none; background:#fafafa;
+  transition:border-color .2s, box-shadow .2s;
+}
+.p-inp:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(26,108,248,.12); background:#fff }
+.p-inp.ok { border-color:rgba(34,197,94,.55) }
+.p-inp.bad { border-color:rgba(239,68,68,.5) }
+/* UTR row */
+.utr-row { display:flex; align-items:center; gap:8px }
+.utr-row .p-inp { flex:1 }
+.help-btn {
+  flex-shrink:0; width:30px; height:30px; border-radius:50%;
+  background:var(--blue); color:#fff; font-size:14px; font-weight:900;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 10px rgba(26,108,248,.4); transition:background .2s, transform .15s;
+}
+.help-btn:hover { background:var(--blue-dk); transform:scale(1.1) }
+/* Checkbox */
+.chk-row { display:flex; align-items:flex-start; gap:8px; margin-bottom:14px }
+.chk-row input[type=checkbox] { width:15px; height:15px; margin-top:3px; accent-color:var(--blue); cursor:pointer; flex-shrink:0 }
+.chk-row label { font-size:12px; color:#444; line-height:1.55; cursor:pointer }
+/* Confirm button */
+.btn-confirm {
+  width:100%; background:#0a0a14; color:#fff; border-radius:11px; padding:13px;
+  font-size:14.5px; font-weight:800; letter-spacing:.04em;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  transition:background .2s, transform .15s; box-shadow:0 4px 18px rgba(0,0,0,.22);
+}
+.btn-confirm:hover:not(:disabled) { background:#161630; transform:translateY(-1px) }
+.btn-confirm:disabled { opacity:.42; cursor:not-allowed; transform:none }
+.sec-note { display:flex; align-items:flex-start; gap:7px; background:#f0fff4; border:1px solid rgba(34,197,94,.3); border-radius:10px; padding:10px 12px; margin-top:12px }
+.sn-ico { font-size:14px; flex-shrink:0; margin-top:1px }
+.sn-txt { font-size:11px; color:#2d6a4f; line-height:1.55 }
+
+/* ═══════════════════════════════════════════════
+   UTR HELP MODAL
+═══════════════════════════════════════════════ */
+.tt-bd { position:fixed; inset:0; z-index:499; background:rgba(0,0,0,.6); backdrop-filter:blur(5px); opacity:0; pointer-events:none; transition:opacity .25s }
+.tt-bd.on { opacity:1; pointer-events:all }
+.utr-tt {
+  position:fixed; top:50%; left:50%;
+  transform:translate(-50%,-50%) scale(.9);
+  width:min(345px,94vw); background:#fff; border-radius:18px;
+  box-shadow:0 24px 70px rgba(0,0,0,.42),0 0 0 1px rgba(0,0,0,.06);
+  z-index:500; opacity:0; pointer-events:none; overflow:hidden;
+  transition:opacity .25s, transform .25s cubic-bezier(.22,1,.36,1);
+}
+.utr-tt.on { opacity:1; pointer-events:all; transform:translate(-50%,-50%) scale(1) }
+.tt-hdr { background:linear-gradient(135deg,var(--blue-dk),var(--blue)); padding:13px 17px; display:flex; align-items:center; justify-content:space-between }
+.tt-ttl { font-size:13px; font-weight:800; color:#fff; display:flex; align-items:center; gap:6px }
+.tt-cls { background:rgba(255,255,255,.2); color:#fff; border-radius:50%; width:26px; height:26px; font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center }
+.tt-cls:hover { background:rgba(255,255,255,.35) }
+.tt-body { padding:15px 17px 18px }
+
+/* GPay-style phone mockup */
+.phone-mock { width:100%; max-width:240px; margin:0 auto 13px; background:#1a1a2e; border-radius:20px; overflow:hidden; border:3px solid #2a2a42; box-shadow:0 8px 28px rgba(0,0,0,.3); position:relative }
+.ph-notch { height:16px; background:#111; display:flex; align-items:center; justify-content:center; gap:5px }
+.ph-dot { width:6px; height:6px; border-radius:50%; background:#252525 }
+.ph-bar { background:#1a73e8; padding:9px 13px; display:flex; align-items:center; gap:8px }
+.ph-back { font-size:17px; color:#fff; opacity:.8; line-height:1 }
+.ph-bar-ttl { font-size:12.5px; font-weight:700; color:#fff }
+.ph-body { padding:11px 13px; background:#fff }
+.ph-txn-row { display:flex; align-items:center; gap:9px; margin-bottom:9px }
+.ph-txn-ico { width:32px; height:32px; border-radius:50%; background:#e8f0fe; display:flex; align-items:center; justify-content:center; font-size:16px; flex-shrink:0 }
+.ph-txn-nm { font-size:12px; font-weight:700; color:#111 }
+.ph-txn-dt { font-size:9.5px; color:#888; margin-top:1px }
+.ph-amt { font-size:14px; font-weight:900; color:var(--blue); margin-left:auto; flex-shrink:0 }
+.ph-div { height:1px; background:#f0f0f0; margin:7px 0 }
+.ph-info-lbl { font-size:9.5px; color:#999; text-transform:uppercase; letter-spacing:.07em; font-weight:700; margin-bottom:5px }
+.ph-info-row { display:flex; justify-content:space-between; font-size:10.5px; color:#666; margin-bottom:3px }
+.ph-utr-box {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:7px 9px; border-radius:8px;
+  background:linear-gradient(135deg,#fff8e1,#fff3cd); border:2px solid #ffc107;
+  margin-top:5px; position:relative;
+}
+.ph-utr-lbl { font-size:9px; font-weight:700; color:#666; text-transform:uppercase; letter-spacing:.06em }
+.ph-utr-val { font-size:11px; font-weight:900; color:#111 }
+/* Animated red annotation ring + arrow */
+.ann-ring { position:absolute; inset:-3px; border-radius:10px; border:2.5px solid var(--red); animation:ann-pulse 2s ease-in-out infinite }
+.ann-arrow { position:absolute; top:-24px; right:6px; color:var(--red); font-size:18px; animation:ann-bounce 1.5s ease-in-out infinite }
+@keyframes ann-pulse {0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.4)}50%{box-shadow:0 0 0 6px rgba(239,68,68,0)}}
+@keyframes ann-bounce {0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+
+.utr-note { font-size:11.5px; color:#444; line-height:1.65; text-align:center; background:#f8f9ff; border:1px solid #e8eeff; border-radius:10px; padding:10px 13px }
+.utr-note strong { color:var(--blue) }
+
+/* ═══════════════════════════════════════════════
+   SUCCESS / RECEIPT SCREEN
+═══════════════════════════════════════════════ */
+#sucOvl .sheet { background:linear-gradient(160deg,#0c1e12,#080f09); border:1px solid rgba(34,197,94,.2); padding:0; border-radius:22px 22px 0 0 }
+.suc-hd { padding:26px 22px 0; text-align:center }
+.suc-ico-wrap { position:relative; display:inline-flex; align-items:center; justify-content:center; margin-bottom:12px }
+.suc-ring { position:absolute; width:84px; height:84px; border-radius:50%; border:2px solid rgba(34,197,94,.3); animation:s-ring 2.5s ease-in-out infinite }
+.suc-ring2 { position:absolute; width:104px; height:104px; border-radius:50%; border:1.5px solid rgba(34,197,94,.15); animation:s-ring 2.5s ease-in-out infinite .5s }
+@keyframes s-ring {0%,100%{opacity:.6;transform:scale(1)}50%{opacity:.18;transform:scale(1.1)}}
+.suc-ico { font-size:58px; animation:bounce-in .55s cubic-bezier(.22,1,.36,1); position:relative; z-index:1 }
+@keyframes bounce-in {0%{transform:scale(0);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.suc-ttl { font-family:'Cinzel',serif; font-size:20px; font-weight:700; color:var(--green); margin-bottom:6px }
+.suc-sub { font-size:12.5px; color:rgba(134,239,172,.7); line-height:1.65; margin-bottom:18px }
+
+/* Receipt card (html2canvas target) */
+#rcptCard { margin:0 14px; background:linear-gradient(160deg,#0e2418,#0a1a10); border:1px solid rgba(34,197,94,.22); border-radius:16px; overflow:hidden }
+.rc-hdr { background:linear-gradient(135deg,#1a6e38,#22c55e 50%,#1a6e38); padding:12px 16px; display:flex; align-items:center; gap:9px }
+.rc-hdr-ico { width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,.24); display:flex; align-items:center; justify-content:center; font-size:17px; flex-shrink:0 }
+.rc-hdr-ttl { font-family:'Cinzel',serif; font-size:12px; font-weight:700; color:#fff }
+.rc-hdr-sub { font-size:9px; color:rgba(255,255,255,.7); margin-top:1px }
+.rc-body { padding:13px 15px }
+.rc-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; border-bottom:1px solid rgba(34,197,94,.1) }
+.rc-row:last-child { border-bottom:none }
+.rc-k { font-size:9.5px; color:rgba(134,239,172,.55); font-weight:600; letter-spacing:.05em; text-transform:uppercase; flex-shrink:0 }
+.rc-v { font-size:12.5px; font-weight:800; color:#c8f0ce; text-align:right; word-break:break-all; max-width:62% }
+.rc-v.hl { color:var(--gold-lt); font-size:13px }
+.rc-ftr { background:rgba(34,197,94,.06); border-top:1px solid rgba(34,197,94,.12); padding:10px 15px; display:flex; align-items:center; justify-content:space-between }
+.rc-brand { font-family:'Cinzel Decorative',serif; font-size:8px; letter-spacing:.12em; background:linear-gradient(90deg,var(--gold-lt),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text }
+.rc-status { display:flex; align-items:center; gap:5px; font-size:10px; font-weight:700; color:var(--green) }
+.rc-dot { width:6px; height:6px; border-radius:50%; background:var(--green); animation:s-dot 1.5s ease-in-out infinite }
+@keyframes s-dot {0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.5)}50%{box-shadow:0 0 0 5px rgba(34,197,94,0)}}
+
+.suc-actions { padding:14px 14px 22px; display:flex; flex-direction:column; gap:9px }
+.btn-dl-rcpt { width:100%; display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg,var(--gold-dk),var(--gold) 50%,var(--gold-lt)); border-radius:12px; padding:13px; color:#000; font-size:14px; font-weight:800; box-shadow:0 4px 20px rgba(212,167,66,.35); transition:transform .15s, box-shadow .2s }
+.btn-dl-rcpt:hover { transform:translateY(-1px); box-shadow:0 8px 28px rgba(212,167,66,.5) }
+.btn-wa-go { width:100%; background:#25d366; color:#fff; border-radius:12px; padding:13px; font-size:14px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 16px rgba(37,211,102,.3); transition:background .2s, transform .15s }
+.btn-wa-go:hover { background:#1ebe5d; transform:translateY(-1px) }
+
+/* ═══════════════════════════════════════════════
+   ORDER TRACKER PAGE
+═══════════════════════════════════════════════ */
+.trk-wrap { position:relative; z-index:10; max-width:500px; margin:0 auto; padding:18px 13px 100px }
+.t-card { background:var(--glass); border:1px solid var(--c-dim); border-radius:17px; padding:20px 16px; backdrop-filter:blur(12px); margin-bottom:14px }
+.t-title { font-family:'Cinzel',serif; font-size:15px; font-weight:700; color:var(--gold-lt); margin-bottom:4px }
+.t-sub { font-size:11.5px; color:var(--muted); margin-bottom:16px; line-height:1.55 }
+.t-row { display:flex; gap:8px }
+.t-row .fld-inp { flex:1 }
+.btn-search { background:linear-gradient(135deg,var(--gold-dk),var(--gold)); border-radius:10px; padding:0 16px; font-size:12.5px; font-weight:700; color:#000; height:48px; display:flex; align-items:center; gap:5px; white-space:nowrap; transition:opacity .2s, transform .15s }
+.btn-search:hover { opacity:.9; transform:translateY(-1px) }
+.t-result { display:none; margin-top:14px; border-radius:13px; overflow:hidden; border:1px solid var(--c-dim) }
+.t-result.on { display:block; animation:fade-up .4s ease both }
+.tr-hdr { padding:11px 15px; display:flex; align-items:center; gap:9px }
+.tr-hdr.approved,.tr-hdr.success { background:rgba(34,197,94,.1); border-bottom:1px solid rgba(34,197,94,.18) }
+.tr-hdr.pending { background:rgba(234,179,8,.08); border-bottom:1px solid rgba(234,179,8,.18) }
+.tr-hdr.rejected { background:rgba(239,68,68,.1); border-bottom:1px solid rgba(239,68,68,.18) }
+.tr-badge { padding:3px 11px; border-radius:99px; font-size:10.5px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; margin-left:auto }
+.tr-badge.approved,.tr-badge.success { background:rgba(34,197,94,.18); color:var(--green) }
+.tr-badge.pending { background:rgba(234,179,8,.18); color:#eab308 }
+.tr-badge.rejected { background:rgba(239,68,68,.18); color:var(--red) }
+.tr-body { background:rgba(16,16,30,.7); padding:13px 15px }
+.tr-drow { display:flex; justify-content:space-between; align-items:center; padding:5px 0; border-bottom:1px solid rgba(255,255,255,.05) }
+.tr-drow:last-child { border-bottom:none }
+.tr-dk { font-size:10.5px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.06em }
+.tr-dv { font-size:12.5px; font-weight:700; color:var(--text) }
+.t-empty { text-align:center; padding:28px 14px; color:var(--muted); font-size:13px }
+.t-empty-ico { font-size:38px; margin-bottom:7px; display:block }
+.info-code { background:rgba(14,10,36,.7); border:1px solid rgba(100,80,255,.18); border-radius:13px; padding:16px; backdrop-filter:blur(10px) }
+.ic-title { font-size:12.5px; font-weight:700; color:#a78bfa; margin-bottom:8px; display:flex; align-items:center; gap:6px }
+.code-block { background:rgba(0,0,0,.45); border-radius:8px; padding:9px 11px; font-family:'Share Tech Mono',monospace; font-size:10px; color:#c4b5fd; margin:7px 0; border:1px solid rgba(100,80,255,.14); line-height:1.7; word-break:break-all }
+
+/* ═══════════════════════════════════════════════
+   REFUND PAGE
+═══════════════════════════════════════════════ */
+.rf-wrap { position:relative; z-index:10; max-width:500px; margin:0 auto; padding:18px 13px 100px }
+.rf-card { background:var(--glass); border:1px solid var(--c-dim); border-radius:17px; padding:20px 16px; backdrop-filter:blur(12px); margin-bottom:14px }
+.rf-title { font-family:'Cinzel',serif; font-size:16px; font-weight:700; background:linear-gradient(135deg,var(--gold-lt),var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:4px }
+.rf-sub { font-size:11.5px; color:var(--muted); margin-bottom:16px }
+.rf-list { display:flex; flex-direction:column; gap:10px; margin-bottom:20px }
+.rf-item { background:rgba(239,68,68,.06); border:1px solid rgba(239,68,68,.18); border-radius:11px; padding:12px 13px; display:flex; align-items:flex-start; gap:9px }
+.rf-ico { font-size:15px; flex-shrink:0; margin-top:1px }
+.rf-item-ttl { font-size:12.5px; font-weight:800; color:#fca5a5; margin-bottom:3px }
+.rf-item-txt { font-size:11.5px; color:rgba(252,165,165,.7); line-height:1.55 }
+.rf-form-ttl { font-size:14px; font-weight:800; color:var(--text); margin-bottom:4px; display:flex; align-items:center; gap:6px }
+.rf-form-sub { font-size:11.5px; color:var(--muted); margin-bottom:14px }
+.rf-fl { margin-bottom:11px }
+.rf-lbl { display:block; font-size:10.5px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--gold); opacity:.85; margin-bottom:5px }
+.rf-inp { width:100%; background:rgba(5,5,14,.78); border:1.5px solid var(--c-dim); border-radius:10px; padding:11px 13px; font-size:14px; color:var(--text); outline:none; backdrop-filter:blur(6px); transition:border-color .2s, box-shadow .2s }
+.rf-inp::placeholder { color:var(--muted) }
+.rf-inp:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,167,66,.14) }
+.rf-ta { min-height:75px; resize:vertical }
+.btn-rf { width:100%; background:#25d366; color:#fff; border-radius:12px; padding:13px; font-size:14px; font-weight:800; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 16px rgba(37,211,102,.3); transition:background .2s, transform .15s }
+.btn-rf:hover { background:#1ebe5d; transform:translateY(-1px) }
+
+/* ═══════════════════════════════════════════════
+   FLOATING BUTTONS (IMO + WhatsApp)
+═══════════════════════════════════════════════ */
+.fab-group { position:fixed; bottom:22px; right:14px; z-index:100; display:flex; flex-direction:column; gap:9px; align-items:flex-end }
+
+/* IMO Customer Care pill — continuous glow + lift on hover */
+.fab-imo {
+  display:flex; align-items:center; gap:9px;
+  background:rgba(12,10,30,.82); backdrop-filter:blur(16px);
+  border:1px solid rgba(100,160,255,.32); border-radius:99px;
+  padding:9px 16px 9px 10px;
+  box-shadow:0 4px 20px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.06);
+  animation:imo-pulse 3s ease-in-out infinite;
+  transition:transform .22s, box-shadow .22s, border-color .22s;
+  cursor:pointer;
+}
+.fab-imo:hover { transform:translateY(-3px) scale(1.02); box-shadow:0 8px 30px rgba(60,120,255,.4), 0 0 24px rgba(80,140,255,.2); border-color:rgba(100,180,255,.6) }
+@keyframes imo-pulse {0%,100%{box-shadow:0 4px 20px rgba(0,0,0,.4), 0 0 10px rgba(80,130,255,.1)}50%{box-shadow:0 4px 20px rgba(0,0,0,.4), 0 0 22px rgba(80,130,255,.25)}}
+.fab-imo-ico { width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,var(--blue-dk),var(--blue) 60%,#5490ff); display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; box-shadow:0 2px 8px rgba(26,108,248,.5) }
+.fab-imo-txt { font-size:11px; font-weight:700; color:rgba(210,230,255,.92); letter-spacing:.03em; white-space:nowrap }
+
+/* WhatsApp FAB */
+.fab-wa { width:50px; height:50px; border-radius:50%; background:#25d366; color:#fff; box-shadow:0 4px 18px rgba(37,211,102,.5); display:flex; align-items:center; justify-content:center; font-size:26px; transition:transform .2s, box-shadow .2s }
+.fab-wa:hover { transform:scale(1.1) translateY(-2px); box-shadow:0 8px 26px rgba(37,211,102,.6) }
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+.site-footer { position:relative; z-index:10; border-top:1px solid var(--c-dim); padding:18px 16px; text-align:center; font-size:10.5px; color:var(--muted); line-height:1.9; background:rgba(5,5,12,.7); backdrop-filter:blur(12px) }
+.site-footer a { color:var(--gold) }
+
+/* ═══════════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════════ */
+.toast { position:fixed; bottom:88px; left:50%; transform:translateX(-50%) translateY(90px); background:#1c1c28; border:1px solid var(--c-border); border-radius:12px; padding:10px 18px; font-size:12.5px; font-weight:500; color:var(--text); z-index:1000; opacity:0; white-space:nowrap; box-shadow:0 8px 32px rgba(0,0,0,.5); transition:transform .3s cubic-bezier(.22,1,.36,1), opacity .3s }
+.toast.show { transform:translateX(-50%) translateY(0); opacity:1 }
+.toast.err { border-color:rgba(239,68,68,.4); color:#fca5a5; background:#1a1018 }
+.toast.ok { border-color:rgba(34,197,94,.4); color:#86efac; background:#0f1a12 }
+
+/* ═══════════════════════════════════════════════
+   UTILITY ANIMATIONS
+═══════════════════════════════════════════════ */
+@keyframes fade-up {from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.fu { animation:fade-up .5s ease both }
+.fu1 { animation-delay:.07s }
+.fu2 { animation-delay:.14s }
+.fu3 { animation-delay:.21s }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="ldr">
-  <div class="lg">💎</div>
-  <div class="lb">KAMAL DIAMOND</div>
-  <div class="lbar"><div class="lfill"></div></div>
+<!-- ══════════ LOADER ══════════ -->
+<div id="loader">
+  <div class="ld-gem">💎</div>
+  <div class="ld-brand">KAMAL DIAMOND RESELLER</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
 </div>
 
-<div class="atmos"></div>
+<!-- ══════════ ANIMATED BACKGROUND ══════════ -->
+<div id="site-bg">
+  <div class="bg-grid"></div>
+  <div class="stars-wrap" id="starsEl"></div>
+  <div class="float-gem" style="--fs:26px;--d:7s;--dl:0s;top:12%;left:7%">💎</div>
+  <div class="float-gem" style="--fs:17px;--d:9s;--dl:2s;top:30%;left:2%">💠</div>
+  <div class="float-gem" style="--fs:22px;--d:11s;--dl:1s;top:58%;left:9%">💎</div>
+  <div class="float-gem" style="--fs:15px;--d:8s;--dl:3s;top:16%;right:6%">🔷</div>
+  <div class="float-gem" style="--fs:24px;--d:10s;--dl:.5s;top:48%;right:3%">💎</div>
 
-<!-- STEP NAV -->
-<nav class="snav">
-  <div class="steps">
-    <div class="st active" id="st1"><div class="sd">1</div><div class="sl">Pack</div></div>
-    <div class="st" id="st2"><div class="sd">2</div><div class="sl">ID</div></div>
-    <div class="st" id="st3"><div class="sd">3</div><div class="sl">QR Pay</div></div>
-    <div class="st" id="st4"><div class="sd">4</div><div class="sl">UTR</div></div>
-    <div class="st" id="st5"><div class="sd">✓</div><div class="sl">Done</div></div>
+  <!-- Anime character SVG -->
+  <div class="char-wrap">
+    <svg viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <g class="hair-g">
+        <ellipse cx="150" cy="55" rx="50" ry="55" fill="#180840"/>
+        <path d="M102 52 Q78 88 80 125 Q82 145 92 155" stroke="#180840" stroke-width="17" stroke-linecap="round"/>
+        <path d="M198 52 Q222 88 220 125 Q218 145 208 155" stroke="#180840" stroke-width="17" stroke-linecap="round"/>
+        <path d="M120 18 Q150 0 180 18 Q200 28 204 48 Q170 33 150 35 Q130 33 96 48 Q100 28 120 18Z" fill="#220d55"/>
+        <path d="M100 58 Q82 118 78 195 Q75 235 81 272" stroke="#180840" stroke-width="11" stroke-linecap="round"/>
+        <path d="M200 58 Q218 118 222 195 Q225 235 219 272" stroke="#180840" stroke-width="11" stroke-linecap="round"/>
+      </g>
+      <ellipse cx="150" cy="76" rx="36" ry="42" fill="#f9d8b8"/>
+      <ellipse cx="135" cy="72" rx="8" ry="10" fill="#180840"/>
+      <ellipse cx="165" cy="72" rx="8" ry="10" fill="#180840"/>
+      <circle cx="136.5" cy="69.5" r="3" fill="white"/>
+      <circle cx="166.5" cy="69.5" r="3" fill="white"/>
+      <circle cx="136" cy="69" r="1.5" fill="#7040d0"/>
+      <circle cx="166" cy="69" r="1.5" fill="#7040d0"/>
+      <ellipse cx="122" cy="84" rx="7" ry="4.5" fill="rgba(255,140,120,.3)"/>
+      <ellipse cx="178" cy="84" rx="7" ry="4.5" fill="rgba(255,140,120,.3)"/>
+      <path d="M142 94 Q150 102 158 94" stroke="#e0857a" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M147 86 Q150 90 153 86" stroke="#d4a080" stroke-width="1.5" stroke-linecap="round"/>
+      <ellipse cx="114" cy="82" rx="6" ry="7.5" fill="#f9d8b8"/>
+      <ellipse cx="186" cy="82" rx="6" ry="7.5" fill="#f9d8b8"/>
+      <circle cx="114" cy="89" r="2.5" fill="#d4a742"/>
+      <circle cx="186" cy="89" r="2.5" fill="#d4a742"/>
+      <rect x="144" y="116" width="12" height="16" rx="6" fill="#f9d8b8"/>
+      <path d="M112 134 Q92 155 88 212 Q85 250 89 290 L128 290 L133 220 L150 200 L167 220 L172 290 L211 290 Q215 250 212 212 Q208 155 188 134 Q170 124 150 122 Q130 124 112 134Z" fill="#280e6a"/>
+      <path d="M100 174 Q124 164 144 174 Q164 184 184 174" stroke="rgba(212,167,66,.4)" stroke-width="1.5"/>
+      <path d="M98 202 Q124 192 144 202 Q164 212 186 202" stroke="rgba(212,167,66,.35)" stroke-width="1.5"/>
+      <path d="M132 129 L150 144 L168 129 L164 122 L150 139 L136 122Z" fill="#fff9f0"/>
+      <path d="M100 210 Q150 220 200 210 L202 228 Q150 238 98 228Z" fill="#d4a742" opacity=".8"/>
+      <g class="arm-l-g" style="transform-origin:112px 144px">
+        <path d="M112 142 Q88 150 70 136 Q56 124 47 106 Q45 98 52 94 Q59 90 65 98 Q76 118 91 130 Q105 138 118 144" fill="#f9d8b8" stroke="#e8c090" stroke-width="1"/>
+        <ellipse cx="48" cy="97" rx="11" ry="9" fill="#f9d8b8"/>
+        <path d="M41 92 Q38 85 40 81" stroke="#f9d8b8" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M47 89 Q44 82 46 78" stroke="#f9d8b8" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M53 89 Q52 82 54 78" stroke="#f9d8b8" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M59 91 Q60 84 62 80" stroke="#f9d8b8" stroke-width="4.5" stroke-linecap="round"/>
+        <g class="gem-g">
+          <polygon points="47,70 42,60 47,53 52,60" fill="#a8e6ff" stroke="#60c8ff" stroke-width="1.5" opacity=".95"/>
+          <polygon points="47,70 42,60 47,65 52,60" fill="#60c8ff" opacity=".9"/>
+          <polygon points="47,53 42,60 47,57 52,60" fill="white" opacity=".8"/>
+          <line x1="47" y1="48" x2="47" y2="43" stroke="white" stroke-width="1.5" opacity=".8"/>
+          <line x1="36" y1="57" x2="32" y2="54" stroke="white" stroke-width="1.5" opacity=".7"/>
+          <line x1="58" y1="57" x2="62" y2="54" stroke="white" stroke-width="1.5" opacity=".7"/>
+        </g>
+        <path d="M112 142 Q88 150 70 136 Q75 150 80 154 Q95 148 118 146" fill="#280e6a" opacity=".85"/>
+      </g>
+      <g class="arm-r-g" style="transform-origin:188px 144px">
+        <path d="M188 142 Q212 152 234 142 Q250 132 256 114 Q258 105 252 101 Q245 97 241 105 Q230 124 212 134 Q198 140 186 144" fill="#f9d8b8" stroke="#e8c090" stroke-width="1"/>
+        <path d="M188 142 Q212 152 234 142 Q228 156 222 159 Q206 152 186 146" fill="#280e6a" opacity=".85"/>
+      </g>
+      <path d="M100 290 Q82 348 80 406 Q79 435 87 462 Q114 472 150 474 Q186 472 213 462 Q221 435 220 406 Q218 348 200 290Z" fill="#1a0852"/>
+      <path d="M107 310 Q150 320 193 310" stroke="rgba(212,167,66,.22)" stroke-width="1"/>
+      <path d="M102 342 Q150 354 198 342" stroke="rgba(212,167,66,.2)" stroke-width="1"/>
+      <ellipse cx="124" cy="467" rx="20" ry="7.5" fill="#180840"/>
+      <ellipse cx="176" cy="467" rx="20" ry="7.5" fill="#180840"/>
+      <ellipse cx="124" cy="462" rx="14" ry="11" fill="#f0ede8"/>
+      <ellipse cx="176" cy="462" rx="14" ry="11" fill="#f0ede8"/>
+      <circle cx="68" cy="190" r="2" fill="#f5d98b"><animate attributeName="opacity" values=".15;1;.15" dur="2s" repeatCount="indefinite"/></circle>
+      <circle cx="234" cy="175" r="2.5" fill="#a8e6ff"><animate attributeName="opacity" values=".2;1;.2" dur="1.8s" repeatCount="indefinite" begin=".4s"/></circle>
+      <circle cx="76" cy="310" r="1.5" fill="#f5d98b"><animate attributeName="opacity" values=".15;.9;.15" dur="2.4s" repeatCount="indefinite" begin=".8s"/></circle>
+    </svg>
   </div>
+</div>
+<div id="bg-glass"></div>
+
+<!-- ══════════ MAIN ROOT ══════════ -->
+<div id="root">
+
+<!-- TAB NAVIGATION -->
+<nav class="tab-nav">
+  <button class="tab-btn on" id="tab-shop" onclick="switchTab('shop')">💎 Buy</button>
+  <button class="tab-btn" id="tab-track" onclick="switchTab('track')">🔍 Track</button>
+  <button class="tab-btn" id="tab-refund" onclick="switchTab('refund')">📋 Refund</button>
 </nav>
 
-<!-- HEADER -->
-<header class="fu">
-  <span class="hgem">💎</span>
-  <div class="brand">KAMAL DIAMOND RESELLER</div>
-  <div class="tagline">✦ 24 / 7 Fast Service ✦</div>
-  <div class="hchips">
-    <a class="hchip" href="https://wa.me/916382371168" target="_blank" rel="noopener">
-      <svg width="13" height="13" fill="#25d366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      WhatsApp
-    </a>
-    <a class="hchip" href="https://s.imoim.net/Rlyu9W" target="_blank" rel="noopener">
-      <svg width="13" height="13" fill="var(--blue)" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="rgba(26,108,248,.3)"/><path fill="var(--blue)" d="M12 4a8 8 0 1 0 0 16A8 8 0 0 0 12 4zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 11c-2.2 0-4.2-1.1-5.4-2.7.9-1.3 2.4-2.3 5.4-2.3s4.5 1 5.4 2.3C16.2 16.9 14.2 18 12 18z"/></svg>
-      IMO Call
-    </a>
-    <a class="hchip" href="mailto:kamal6382371168@gmail.com">
-      <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      Email
-    </a>
+<!-- STEP PROGRESS BAR -->
+<div class="step-bar" id="stepBar">
+  <div class="steps">
+    <div class="step active" id="stp1"><div class="step-dot">1</div><div class="step-lbl">Pack</div></div>
+    <div class="step" id="stp2"><div class="step-dot">2</div><div class="step-lbl">Qty</div></div>
+    <div class="step" id="stp3"><div class="step-dot">3</div><div class="step-lbl">ID</div></div>
+    <div class="step" id="stp4"><div class="step-dot">4</div><div class="step-lbl">QR Pay</div></div>
+    <div class="step" id="stp5"><div class="step-dot">5</div><div class="step-lbl">UTR</div></div>
+    <div class="step" id="stp6"><div class="step-dot">✓</div><div class="step-lbl">Done</div></div>
   </div>
-</header>
+</div>
 
-<!-- MAIN -->
-<main>
-  <!-- PAGE TABS -->
-  <div class="page-tabs fu">
-    <button class="ptab active" onclick="switchTab('shop')">💎 Shop</button>
-    <button class="ptab" onclick="switchTab('refund')">📋 Refund Policy</button>
-  </div>
+<!-- ══════════════════════════════════
+     PAGE 1 — SHOP
+══════════════════════════════════ -->
+<div class="page on" id="page-shop">
+  <header class="site-hdr fu">
+    <span class="hdr-gem">💎</span>
+    <div class="hdr-brand">KAMAL DIAMOND RESELLER</div>
+    <div class="hdr-tag">✦ 24 / 7 Fast Service ✦</div>
+    <div class="hdr-chips">
+      <a class="chip" href="https://wa.me/916382371168" target="_blank" rel="noopener">
+        <svg width="12" height="12" fill="#25d366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a class="chip" href="https://call.imo.im/kamalSeller" target="_blank" rel="noopener">📱 IMO</a>
+      <a class="chip" href="mailto:kamal6382371168@gmail.com">✉️ Email</a>
+    </div>
+  </header>
 
-  <!-- ══ SHOP PAGE ══ -->
-  <div class="page-section show" id="shopPage">
+  <div class="main-wrap">
+    <div class="sec-hd fu fu1">Select Diamond Pack</div>
+    <div class="pack-grid fu fu1" id="packGrid"><!-- Rendered by JS --></div>
 
-    <!-- Pack Grid -->
-    <div class="sechd fu fu1">Select Diamond Pack</div>
-    <div class="pack-grid fu fu1" id="packGrid"></div>
-
-    <!-- Quantity Widget -->
-    <div class="qty-widget" id="qtyWidget">
-      <div class="qty-hd">
-        <span>⚡</span>
-        <span id="qtyWidgetTitle">Quantity Multiplier</span>
-      </div>
+    <!-- QUANTITY SELECTOR -->
+    <div class="qty-block fu fu2">
+      <div class="qty-hd">💎 Quantity Selector <small>(max 10 per order)</small></div>
       <div class="qty-row">
-        <div class="qty-ctrl">
-          <button class="qty-btn" id="qtyMinus" onclick="changeQty(-1)">−</button>
-          <div class="qty-num" id="qtyNum">1</div>
-          <button class="qty-btn" id="qtyPlus" onclick="changeQty(1)">+</button>
+        <div class="qty-info">
+          <div class="qty-nm" id="qtyNm">Select a pack first</div>
+          <div class="qty-sub" id="qtySub">Price per pack shown above</div>
         </div>
-        <div class="qty-totals">
-          <div class="qty-total-diamonds" id="qtyTotalD">10 💎 Diamonds</div>
-          <div class="qty-total-price" id="qtyTotalP">₹30.00</div>
-          <div class="qty-note" id="qtyNote">1 × ₹30</div>
+        <div class="qty-ctrl">
+          <button class="q-btn" onclick="chQty(-1)">−</button>
+          <div class="q-num" id="qtyNum">1</div>
+          <button class="q-btn" onclick="chQty(1)">+</button>
+        </div>
+      </div>
+      <div class="qty-totals">
+        <div class="qt-l">
+          <div class="qt-lbl">Total Diamonds</div>
+          <div class="qt-val" id="qtD">—</div>
+        </div>
+        <div class="qt-r">
+          <div class="qt-lbl">Total Amount</div>
+          <div class="qt-val" id="qtP">₹0</div>
         </div>
       </div>
     </div>
 
-    <!-- Form Card -->
-    <div class="fcard fu fu2">
-      <div class="sechd" style="margin-bottom:18px">Order Details</div>
-      <div class="fl">
-        <label class="lbl">Selected Pack</label>
-        <div style="background:var(--bg3);border:1.5px solid var(--bdim);border-radius:10px;padding:12px 15px;display:flex;align-items:center;gap:8px;min-height:48px" id="packDisp">
-          <span>💎</span><span id="packDispTxt" style="color:var(--muted);font-size:14px">Choose a pack above</span>
+    <!-- FORM -->
+    <div class="form-card fu fu3">
+      <div class="sec-hd" style="margin-bottom:16px">Order Details</div>
+      <div class="fld">
+        <label class="fld-lbl">Selected Pack</label>
+        <div class="pack-disp" id="packDisp">
+          <span style="font-size:16px">💎</span>
+          <span style="color:var(--muted);font-weight:400">Choose a pack above</span>
         </div>
       </div>
-      <div class="fl">
-        <label class="lbl" for="imoInp">Your IMO / Game ID</label>
-        <input class="inp" id="imoInp" type="text" inputmode="numeric"
-          placeholder="Enter your numeric Game / IMO ID"
+      <div class="fld">
+        <label class="fld-lbl" for="imoId">Enter IMO ID</label>
+        <input class="fld-inp" id="imoId" type="text" inputmode="numeric"
+          placeholder="Enter your numeric IMO / Game ID"
           autocomplete="off" spellcheck="false" oninput="onImo(this)"/>
-        <div class="hint" id="imoHint"></div>
+        <div class="fld-hint" id="imoHint"></div>
       </div>
       <button class="btn-pay" id="payBtn" disabled onclick="openPaySheet()">
-        💎 &nbsp;Proceed to QR Payment
+        💎 &nbsp;Pay Now via QR
       </button>
-      <div class="trust">
-        <span class="ti"><em>🔒</em> Secure QR</span>
-        <span class="ti"><em>⚡</em> Instant Delivery</span>
-        <span class="ti"><em>✅</em> 100% Genuine</span>
+      <div class="trust-strip">
+        <span class="trust-item"><em>🔒</em> Secure QR Only</span>
+        <span class="trust-item"><em>⚡</em> Instant Delivery</span>
+        <span class="trust-item"><em>✅</em> 100% Genuine</span>
+      </div>
+    </div>
+  </div>
+</div><!-- /page-shop -->
+
+<!-- ══════════════════════════════════
+     PAGE 2 — TRACK ORDER
+══════════════════════════════════ -->
+<div class="page" id="page-track">
+  <div class="trk-wrap">
+    <div class="sec-hd" style="margin-top:20px">Search Order Status via UTR</div>
+    <div class="t-card">
+      <div class="t-title">🔍 Live Order Tracker</div>
+      <div class="t-sub">Enter your 12-digit UTR / Transaction ID to fetch your real-time order status from our database.</div>
+      <div class="t-row">
+        <input class="fld-inp" id="trkUtr" type="tel" inputmode="numeric" placeholder="Enter 12-digit UTR" maxlength="16"/>
+        <button class="btn-search" onclick="searchOrder()">
+          <svg width="13" height="13" fill="currentColor" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.5 6.5 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 5L20.49 19l-5-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          Search
+        </button>
+      </div>
+      <!-- Result -->
+      <div id="trkResult" class="t-result">
+        <div class="tr-hdr pending" id="trkHdr">
+          <span style="font-size:19px" id="trkIco">⏳</span>
+          <div>
+            <div style="font-size:13px;font-weight:800;color:var(--text)" id="trkTitle">Order Found</div>
+            <div style="font-size:10.5px;color:var(--muted);margin-top:1px" id="trkSub">Processing</div>
+          </div>
+          <span class="tr-badge pending" id="trkBadge">Pending</span>
+        </div>
+        <div class="tr-body" id="trkBody"></div>
+      </div>
+      <div class="t-empty" id="trkEmpty" style="display:none">
+        <span class="t-empty-ico">🔍</span>
+        No record found for this UTR. Please verify the number or contact WhatsApp support.
       </div>
     </div>
 
-  </div><!-- /shopPage -->
-
-  <!-- ══ REFUND POLICY PAGE ══ -->
-  <div class="page-section" id="refundPage">
-
-    <div class="policy-card fu">
-      <div class="policy-title">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--gold-lt)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Refund Policy
+    <div class="info-code">
+      <div class="ic-title">⚙️ Backend Connection</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:8px">
+        This page connects to your live Google Apps Script Web App. Your deployed URL is already configured:
       </div>
-      <div class="policy-item">
-        <div class="policy-num">1</div>
-        <div class="policy-text"><strong>Successful Delivery:</strong> Once the diamonds have been credited to your account (IMO/Game), no refund will be provided under any circumstances.</div>
-      </div>
-      <div class="policy-item">
-        <div class="policy-num">2</div>
-        <div class="policy-text"><strong>Incorrect Information:</strong> We are not responsible if you provide an incorrect IMO ID or Player ID and the diamonds are sent to the wrong account.</div>
-      </div>
-      <div class="policy-item">
-        <div class="policy-num">3</div>
-        <div class="policy-text"><strong>Intentional Orders:</strong> Refunds will not be accepted for orders placed by mistake or for testing/fun purposes.</div>
-      </div>
-      <div class="policy-item">
-        <div class="policy-num">4</div>
-        <div class="policy-text"><strong>Fraudulent Claims:</strong> Any refund request based on fake reports or forged screenshots will be strictly rejected.</div>
-      </div>
-      <div class="policy-item">
-        <div class="policy-num">5</div>
-        <div class="policy-text"><strong>Technical Issues:</strong> We are not liable for delays caused by network or technical issues on the user's end after the diamonds have been dispatched.</div>
-      </div>
+      <div class="code-block">https://script.google.com/macros/s/<br>AKfycbwpptsdcDRY24t2a-2RCxQagrOMQ9RW3Q8i5jlxumkkuWkxbFzmSDByNYswWJJm6Be21A/exec</div>
     </div>
+  </div>
+</div><!-- /page-track -->
 
-    <!-- Refund Request Form -->
-    <div class="sechd">Refund Request Form</div>
-    <div class="refund-form-card fu">
-      <p style="font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.6">Fill in your details below. Your request will be sent directly to our WhatsApp for review.</p>
-      <div class="rfl">
-        <label class="rlbl">Customer Name</label>
-        <input class="rinp" id="rfName" type="text" placeholder="Your full name"/>
+<!-- ══════════════════════════════════
+     PAGE 3 — REFUND POLICY
+══════════════════════════════════ -->
+<div class="page" id="page-refund">
+  <div class="rf-wrap">
+    <div class="sec-hd" style="margin-top:20px">Refund Policy</div>
+    <div class="rf-card">
+      <div class="rf-title">⚠️ Refund Policy</div>
+      <div class="rf-sub">Please read the following terms carefully before applying for a refund.</div>
+      <div class="rf-list">
+        <div class="rf-item"><span class="rf-ico">✅</span><div><div class="rf-item-ttl">1. Successful Delivery</div><div class="rf-item-txt">Once the diamonds have been credited to your account (IMO), no refund will be provided under any circumstances.</div></div></div>
+        <div class="rf-item"><span class="rf-ico">❌</span><div><div class="rf-item-ttl">2. Incorrect Information</div><div class="rf-item-txt">We are not responsible if you provide an incorrect IMO ID or Player ID and the diamonds are sent to the wrong account.</div></div></div>
+        <div class="rf-item"><span class="rf-ico">🚫</span><div><div class="rf-item-ttl">3. Intentional Orders</div><div class="rf-item-txt">Refunds will not be accepted for orders placed by mistake or for testing/fun purposes.</div></div></div>
+        <div class="rf-item"><span class="rf-ico">🔍</span><div><div class="rf-item-ttl">4. Fraudulent Claims</div><div class="rf-item-txt">Any refund request based on fake reports or forged screenshots will be strictly rejected.</div></div></div>
+        <div class="rf-item"><span class="rf-ico">📶</span><div><div class="rf-item-ttl">5. Technical Issues</div><div class="rf-item-txt">We are not liable for delays caused by network or technical issues on the user's end after the diamonds have been dispatched.</div></div></div>
       </div>
-      <div class="rfl">
-        <label class="rlbl">IMO ID</label>
-        <input class="rinp" id="rfImo" type="text" inputmode="numeric" placeholder="Your IMO / Game ID"/>
-      </div>
-      <div class="rfl">
-        <label class="rlbl">Mobile Number</label>
-        <input class="rinp" id="rfMobile" type="tel" inputmode="numeric" placeholder="+91 XXXXXXXXXX"/>
-      </div>
-      <div class="rfl">
-        <label class="rlbl">UTR Number <span style="font-size:10px;color:var(--muted)">(12-digit Bank Transaction ID)</span></label>
-        <input class="rinp" id="rfUtr" type="tel" inputmode="numeric" placeholder="e.g. 423156789012" maxlength="12"/>
-      </div>
-      <div class="rfl">
-        <label class="rlbl">Reason for Refund</label>
-        <textarea class="rinp" id="rfReason" rows="3" placeholder="Describe your issue clearly…"></textarea>
-      </div>
-      <button class="btn-refund" onclick="sendRefundWA()">
-        <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Send Refund Request on WhatsApp
+
+      <div class="rf-form-ttl">📝 Refund Request Form</div>
+      <div class="rf-form-sub">Fill in the details below — your request will be sent directly to our WhatsApp support team.</div>
+      <div class="rf-fl"><label class="rf-lbl">Customer Name</label><input class="rf-inp" id="rfName" type="text" placeholder="Your full name"/></div>
+      <div class="rf-fl"><label class="rf-lbl">IMO ID</label><input class="rf-inp" id="rfImo" type="text" inputmode="numeric" placeholder="Your IMO / Game ID"/></div>
+      <div class="rf-fl"><label class="rf-lbl">Mobile Number</label><input class="rf-inp" id="rfMob" type="tel" inputmode="numeric" placeholder="+91 XXXXXXXXXX"/></div>
+      <div class="rf-fl"><label class="rf-lbl">UTR Number (12-digit Bank Transaction ID)</label><input class="rf-inp" id="rfUtr" type="tel" inputmode="numeric" placeholder="e.g. 423156789012" maxlength="16"/></div>
+      <div class="rf-fl"><label class="rf-lbl">Reason for Refund</label><textarea class="rf-inp rf-ta" id="rfReason" placeholder="Explain your reason clearly…"></textarea></div>
+      <button class="btn-rf" onclick="submitRefund()">
+        <svg width="17" height="17" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Submit via WhatsApp
       </button>
     </div>
+  </div>
+</div><!-- /page-refund -->
 
-  </div><!-- /refundPage -->
-</main>
-
-<footer>
+<footer class="site-footer">
   © 2025 Kamal Diamond Reseller ·
-  <a href="mailto:kamal6382371168@gmail.com">kamal6382371168@gmail.com</a><br>
-  Merchant ID: Q433892283 · Payments via UPI QR Code only
+  <a href="mailto:kamal6382371168@gmail.com">kamal6382371168@gmail.com</a> ·
+  <a href="https://wa.me/916382371168" target="_blank">WhatsApp</a> ·
+  <a href="https://s.imoim.net/OePvXD" target="_blank">IMO</a><br>
+  All payments via UPI QR only · Merchant: VEDHESWARAN FRUITS
 </footer>
+</div><!-- /root -->
 
-<!-- ══ FLOATING BUTTONS ══ -->
-<div class="float-cluster">
-  <a class="float-btn float-imo" href="https://s.imoim.net/Rlyu9W" target="_blank" rel="noopener">
-    <div class="float-icon">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(100,160,255,.9)"><circle cx="12" cy="12" r="10" fill="rgba(26,108,248,.25)"/><path fill="rgba(100,160,255,.9)" d="M12 4a8 8 0 1 0 0 16A8 8 0 0 0 12 4zm0 3a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm0 11c-2.2 0-4.2-1.1-5.4-2.7.9-1.3 2.4-2.3 5.4-2.3s4.5 1 5.4 2.3C16.2 16.9 14.2 18 12 18z"/></svg>
-    </div>
-    <div class="float-btn-text">
-      <div class="float-label">Support</div>
-      <div class="float-value">IMO Customer Care</div>
-    </div>
+<!-- ══════════ FLOATING BUTTONS ══════════ -->
+<div class="fab-group">
+  <!-- IMO Customer Care — required floating pill -->
+  <a class="fab-imo" href="https://s.imoim.net/OePvXD" target="_blank" rel="noopener">
+    <div class="fab-imo-ico">📱</div>
+    <div class="fab-imo-txt">IMO Customer Care</div>
   </a>
-  <a class="float-btn float-wa" href="https://wa.me/916382371168" target="_blank" rel="noopener">
-    <div class="float-icon">
-      <svg width="18" height="18" fill="#25d366" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    </div>
-    <div class="float-btn-text">
-      <div class="float-label">Support</div>
-      <div class="float-value">WhatsApp</div>
-    </div>
+  <!-- WhatsApp FAB -->
+  <a class="fab-wa" href="https://wa.me/916382371168" target="_blank" rel="noopener">
+    <svg width="26" height="26" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 </div>
 
-<!-- ══════════ PAYMENT OVERLAY ══════════ -->
-<div class="overlay" id="payOv">
+<!-- ══════════════════════════════════
+     PAYMENT BOTTOM SHEET
+══════════════════════════════════ -->
+<div class="overlay" id="payOvl">
   <div class="sheet">
-    <div class="phdr">
+    <div class="pay-hdr">
       <div>
-        <div class="phdr-t">🔐 Payment Confirmation</div>
-        <div class="phdr-s" id="paySubLbl">QR Scan · Enter UTR · Done</div>
+        <div class="pay-ttl">🔐 Payment Confirmation</div>
+        <div class="pay-sub" id="paySubTxt">Scan QR · Enter UTR · Confirm</div>
       </div>
-      <button class="cx" onclick="closePaySheet()">✕</button>
+      <button class="x-btn" onclick="closePaySheet()">✕</button>
     </div>
-    <div class="pbody">
 
-      <!-- Order banner -->
-      <div class="obanner">
-        <div class="obl">
-          <div class="ol">Diamond Pack</div>
-          <div class="ov" id="sumPack">—</div>
-        </div>
-        <div class="obr">
-          <div class="ol">Pay Exactly</div>
-          <div class="oa" id="sumAmt">₹0</div>
-        </div>
+    <div class="pay-body">
+      <!-- Blue order banner -->
+      <div class="ord-banner">
+        <div class="ob-l"><div class="ob-lbl">Your Order</div><div class="ob-val" id="bnrPack">—</div></div>
+        <div class="ob-r"><div class="ob-lbl">Pay Exactly</div><div class="ob-val" id="bnrAmt">₹0</div></div>
+      </div>
+      <!-- 5-minute timer -->
+      <div class="tmr-strip">
+        <span class="tmr-lbl">⏱ QR expires in</span>
+        <span class="tmr-val" id="tmrEl">05:00</span>
       </div>
 
-      <!-- Timer -->
-      <div class="twrap">
-        <span class="tlbl">⏱ QR expires in</span>
-        <span class="tval" id="timerEl">10:00</span>
-      </div>
-
-      <!-- Premium QR section -->
-      <div class="qrsec">
-        <div class="qr-method-badge">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#2255cc"><path d="M3 3h7v7H3zm0 11h7v7H3zm11-11h7v7h-7zm0 11h7v7h-7zM5 5h3v3H5zm0 11h3v3H5zm11-11h3v3h-3zm0 11h3v3h-3z"/></svg>
-          Scan QR Code to Pay Only
-        </div>
-
-        <!-- Premium downloadable QR card -->
-        <div id="qrDownloadCard">
-          <div class="qr-card-inner">
-            <div class="qr-top">
-              <div class="qr-merchant-name">KAMAL DIAMOND RESELLER</div>
-              <div class="qr-upi-tag">UPI QR</div>
-            </div>
-            <div class="qr-frame" style="position:relative">
-              <div class="qr-corner tl"></div><div class="qr-corner tr"></div>
-              <div class="qr-corner bl"></div><div class="qr-corner br"></div>
-              <div id="qrSpinner" class="qr-spinner">
-                <div class="spin-ring"></div>
-                <div class="qr-spin-txt">Generating QR…</div>
+      <!-- ── PREMIUM QR DOWNLOAD CARD ── -->
+      <div class="qr-section">
+        <!-- This entire div is captured by html2canvas for download -->
+        <div id="qrDlCard">
+          <div class="qc-top">
+            <div class="qc-brand">Kamal Diamond</div>
+            <div class="qc-upi-pill">UPI PAYMENT</div>
+          </div>
+          <div class="qc-body">
+            <!-- QR canvas area -->
+            <div class="qr-canvas" id="qrCanvas">
+              <div class="qr-spin" id="qrSpin">
+                <div class="spinner"></div>
+                <div class="spin-lbl">Generating QR…</div>
               </div>
-              <img id="qrImg" src="" alt="UPI QR" class="qr-img-el" style="display:none" crossorigin="anonymous"/>
-              <div class="qr-logo" id="qrLogo" style="display:none">💎</div>
+              <img id="qrImg" src="" alt="UPI QR Code" style="display:none;border-radius:7px;width:100%;height:100%"/>
+              <div class="qr-logo" id="qrLogo">💎</div>
             </div>
-            <!-- Order details inside QR card -->
-            <div class="qr-order-info" id="qrOrderInfo">
-              <div class="qr-info-row">
-                <span class="qr-info-l">Pack</span>
-                <span class="qr-info-v gold" id="qrInfoPack">—</span>
-              </div>
-              <div class="qr-info-row">
-                <span class="qr-info-l">Amount</span>
-                <span class="qr-info-v gold" id="qrInfoAmt">—</span>
-              </div>
-              <div class="qr-info-row">
-                <span class="qr-info-l">User ID</span>
-                <span class="qr-info-v" id="qrInfoImo">—</span>
-              </div>
+            <div class="qc-merchant">VEDHESWARAN FRUITS</div>
+            <div class="qr-note-tag" id="qrNoteTag"></div>
+            <!-- Order details printed inside the download card -->
+            <div class="qc-meta">
+              <div class="qc-mrow"><span class="qc-mk">Pack</span><span class="qc-mv" id="qcPack">—</span></div>
+              <div class="qc-mrow"><span class="qc-mk">Amount</span><span class="qc-mv" id="qcAmt">—</span></div>
+              <div class="qc-mrow"><span class="qc-mk">IMO ID</span><span class="qc-mv" id="qcImo">—</span></div>
+              <div class="qc-mrow"><span class="qc-mk">UPI ID</span><span class="qc-mv">Q433892283@ybl</span></div>
             </div>
-            <div class="qr-bottom-row">
-              <div class="qr-mid-lbl">ID: Q433892283</div>
-              <div class="qr-scan-lbl">SCAN TO PAY ▸</div>
+            <div class="qc-apps">
+              <span class="qc-atag">GPay</span><span class="qc-atag">PhonePe</span>
+              <span class="qc-atag">Paytm</span><span class="qc-atag">BHIM</span>
             </div>
+          </div>
+          <div class="qc-bot">
+            <span class="qc-btag">SCAN &amp; PAY</span>
+            <span class="qc-btag">QR ONLY · SECURE</span>
           </div>
         </div>
 
-        <div class="qr-note-chip" id="qrNote"></div>
-
-        <div style="font-size:12px;color:#888;text-align:center;line-height:1.6">
-          Open any UPI app → tap <strong>Scan QR</strong><br>to complete payment
-        </div>
-
-        <!-- Download QR button -->
-        <button class="btn-dl-qr" id="dlQrBtn" onclick="downloadQR()" style="display:none">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+        <!-- Download QR Card button (captures full card above) -->
+        <button class="btn-dl-qr" id="dlQrBtn" onclick="downloadQRCard()" disabled>
+          <svg width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 8h14v2H5v-2z"/></svg>
           Download QR Card
         </button>
-
-        <div class="qapp-row">
-          <span class="qapp">📱 GPay</span>
-          <span class="qapp">📱 PhonePe</span>
-          <span class="qapp">📱 Paytm</span>
-          <span class="qapp">📱 BHIM</span>
+        <div class="qr-hint-txt">Scan this QR in any UPI app to complete payment</div>
+        <div class="qr-apps-row">
+          <span class="qr-app-chip">GPay → Scan QR</span>
+          <span class="qr-app-chip">PhonePe → Scan</span>
+          <span class="qr-app-chip">Paytm → Scan</span>
         </div>
       </div>
 
-      <!-- Payment form -->
-      <div class="pfsec">
-        <div class="pftitle">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#111"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+      <!-- ── PAYMENT DETAILS FORM ── -->
+      <div class="p-form">
+        <div class="p-form-ttl">
+          <svg width="16" height="16" fill="#111" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
           Submit Payment Details
         </div>
-        <div class="pfsub">After paying via QR, fill in the details below to confirm your order.</div>
+        <div class="p-form-sub">After scanning and completing the UPI payment above, fill in your details to confirm your order.</div>
 
-        <div class="infogrid">
-          <div class="ibox"><div class="ibox-l">IMO ID</div><div class="ibox-v" id="sumImo">—</div></div>
-          <div class="ibox"><div class="ibox-l">Diamonds</div><div class="ibox-v" id="sumD">—</div></div>
+        <div class="info-grid">
+          <div class="info-b"><div class="ib-lbl">IMO ID</div><div class="ib-val" id="infoImo">—</div></div>
+          <div class="info-b"><div class="ib-lbl">Diamonds</div><div class="ib-val" id="infoDm">—</div></div>
         </div>
 
-        <div class="pfl">
-          <label class="plbl">Your Name <span style="font-weight:400;text-transform:none;font-size:10px;color:#bbb">(optional)</span></label>
-          <input class="pinp" id="nameInp" type="text" placeholder="e.g. Rajan Kumar"/>
-        </div>
-
-        <div class="pfl">
-          <label class="plbl">Enter 12-Digit UTR Number <span style="color:var(--red)">*</span></label>
-          <div class="utrrow">
-            <input class="pinp" id="utrInp" type="tel" inputmode="numeric"
-              placeholder="e.g. 423156789012" maxlength="12" oninput="onUtr(this)"/>
-            <button class="utr-qbtn" onclick="toggleUtrTip()" title="Where to find UTR?">?</button>
+        <!-- UTR input + ? help button -->
+        <div class="p-fld">
+          <label class="p-lbl">Enter 12-Digit UTR Number <span style="color:var(--red)">*</span></label>
+          <div class="utr-row">
+            <input class="p-inp" id="utrInp" type="tel" inputmode="numeric"
+              placeholder="e.g. 423156789012" maxlength="16" oninput="onUtr(this)"/>
+            <button class="help-btn" onclick="toggleUtrHelp()" title="Where to find UTR?">?</button>
           </div>
-          <div class="phint" id="utrHint"></div>
+          <div class="fld-hint" id="utrHint"></div>
         </div>
 
-        <div class="chkrow">
-          <input type="checkbox" id="chk"/>
-          <label for="chk">I confirm I've completed the UPI QR payment and the UTR number entered is correct.</label>
+        <div class="chk-row">
+          <input type="checkbox" id="payChk"/>
+          <label for="payChk">I confirm I have completed the UPI QR payment and the UTR number above is correct.</label>
         </div>
 
         <button class="btn-confirm" id="confirmBtn" onclick="submitOrder()">
           ✅ &nbsp;Confirm &amp; Submit Order
         </button>
 
-        <div class="secnote">
-          <span style="font-size:16px;flex-shrink:0;margin-top:1px">🔒</span>
-          <div class="secnote-t">Your details are submitted securely. Diamonds will be delivered to your IMO ID within minutes after verification.</div>
+        <div class="sec-note">
+          <span class="sn-ico">🔒</span>
+          <div class="sn-txt">Your details are submitted securely to our database. Diamonds will be delivered to your IMO ID within minutes of verification.</div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+      </div><!-- /p-form -->
+    </div><!-- /pay-body -->
+  </div><!-- /sheet -->
+</div><!-- /payOvl -->
 
-<!-- ══════════ UTR TOOLTIP ══════════ -->
-<div class="tt-bg" id="ttBg" onclick="toggleUtrTip()"></div>
-<div class="tt-pop" id="ttPop">
+<!-- ══════════ UTR HELP POPUP ══════════ -->
+<div class="tt-bd" id="ttBd" onclick="toggleUtrHelp()"></div>
+<div class="utr-tt" id="utrTT">
   <div class="tt-hdr">
-    <div class="tt-title">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-      Where is my UTR Number?
-    </div>
-    <button class="ttcx" onclick="toggleUtrTip()">✕</button>
+    <div class="tt-ttl">ℹ️ Where to Find Your UTR Number?</div>
+    <button class="tt-cls" onclick="toggleUtrHelp()">✕</button>
   </div>
   <div class="tt-body">
     <div style="display:flex;justify-content:center">
       <div class="phone-mock">
         <div class="ph-notch">
           <div class="ph-dot"></div>
-          <div class="ph-dot" style="width:22px;border-radius:4px"></div>
+          <div class="ph-dot" style="width:18px;border-radius:3px"></div>
           <div class="ph-dot"></div>
         </div>
-        <div style="background:#fff">
-          <div class="gp-bar"><div class="gp-back">‹</div><div class="gp-t">Transaction Details</div></div>
-          <div class="gp-body">
-            <div class="gp-row">
-              <div class="gp-ico">💎</div>
-              <div><div class="gp-nm">Kamal Diamond Reseller</div><div class="gp-dt">Today, 3:22 PM · Paid</div></div>
-              <div class="gp-amt">₹875</div>
+        <div class="ph-bar">
+          <div class="ph-back">‹</div>
+          <div class="ph-bar-ttl">Transaction Details</div>
+        </div>
+        <div class="ph-body">
+          <div class="ph-txn-row">
+            <div class="ph-txn-ico">💎</div>
+            <div>
+              <div class="ph-txn-nm">Kamal Diamond Reseller</div>
+              <div class="ph-txn-dt">Today · Paid · ✓ Success</div>
             </div>
-            <div class="gp-div"></div>
-            <div class="gp-lbl">Transaction Info</div>
-            <div class="gp-item"><span>Status</span><span style="color:#16a34a;font-weight:700">✓ Success</span></div>
-            <div class="gp-item"><span>UPI Ref. No.</span><span>4231 5678 9012</span></div>
-            <div class="utr-hl">
-              <div><div class="utr-hl-l">UTR / UPI Transaction ID</div><div class="utr-hl-v">423156789012</div></div>
-              <span>📋</span>
+            <div class="ph-amt">₹875</div>
+          </div>
+          <div class="ph-div"></div>
+          <div class="ph-info-lbl">Transaction Info</div>
+          <div class="ph-info-row"><span>Status</span><span style="color:#2d9e5c;font-weight:700">✓ Success</span></div>
+          <div class="ph-info-row"><span>UPI Ref.</span><span>4231 5678 9012</span></div>
+          <div style="position:relative;margin-top:2px">
+            <div class="ph-utr-box">
+              <div>
+                <div class="ph-utr-lbl">UTR / Transaction ID</div>
+                <div class="ph-utr-val">423156789012</div>
+              </div>
+              <div style="font-size:16px">📋</div>
+              <div class="ann-ring"></div>
+              <div class="ann-arrow">👆</div>
             </div>
           </div>
         </div>
-        <div class="ann-wrap">
-          <div class="ann-ring" style="left:8px;right:8px;bottom:9px;height:44px;border-radius:10px"></div>
-          <div class="ann-arr" style="right:12px;bottom:58px">👇</div>
-        </div>
       </div>
     </div>
-    <div class="find-note">
-      <strong>📍 Find this unique number</strong> in your payment transaction history.<br><br>
-      <b>Google Pay:</b> Tap transaction → <em>"UTR / Transaction ID"</em><br>
-      <b>PhonePe:</b> History → Tap payment → <em>"UPI Transaction ID"</em><br>
-      <b>Paytm:</b> Passbook → Tap payment → <em>"Transaction ID"</em><br><br>
-      <span style="color:#999">It's a <b>12-digit number</b> like <code style="background:#eef;padding:1px 6px;border-radius:4px;font-size:11px">423156789012</code></span>
+    <div class="utr-note" style="margin-top:13px">
+      <strong>📍 Find this unique number in your payment transaction history</strong><br><br>
+      <b>GPay:</b> Tap transaction → "UTR / Transaction ID"<br>
+      <b>PhonePe:</b> History → tap payment → "UPI Transaction ID"<br>
+      <b>Paytm:</b> Passbook → tap payment → "Transaction ID"<br><br>
+      <span style="color:#888">It is a <b>12-digit number</b> like <code style="background:#eef;padding:1px 5px;border-radius:4px;font-size:10.5px">423156789012</code></span>
     </div>
   </div>
 </div>
 
 <!-- ══════════ SUCCESS + RECEIPT OVERLAY ══════════ -->
-<div class="overlay" id="sucOv">
+<div class="overlay ctr" id="sucOvl">
   <div class="sheet">
-    <div class="suc-wrap">
+    <div class="suc-hd">
+      <div class="suc-ico-wrap">
+        <div class="suc-ring"></div>
+        <div class="suc-ring2"></div>
+        <div class="suc-ico">🎉</div>
+      </div>
+      <div class="suc-ttl">Payment Confirmed!</div>
+      <div class="suc-sub">Order recorded. Diamonds will be delivered to your ID shortly.<br>Download your receipt below.</div>
+    </div>
 
-      <!-- RECEIPT CARD -->
-      <div id="rcCard">
-        <div class="rc-hdr">
-          <div class="conf-wrap" id="confWrap"></div>
-          <div class="chk-ring">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:60;stroke-dashoffset:60">
-              <polyline points="20 6 9 17 4 12"></polyline>
-            </svg>
-          </div>
-          <div class="rc-status">Payment Successful!</div>
-          <div class="rc-ssub">Transaction Verified ✓</div>
-        </div>
-        <div class="rc-wave">
-          <svg viewBox="0 0 400 22" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 22L0 11Q50 0 100 11Q150 22 200 11Q250 0 300 11Q350 22 400 11L400 22Z" fill="#0a7038"/>
-          </svg>
-        </div>
-        <div class="rc-body">
-          <div class="rc-brand">
-            <span style="font-size:22px">💎</span>
-            <div>
-              <div class="rc-brand-name">Kamal Diamond Reseller</div>
-              <div class="rc-brand-sub">24/7 Fast Service · Kamal Seller</div>
-            </div>
-          </div>
-          <div class="rc-rows">
-            <div class="rc-row"><span class="rc-rl">Merchant</span><span class="rc-rv">Kamal Seller</span></div>
-            <div class="rc-row"><span class="rc-rl">User ID (IMO)</span><span class="rc-rv b" id="rcImo">—</span></div>
-            <div class="rc-row"><span class="rc-rl">Package</span><span class="rc-rv" id="rcPack">—</span></div>
-            <div class="rc-row"><span class="rc-rl">Amount Paid</span><span class="rc-rv g" id="rcAmt">—</span></div>
-            <div class="rc-row"><span class="rc-rl">UTR Number</span><span class="rc-rv" id="rcUtr" style="font-size:12px;letter-spacing:.04em">—</span></div>
-            <div class="rc-row"><span class="rc-rl">Status</span><span class="rc-rv g">✅ Payment Successful</span></div>
-            <div class="rc-row" style="border-bottom:none"><span class="rc-rl">Date &amp; Time</span><span class="rc-rv" id="rcDate" style="font-size:11px">—</span></div>
-          </div>
-        </div>
-        <div class="rc-foot">
-          <div class="rc-foot-t">
-            💎 Diamonds delivered to your IMO ID shortly<br>
-            Support: +91 63823 71168 | kamal6382371168@gmail.com
-          </div>
+    <!-- RECEIPT CARD — html2canvas capture target -->
+    <div id="rcptCard">
+      <div class="rc-hdr">
+        <div class="rc-hdr-ico">💎</div>
+        <div>
+          <div class="rc-hdr-ttl">Transaction Receipt</div>
+          <div class="rc-hdr-sub">Diamond Purchase Confirmation</div>
         </div>
       </div>
+      <div class="rc-body">
+        <div class="rc-row"><div class="rc-k">Merchant</div><div class="rc-v">Kamal seller</div></div>
+        <div class="rc-row"><div class="rc-k">User ID</div><div class="rc-v hl" id="rcImo">—</div></div>
+        <div class="rc-row"><div class="rc-k">Package</div><div class="rc-v" id="rcPack">—</div></div>
+        <div class="rc-row"><div class="rc-k">Amount</div><div class="rc-v hl" id="rcAmt">—</div></div>
+        <div class="rc-row"><div class="rc-k">UTR No.</div><div class="rc-v" id="rcUtr" style="font-family:'Share Tech Mono',monospace;font-size:11.5px">—</div></div>
+        <div class="rc-row"><div class="rc-k">Status</div><div class="rc-v" style="color:var(--green);display:flex;align-items:center;gap:5px"><span class="rc-dot"></span>Payment Successful</div></div>
+        <div class="rc-row"><div class="rc-k">Date &amp; Time</div><div class="rc-v" id="rcDate" style="font-size:10.5px">—</div></div>
+      </div>
+      <div class="rc-ftr">
+        <div class="rc-brand">KAMAL DIAMOND RESELLER</div>
+        <div class="rc-status"><span class="rc-dot"></span>Verified</div>
+      </div>
+    </div>
 
-      <!-- Buttons outside receipt card -->
-      <button class="btn-dl-receipt" onclick="downloadReceipt()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-        Download Receipt as Image
+    <div class="suc-actions">
+      <button class="btn-dl-rcpt" id="dlRcptBtn" onclick="downloadReceipt()">
+        <svg width="15" height="15" fill="#000" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 8h14v2H5v-2z"/></svg>
+        Download Receipt
       </button>
-      <button class="btn-wa" onclick="goWA()">
-        <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <button class="btn-wa-go" onclick="goWhatsApp()">
+        <svg width="17" height="17" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Confirm on WhatsApp
       </button>
     </div>
   </div>
 </div>
 
+<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ══════════════════════════════════════════════
-     JAVASCRIPT
-══════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════
+     JAVASCRIPT — FULL APPLICATION LOGIC
+══════════════════════════════════════════════════ -->
 <script>
-/* ── CONFIG ──────────────────────────────────────────────────────────── */
-// ⚠️ Verify your exact UPI VPA in PhonePe Business app → "My UPI ID"
-// Common format: Q433892283@ybl (PhonePe) | Q433892283@paytm | Q433892283@upi
+/* ════════════════════════════════════════════════════
+   CONFIGURATION  ← Your live values are pre-filled
+════════════════════════════════════════════════════ */
 const CFG = {
-  upiId   : 'Q433892283@ybl',          // ⚠️ VERIFY this in your PhonePe Business app
-  upiName : 'Kamal Diamond Reseller',
-  waNum   : '916382371168',
-  formUrl : 'https://docs.google.com/forms/d/e/1FAIpQLScyiGqT7r56UGWLTbNIo88xku_ujRR1rlEfnCKRSG50Dk8WuA/formResponse',
-  fUtr    : 'entry.881415050',
-  fPack   : 'entry.259203416',
-  fImo    : 'entry.685694097',
+  // Your deployed Google Apps Script Web App URL
+  APPS_SCRIPT : 'https://script.google.com/macros/s/AKfycbwdwKiVDnCNW0-_dUHqb5id2BfTg36BV7oy4ORyDIUs-w3qgCfbSHeNUBQ3zVad556t/exec',
+  // NPCI-compliant UPI merchant details
+  UPI_ID      : 'Q433892283@ybl',
+  UPI_NAME    : 'VEDHESWARAN FRUITS',
+  MCC         : '5999',
+
+  // WhatsApp
+  WA          : '916382371168',
 };
 
+/* ════════════════════════════════════════════════════
+   DIAMOND PACKS DATA
+════════════════════════════════════════════════════ */
 const PACKS = [
-  {id:0,  label:'10 Diamonds',    d:10,    price:30,    ps:'₹30.00'     },
-  {id:1,  label:'50 Diamonds',    d:50,    price:90,    ps:'₹90.00'     },
-  {id:2,  label:'100 Diamonds',   d:100,   price:175,   ps:'₹175.00'    },
-  {id:3,  label:'200 Diamonds',   d:200,   price:350,   ps:'₹350.00'    },
-  {id:4,  label:'500 Diamonds',   d:500,   price:875,   ps:'₹875.00'    ,badge:'Popular'},
-  {id:5,  label:'1000 Diamonds',  d:1000,  price:1750,  ps:'₹1,750.00'  },
-  {id:6,  label:'2000 Diamonds',  d:2000,  price:3499,  ps:'₹3,499.00'  },
-  {id:7,  label:'5000 Diamonds',  d:5000,  price:8700,  ps:'₹8,700.00'  },
-  {id:8,  label:'10000 Diamonds', d:10000, price:17399, ps:'₹17,399.00' ,badge:'Best Value'},
+  { id:'p10',    label:'10 Diamonds',    d:10,    price:30,    badge:null         },
+  { id:'p50',    label:'50 Diamonds',    d:50,    price:90,    badge:null         },
+  { id:'p100',   label:'100 Diamonds',   d:100,   price:175,   badge:null         },
+  { id:'p200',   label:'200 Diamonds',   d:200,   price:350,   badge:null         },
+  { id:'p500',   label:'500 Diamonds',   d:500,   price:875,   badge:'Popular'    },
+  { id:'p1000',  label:'1000 Diamonds',  d:1000,  price:1750,  badge:null         },
+  { id:'p2000',  label:'2000 Diamonds',  d:2000,  price:3500,  badge:null         },
+  { id:'p5000',  label:'5000 Diamonds',  d:5000,  price:8750,  badge:null         },
+  { id:'p10000', label:'10000 Diamonds', d:10000, price:17500, badge:'Best Value' },
 ];
 
-/* ── STATE ───────────────────────────────────────────────────────────── */
-let selIdx=null, qty=1, imoOk=false, timerInt=null, ord={}, qrImgUrl='';
+/* ════════════════════════════════════════════════════
+   APPLICATION STATE
+════════════════════════════════════════════════════ */
+let selPack  = null;
+let qty      = 1;
+let imoValid = false;
+let timerInt = null;
+let ord      = {};
 
-/* ── LOADER ──────────────────────────────────────────────────────────── */
-window.addEventListener('load',()=>setTimeout(()=>document.getElementById('ldr').classList.add('out'),1400));
+/* ════════════════════════════════════════════════════
+   INIT
+════════════════════════════════════════════════════ */
+window.addEventListener('load', () => {
+  buildStars();
+  renderPackGrid();
+  updateQtyUI();
+  setTimeout(() => document.getElementById('loader').classList.add('hide'), 1600);
+});
 
-/* ── PAGE TABS ───────────────────────────────────────────────────────── */
-function switchTab(name){
-  document.querySelectorAll('.ptab').forEach((t,i)=>t.classList.toggle('active',['shop','refund'][i]===name));
-  document.getElementById('shopPage').classList.toggle('show',name==='shop');
-  document.getElementById('refundPage').classList.toggle('show',name==='refund');
+/* ─── Starfield ─── */
+function buildStars() {
+  const c = document.getElementById('starsEl');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 2.5 + 0.4;
+    Object.assign(s.style, {
+      width: sz + 'px', height: sz + 'px',
+      top: Math.random() * 100 + '%', left: Math.random() * 100 + '%',
+      '--d': (Math.random() * 3 + 2) + 's',
+      '--dl': -(Math.random() * 5) + 's',
+    });
+    c.appendChild(s);
+  }
 }
 
-/* ── RENDER PACK GRID ────────────────────────────────────────────────── */
-(function(){
-  document.getElementById('packGrid').innerHTML = PACKS.map(p=>`
-    <div class="pcard" id="pc-${p.id}" onclick="selPack(${p.id})">
-      ${p.badge?`<div class="pbadge">${p.badge}</div>`:''}
-      <span class="pico">💎</span>
-      <div class="pname">${p.label}</div>
-      <div class="pprice">${p.ps}</div>
-      <div class="pchk">✓</div>
-    </div>`).join('');
-})();
+/* ════════════════════════════════════════════════════
+   TAB SYSTEM
+════════════════════════════════════════════════════ */
+function switchTab(t) {
+  ['shop','track','refund'].forEach(p => {
+    document.getElementById('page-' + p).classList.toggle('on', p === t);
+    document.getElementById('tab-' + p).classList.toggle('on', p === t);
+  });
+  document.getElementById('stepBar').style.display = (t === 'shop') ? 'block' : 'none';
+}
 
-function selPack(id){
-  selIdx=id; qty=1;
-  document.querySelectorAll('.pcard').forEach(el=>el.classList.remove('sel'));
-  document.getElementById('pc-'+id).classList.add('sel');
-  updateQtyWidget();
-  document.getElementById('qtyWidget').classList.add('show');
+/* ════════════════════════════════════════════════════
+   PACK GRID RENDER
+════════════════════════════════════════════════════ */
+function renderPackGrid() {
+  document.getElementById('packGrid').innerHTML = PACKS.map(p => `
+    <div class="pack-card" id="pk-${p.id}" onclick="pickPack('${p.id}')">
+      ${p.badge ? `<div class="pack-badge">${p.badge}</div>` : ''}
+      <span class="pack-ico">💎</span>
+      <div class="pack-nm">${p.label}</div>
+      <div class="pack-pr">₹${p.price.toLocaleString('en-IN')}</div>
+      <div class="pack-chk">✓</div>
+    </div>`
+  ).join('');
+}
+
+function pickPack(id) {
+  selPack = PACKS.find(p => p.id === id);
+  qty = 1;
+  document.querySelectorAll('.pack-card').forEach(el => el.classList.remove('active'));
+  document.getElementById('pk-' + id).classList.add('active');
+  updateQtyUI();
   updatePackDisp();
-  if(imoOk) markStep(2);
+  markStep(1);
   checkPayBtn();
 }
 
-/* ── QUANTITY WIDGET ─────────────────────────────────────────────────── */
-function changeQty(dir){
-  if(selIdx===null) return;
-  const n=qty+dir;
-  if(n<1||n>10) return;
-  qty=n; updateQtyWidget(); updatePackDisp();
+/* ════════════════════════════════════════════════════
+   QUANTITY MULTIPLIER  (max 10)
+════════════════════════════════════════════════════ */
+function chQty(delta) {
+  if (!selPack) { showToast('Please select a pack first', 'err'); return; }
+  qty = Math.max(1, Math.min(10, qty + delta));
+  updateQtyUI();
+  updatePackDisp();
+  if (qty >= 2) markStep(2);
+  checkPayBtn();
 }
 
-function updateQtyWidget(){
-  if(selIdx===null) return;
-  const p=PACKS[selIdx];
-  const totalD=p.d*qty, totalP=p.price*qty;
-  document.getElementById('qtyWidgetTitle').textContent=`Quantity Multiplier — ${p.label}`;
-  document.getElementById('qtyNum').textContent=qty;
-  document.getElementById('qtyTotalD').textContent=`${totalD.toLocaleString('en-IN')} 💎 Diamonds`;
-  document.getElementById('qtyTotalP').textContent=`₹${totalP.toLocaleString('en-IN')}`;
-  document.getElementById('qtyNote').textContent=`${qty} × ₹${p.price.toLocaleString('en-IN')}`;
-  document.getElementById('qtyMinus').disabled=(qty<=1);
-  document.getElementById('qtyPlus').disabled=(qty>=10);
-}
-
-function updatePackDisp(){
-  if(selIdx===null) return;
-  const p=PACKS[selIdx], totalD=p.d*qty, totalP=p.price*qty;
-  const pd=document.getElementById('packDisp');
-  pd.innerHTML=`<span>💎</span><span style="font-weight:600;font-size:14px;color:var(--gold-lt)"><b>${totalD.toLocaleString('en-IN')} Diamonds</b>&nbsp;·&nbsp;<span style="color:var(--gold)">₹${totalP.toLocaleString('en-IN')}</span>${qty>1?`&nbsp;<span style="font-size:11px;color:var(--muted)">(${qty}× ${p.label})</span>`:''}</span>`;
-}
-
-/* ── CURRENT ORDER COMPUTED ──────────────────────────────────────────── */
-function getCurrent(){
-  const p=PACKS[selIdx];
-  return {
-    label: qty>1?`${qty}× ${p.label}`:`${p.label}`,
-    d: p.d*qty,
-    price: p.price*qty,
-    ps: `₹${(p.price*qty).toLocaleString('en-IN')}`,
-  };
-}
-
-/* ── IMO VALIDATION ──────────────────────────────────────────────────── */
-function onImo(el){
-  const v=el.value.trim(), h=document.getElementById('imoHint');
-  if(!v){el.className='inp';h.className='hint';imoOk=false;}
-  else if(/^\d{5,15}$/.test(v)){
-    el.className='inp ok';h.className='hint ok';h.innerHTML='✓ &nbsp;Valid Game ID';
-    imoOk=true; if(selIdx!==null) markStep(2);
+function updateQtyUI() {
+  document.getElementById('qtyNum').textContent = qty;
+  if (selPack) {
+    const totalD = selPack.d * qty;
+    const totalP = selPack.price * qty;
+    document.getElementById('qtyNm').textContent  = selPack.label + (qty > 1 ? ' × ' + qty : '');
+    document.getElementById('qtySub').textContent = '₹' + selPack.price.toLocaleString('en-IN') + ' per pack';
+    document.getElementById('qtD').textContent    = totalD.toLocaleString() + ' 💎';
+    document.getElementById('qtP').textContent    = '₹' + totalP.toLocaleString('en-IN');
   } else {
-    el.className='inp bad';h.className='hint err';
-    h.innerHTML='✗ &nbsp;Must be 5–15 digits only'; imoOk=false;
+    document.getElementById('qtyNm').textContent  = 'Select a pack first';
+    document.getElementById('qtySub').textContent = 'Price per pack shown above';
+    document.getElementById('qtD').textContent    = '—';
+    document.getElementById('qtP').textContent    = '₹0';
+  }
+}
+
+function updatePackDisp() {
+  if (!selPack) return;
+  const totalP = selPack.price * qty;
+  const d = document.getElementById('packDisp');
+  d.innerHTML = `<span>💎</span><span><b>${selPack.label}${qty > 1 ? ' × ' + qty : ''}</b>&nbsp;·&nbsp;<span style="color:var(--gold-lt)">₹${totalP.toLocaleString('en-IN')}</span></span>`;
+  d.classList.add('has');
+}
+
+/* ════════════════════════════════════════════════════
+   IMO ID VALIDATION
+════════════════════════════════════════════════════ */
+function onImo(el) {
+  const v = el.value.trim();
+  const h = document.getElementById('imoHint');
+  if (!v) {
+    el.className = 'fld-inp'; h.className = 'fld-hint'; imoValid = false;
+  } else if (/^\d{5,15}$/.test(v)) {
+    el.className = 'fld-inp ok';
+    h.className  = 'fld-hint ok'; h.innerHTML = '✓ &nbsp;Valid IMO ID';
+    imoValid = true;
+    if (selPack) markStep(3);
+  } else {
+    el.className = 'fld-inp bad';
+    h.className  = 'fld-hint err'; h.innerHTML = '✗ &nbsp;Must be 5–15 digits only';
+    imoValid = false;
   }
   checkPayBtn();
 }
-function checkPayBtn(){ document.getElementById('payBtn').disabled=!(imoOk&&selIdx!==null); }
 
-/* ── UTR VALIDATION ──────────────────────────────────────────────────── */
-function onUtr(el){
-  el.value=el.value.replace(/\D/g,'');
-  const v=el.value, h=document.getElementById('utrHint');
-  if(!v){el.className='pinp';h.className='phint';}
-  else if(v.length===12){el.className='pinp ok';h.className='phint ok';h.innerHTML='✓ &nbsp;Valid 12-digit UTR';}
-  else{el.className='pinp'+(v.length>12?' bad':'');h.className='phint';}
+function checkPayBtn() {
+  document.getElementById('payBtn').disabled = !(selPack && imoValid);
 }
 
-/* ── STEP INDICATOR ──────────────────────────────────────────────────── */
-function markStep(n){
-  for(let i=1;i<=5;i++){
-    document.getElementById('st'+i).classList.toggle('active',i===n);
-    document.getElementById('st'+i).classList.toggle('done',i<n);
+/* ════════════════════════════════════════════════════
+   STEP PROGRESS
+════════════════════════════════════════════════════ */
+function markStep(n) {
+  for (let i = 1; i <= 6; i++) {
+    const s = document.getElementById('stp' + i);
+    if (!s) continue;
+    s.classList.toggle('active', i === n);
+    s.classList.toggle('done', i < n);
   }
 }
 
-/* ── OPEN PAYMENT SHEET ──────────────────────────────────────────────── */
-async function openPaySheet(){
-  if(!imoOk||selIdx===null) return;
-  const cur=getCurrent(), imo=document.getElementById('imoInp').value.trim();
+/* ════════════════════════════════════════════════════
+   OPEN PAYMENT SHEET
+════════════════════════════════════════════════════ */
+function openPaySheet() {
+  if (!selPack || !imoValid) return;
+  const imo     = document.getElementById('imoId').value.trim();
+  const totalD  = selPack.d * qty;
+  const totalP  = selPack.price * qty;
+  const packLbl = selPack.label + (qty > 1 ? ' × ' + qty : '');
 
-  document.getElementById('paySubLbl').textContent=`${cur.label} · ${cur.ps}`;
-  document.getElementById('sumPack').textContent=cur.label;
-  document.getElementById('sumAmt').textContent=cur.ps;
-  document.getElementById('sumImo').textContent=imo;
-  document.getElementById('sumD').textContent=`${cur.d.toLocaleString('en-IN')} 💎`;
-  // QR card order info
-  document.getElementById('qrInfoPack').textContent=cur.label;
-  document.getElementById('qrInfoAmt').textContent=cur.ps;
-  document.getElementById('qrInfoImo').textContent=imo;
+  // Populate banner and card fields
+  document.getElementById('paySubTxt').textContent = `${packLbl} · ₹${totalP.toLocaleString('en-IN')}`;
+  document.getElementById('bnrPack').textContent   = packLbl;
+  document.getElementById('bnrAmt').textContent    = '₹' + totalP.toLocaleString('en-IN');
+  document.getElementById('infoImo').textContent   = imo;
+  document.getElementById('infoDm').textContent    = totalD.toLocaleString() + ' 💎';
+  document.getElementById('qcPack').textContent    = packLbl;
+  document.getElementById('qcAmt').textContent     = '₹' + totalP.toLocaleString('en-IN');
+  document.getElementById('qcImo').textContent     = imo;
 
-  // Reset
-  document.getElementById('qrImg').style.display='none';
-  document.getElementById('qrLogo').style.display='none';
-  document.getElementById('qrSpinner').style.display='flex';
-  document.getElementById('qrNote').style.display='none';
-  document.getElementById('dlQrBtn').style.display='none';
-  document.getElementById('utrInp').value='';
-  document.getElementById('nameInp').value='';
-  document.getElementById('utrHint').className='phint';
-  document.getElementById('chk').checked=false;
-  qrImgUrl='';
+  // Reset QR and form
+  document.getElementById('qrImg').style.display    = 'none';
+  document.getElementById('qrSpin').style.display   = 'flex';
+  document.getElementById('qrLogo').style.display   = 'none';
+  document.getElementById('qrNoteTag').style.display = 'none';
+  document.getElementById('utrInp').value            = '';
+  document.getElementById('utrHint').className       = 'fld-hint';
+  document.getElementById('payChk').checked          = false;
+  document.getElementById('dlQrBtn').disabled        = true;
 
-  document.getElementById('payOv').classList.add('on');
-  document.body.style.overflow='hidden';
-  markStep(3);
-  startTimer(600);
-  await buildQR(cur, imo);
+  document.getElementById('payOvl').classList.add('on');
+  document.body.style.overflow = 'hidden';
+  markStep(4);
+  startTimer(300);
+  buildNPCIQR({ label: packLbl, d: totalD, price: totalP }, imo);
 }
 
-function closePaySheet(){
-  document.getElementById('payOv').classList.remove('on');
-  document.body.style.overflow='';
+function closePaySheet() {
+  document.getElementById('payOvl').classList.remove('on');
+  document.body.style.overflow = '';
   clearInterval(timerInt);
-  closeUtrTip();
+  closeUtrHelp();
 }
 
-/* ── QR GENERATION ───────────────────────────────────────────────────── */
-async function buildQR(cur, imo){
-  const note=`ID: ${imo} - ${cur.d} Diamonds`;
-  const upiLink=`upi://pay?pa=${encodeURIComponent(CFG.upiId)}`+
-    `&pn=${encodeURIComponent(CFG.upiName)}`+
-    `&mc=5411&am=${cur.price}&cu=INR`+
-    `&tn=${encodeURIComponent(note)}`;
-  qrImgUrl=`https://api.qrserver.com/v1/create-qr-code/?size=400x400&ecc=H&margin=10&data=${encodeURIComponent(upiLink)}`;
-  showQR(qrImgUrl, note);
-}
+/* ════════════════════════════════════════════════════
+   NPCI-COMPLIANT UPI URI BUILDER + QR GENERATION
+   upi://pay?pa=Q433892283@ybl&pn=VEDHESWARAN%20FRUITS
+         &am=[PRICE]&cu=INR&tn=ID:[IMO]-[DIAMONDS]Diamonds
+════════════════════════════════════════════════════ */
+function buildNPCIQR(pack, imo) {
+  const note   = `ID:${imo}-${pack.d}Diamonds`;
+  const upiURI =
+    `upi://pay` +
+    `?pa=${encodeURIComponent(CFG.UPI_ID)}` +
+    `&pn=${encodeURIComponent(CFG.UPI_NAME)}` +
+    `&mc=${CFG.MCC}` +
+    `&tid=KDR${Date.now()}` +
+    `&tr=KDR${Date.now()}` +
+    `&tn=${encodeURIComponent(note)}` +
+    `&am=${pack.price}` +
+    `&cu=INR` +
+    `&mode=00` +
+    `&purpose=00`;
 
-function showQR(src, note){
-  const img=document.getElementById('qrImg');
-  const noteEl=document.getElementById('qrNote');
-  noteEl.textContent='📝 '+note;
-  img.crossOrigin='anonymous';
-  img.onerror=()=>{ document.getElementById('qrSpinner').innerHTML='<div style="font-size:11px;color:#aaa;text-align:center;padding:14px;line-height:1.7">QR load failed.<br>Check internet &amp; retry.</div>'; };
-  img.onload=()=>{
-    document.getElementById('qrSpinner').style.display='none';
-    img.style.display='block';
-    document.getElementById('qrLogo').style.display='flex';
-    noteEl.style.display='block';
-    document.getElementById('dlQrBtn').style.display='inline-flex';
+  const qrApiURL =
+    `https://api.qrserver.com/v1/create-qr-code/?size=300x300&ecc=M&margin=6&data=${encodeURIComponent(upiURI)}`;
+
+  const img    = document.getElementById('qrImg');
+  const noteEl = document.getElementById('qrNoteTag');
+  const logo   = document.getElementById('qrLogo');
+
+  noteEl.textContent = `📝 ID: ${imo} - ${pack.d} Diamonds`;
+
+  img.onerror = () => {
+    document.getElementById('qrSpin').innerHTML =
+      '<div style="text-align:center;padding:14px;font-size:11.5px;color:#aaa;line-height:1.65">QR load failed.<br>Check internet &amp; retry.</div>';
   };
-  img.src=src;
+  img.onload = () => {
+    document.getElementById('qrSpin').style.display = 'none';
+    img.style.display   = 'block';
+    logo.style.display  = 'flex';
+    noteEl.style.display = 'block';
+    document.getElementById('dlQrBtn').disabled = false;
+  };
+  img.src = qrApiURL;
 }
 
-/* ── DOWNLOAD QR CARD ─────────────────────────────────────────────────── */
-async function downloadQR(){
-  const btn=document.getElementById('dlQrBtn');
-  const orig=btn.innerHTML; btn.innerHTML='⏳ Capturing…'; btn.disabled=true;
-  try{
-    const card=document.getElementById('qrDownloadCard');
-    const canvas=await html2canvas(card,{scale:3,useCORS:true,allowTaint:true,backgroundColor:'#0d0d1c',logging:false});
-    const a=document.createElement('a');
-    a.download=`Kamal_Diamond_QR_${Date.now()}.png`;
-    a.href=canvas.toDataURL('image/png',1.0); a.click();
-    showToast('✅ QR Card downloaded!','ok');
-  } catch(e){ window.open(qrImgUrl,'_blank'); showToast('QR opened — long press to save','ok'); }
-  btn.innerHTML=orig; btn.disabled=false;
+/* ════════════════════════════════════════════════════
+   DOWNLOAD QR CARD  (html2canvas — full styled card)
+════════════════════════════════════════════════════ */
+async function downloadQRCard() {
+  const btn = document.getElementById('dlQrBtn');
+  btn.disabled = true;
+  showToast('Preparing QR card…');
+  try {
+    const canvas = await html2canvas(document.getElementById('qrDlCard'), {
+      scale: 3, useCORS: true, backgroundColor: '#ffffff', logging: false,
+    });
+    const a      = document.createElement('a');
+    a.href        = canvas.toDataURL('image/png', 1.0);
+    a.download    = `KamalDiamond_QR_${document.getElementById('qcImo').textContent}_${Date.now()}.png`;
+    a.click();
+    showToast('QR card saved! 📥', 'ok');
+  } catch (e) {
+    showToast('Download failed — try screenshot', 'err');
+  }
+  btn.disabled = false;
 }
 
-/* ── TIMER ───────────────────────────────────────────────────────────── */
-function startTimer(secs){
-  clearInterval(timerInt); let rem=secs;
-  const el=document.getElementById('timerEl');
-  const tick=()=>{
-    const m=String(Math.floor(rem/60)).padStart(2,'0'),s=String(rem%60).padStart(2,'0');
-    el.textContent=`${m}:${s}`;
-    el.className='tval'+(rem<=60?' urg':'');
-    if(rem<=0){clearInterval(timerInt);el.textContent='EXPIRED';el.className='tval done';
-      showToast('QR expired — please close and try again','err');}
+/* ════════════════════════════════════════════════════
+   5-MINUTE COUNTDOWN TIMER
+════════════════════════════════════════════════════ */
+function startTimer(secs) {
+  clearInterval(timerInt);
+  let rem = secs;
+  const el = document.getElementById('tmrEl');
+  const tick = () => {
+    const m = String(Math.floor(rem / 60)).padStart(2, '0');
+    const s = String(rem % 60).padStart(2, '0');
+    el.textContent = `${m}:${s}`;
+    el.className   = 'tmr-val' + (rem <= 60 ? ' urgent' : '');
+    if (rem <= 0) {
+      clearInterval(timerInt);
+      el.textContent = 'EXPIRED';
+      el.className   = 'tmr-val done';
+      showToast('QR expired — close and regenerate', 'err');
+    }
     rem--;
   };
-  tick(); timerInt=setInterval(tick,1000);
+  tick();
+  timerInt = setInterval(tick, 1000);
 }
 
-/* ── UTR TOOLTIP ─────────────────────────────────────────────────────── */
-function toggleUtrTip(){
-  const s=!document.getElementById('ttPop').classList.contains('show');
-  document.getElementById('ttPop').classList.toggle('show',s);
-  document.getElementById('ttBg').classList.toggle('show',s);
-}
-function closeUtrTip(){
-  document.getElementById('ttPop').classList.remove('show');
-  document.getElementById('ttBg').classList.remove('show');
-}
-
-/* ── SUBMIT ORDER ────────────────────────────────────────────────────── */
-async function submitOrder(){
-  const utr=document.getElementById('utrInp').value.trim();
-  const imo=document.getElementById('imoInp').value.trim();
-  const name=document.getElementById('nameInp').value.trim();
-  const chk=document.getElementById('chk').checked;
-  const cur=getCurrent();
-
-  if(utr.length!==12) return showToast('Please enter a valid 12-digit UTR number','err');
-  if(!chk)            return showToast('Please tick the confirmation checkbox','err');
-
-  const btn=document.getElementById('confirmBtn');
-  btn.disabled=true; btn.innerHTML='⏳ &nbsp;Submitting…';
-
-  ord={utr, imo, name, label:cur.label, price:cur.price, ps:cur.ps, d:cur.d};
-
-  // Google Form submission
-  try{
-    await fetch(CFG.formUrl,{
-      method:'POST', mode:'no-cors',
-      headers:{'Content-Type':'application/x-www-form-urlencoded'},
-      body:new URLSearchParams({[CFG.fUtr]:utr,[CFG.fPack]:cur.label,[CFG.fImo]:imo}).toString()
-    });
-  }catch(_){}
-
-  btn.disabled=false; btn.innerHTML='✅ &nbsp;Confirm &amp; Submit Order';
-  clearInterval(timerInt); closeUtrTip(); closePaySheet();
-  showReceipt();
-}
-
-/* ── SHOW RECEIPT ────────────────────────────────────────────────────── */
-function showReceipt(){
-  markStep(5);
-  const now=new Date();
-  const ds=now.toLocaleDateString('en-IN',{day:'2-digit',month:'short',year:'numeric'})+
-    ' '+now.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit',hour12:true});
-  document.getElementById('rcImo').textContent=ord.imo;
-  document.getElementById('rcPack').textContent=ord.label;
-  document.getElementById('rcAmt').textContent=ord.ps;
-  document.getElementById('rcUtr').textContent=ord.utr;
-  document.getElementById('rcDate').textContent=ds;
-  spawnConfetti();
-  document.getElementById('sucOv').classList.add('on');
-  document.body.style.overflow='hidden';
-}
-
-function spawnConfetti(){
-  const w=document.getElementById('confWrap'); w.innerHTML='';
-  const c=['#d4a742','#f5d98b','#22c55e','#1a6cf8','#ef4444','#fff'];
-  for(let i=0;i<20;i++){
-    const p=document.createElement('div'); p.className='conf-p';
-    p.style.cssText=`left:${Math.random()*100}%;background:${c[i%c.length]};animation-delay:${Math.random()*1.2}s;animation-duration:${1.5+Math.random()}s;transform:rotate(${Math.random()*360}deg)`;
-    w.appendChild(p);
+/* ════════════════════════════════════════════════════
+   UTR FIELD VALIDATION
+════════════════════════════════════════════════════ */
+function onUtr(el) {
+  const v = el.value.replace(/\D/g, '');
+  el.value = v;
+  const h  = document.getElementById('utrHint');
+  if (!v) {
+    el.className = 'p-inp'; h.className = 'fld-hint';
+  } else if (/^\d{12}$/.test(v)) {
+    el.className = 'p-inp ok'; h.className = 'fld-hint ok'; h.innerHTML = '✓ &nbsp;Valid 12-digit UTR';
+  } else if (v.length > 12) {
+    el.className = 'p-inp bad'; h.className = 'fld-hint err'; h.innerHTML = '✗ &nbsp;Must be exactly 12 digits';
+  } else {
+    el.className = 'p-inp'; h.className = 'fld-hint';
   }
 }
 
-/* ── DOWNLOAD RECEIPT ────────────────────────────────────────────────── */
-async function downloadReceipt(){
-  const btn=event.currentTarget; const orig=btn.innerHTML;
-  btn.innerHTML='⏳ &nbsp;Generating image…'; btn.disabled=true;
-  try{
-    const card=document.getElementById('rcCard');
-    const canvas=await html2canvas(card,{
-      scale:3, useCORS:true, allowTaint:true,
-      backgroundColor:'#ffffff', logging:false,
-      onclone:(doc)=>{ const s=doc.querySelector('#rcCard svg'); if(s) s.style.strokeDashoffset='0'; }
+/* ════════════════════════════════════════════════════
+   UTR HELP POPUP TOGGLE
+════════════════════════════════════════════════════ */
+function toggleUtrHelp() {
+  const on = document.getElementById('utrTT').classList.contains('on');
+  document.getElementById('utrTT').classList.toggle('on', !on);
+  document.getElementById('ttBd').classList.toggle('on', !on);
+}
+function closeUtrHelp() {
+  document.getElementById('utrTT').classList.remove('on');
+  document.getElementById('ttBd').classList.remove('on');
+}
+
+/* ════════════════════════════════════════════════════
+   SUBMIT ORDER
+   Step 4: Google Form  (no-cors)
+   Step 5: WhatsApp redirect
+════════════════════════════════════════════════════ */
+async function submitOrder() {
+  const utr     = document.getElementById('utrInp').value.trim();
+  const imo     = document.getElementById('imoId').value.trim();
+  const chk     = document.getElementById('payChk').checked;
+  const totalP  = selPack.price * qty;
+  const totalD  = selPack.d * qty;
+  const packLbl = selPack.label + (qty > 1 ? ' × ' + qty : '');
+
+  if (!utr || utr.length < 12)  return showToast('Enter a valid 12-digit UTR number', 'err');
+  if (!chk)                      return showToast('Please tick the confirmation checkbox', 'err');
+  if (!CFG.UPI_ID || CFG.UPI_ID.length < 5) {
+    alert('You are trying to send money to an invalid UPI ID. Please retry with a Valid UPI ID.');
+    return;
+  }
+
+  const btn = document.getElementById('confirmBtn');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ &nbsp;Submitting…';
+
+  ord = {
+    utr, imo, pack: packLbl, price: totalP, diamonds: totalD,
+    date: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+  };
+
+  /* ── Step 4: Google Form (no-cors) ── */
+  try {
+    await fetch(CFG.FORM_URL, {
+      method  : 'POST',
+      mode    : 'no-cors',
+      headers : { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body    : new URLSearchParams({
+        [CFG.F_UTR]  : utr,
+        [CFG.F_PACK] : packLbl,
+        [CFG.F_IMO]  : imo,
+      }).toString(),
     });
-    const a=document.createElement('a');
-    a.download=`Kamal_Diamond_Receipt_${ord.utr||Date.now()}.png`;
-    a.href=canvas.toDataURL('image/png',1.0); a.click();
-    showToast('✅ Receipt downloaded!','ok');
-  }catch(e){ showToast('Screenshot failed — try manually','err'); }
-  btn.innerHTML=orig; btn.disabled=false;
+  } catch (_) {
+    /* no-cors always throws — form still receives the submission */
+  }
+
+  /* ── Also notify Apps Script (triggers Telegram bot) ── */
+  try {
+    await fetch(CFG.APPS_SCRIPT, {
+      method  : 'POST',
+      mode    : 'no-cors',
+      headers : { 'Content-Type': 'application/json' },
+      body    : JSON.stringify({
+        order_id        : 'KDR' + Date.now(),
+        udr_number      : utr,
+        utr_number      : utr,
+        customer_id     : imo,
+        game_app_id     : 'IMO',
+        package_details : packLbl + ' — ₹' + totalP,
+      }),
+    });
+  } catch (_) { /* Handled server-side */ }
+
+  btn.disabled = false;
+  btn.innerHTML = '✅ &nbsp;Confirm &amp; Submit Order';
+  markStep(5);
+  clearInterval(timerInt);
+  closeUtrHelp();
+  closePaySheet();
+  showReceiptScreen();
 }
 
-/* ── WHATSAPP ────────────────────────────────────────────────────────── */
-function goWA(){
-  const msg=encodeURIComponent(`Order placed for IMO ID: ${ord.imo} - Pack: ₹${ord.price}. UTR: ${ord.utr}`);
-  window.open(`https://wa.me/${CFG.waNum}?text=${msg}`,'_blank');
+/* ════════════════════════════════════════════════════
+   RECEIPT SCREEN
+════════════════════════════════════════════════════ */
+function showReceiptScreen() {
+  markStep(6);
+  document.getElementById('rcImo').textContent  = ord.imo;
+  document.getElementById('rcPack').textContent = ord.pack;
+  document.getElementById('rcAmt').textContent  = '₹' + ord.price.toLocaleString('en-IN');
+  document.getElementById('rcUtr').textContent  = ord.utr;
+  document.getElementById('rcDate').textContent = ord.date;
+  document.getElementById('sucOvl').classList.add('on');
+  document.body.style.overflow = 'hidden';
 }
 
-/* ── REFUND WHATSAPP ─────────────────────────────────────────────────── */
-function sendRefundWA(){
-  const n=document.getElementById('rfName').value.trim();
-  const im=document.getElementById('rfImo').value.trim();
-  const mob=document.getElementById('rfMobile').value.trim();
-  const utr=document.getElementById('rfUtr').value.trim();
-  const reason=document.getElementById('rfReason').value.trim();
-  if(!im||!utr||!reason) return showToast('Please fill in all required fields','err');
-  const msg=encodeURIComponent(
-    `*REFUND REQUEST — Kamal Diamond Reseller*\n\n`+
-    `👤 Customer Name: ${n||'Not provided'}\n`+
-    `🆔 IMO ID: ${im}\n`+
-    `📱 Mobile: ${mob||'Not provided'}\n`+
-    `🧾 UTR Number: ${utr}\n`+
-    `📝 Reason: ${reason}`
+/* ════════════════════════════════════════════════════
+   DOWNLOAD RECEIPT  (html2canvas → PNG)
+════════════════════════════════════════════════════ */
+async function downloadReceipt() {
+  const btn = document.getElementById('dlRcptBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Capturing…';
+  try {
+    const canvas = await html2canvas(document.getElementById('rcptCard'), {
+      scale: 3, useCORS: true, backgroundColor: null, logging: false,
+    });
+    const a    = document.createElement('a');
+    a.href      = canvas.toDataURL('image/png', 1.0);
+    a.download  = `KamalDiamond_Receipt_${ord.utr}.png`;
+    a.click();
+    showToast('Receipt saved to gallery! 📥', 'ok');
+  } catch (e) {
+    showToast('Capture failed — try screenshot', 'err');
+  }
+  btn.disabled = false;
+  btn.innerHTML = `<svg width="15" height="15" fill="#000" viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 8h14v2H5v-2z"/></svg> Download Receipt`;
+}
+
+/* ════════════════════════════════════════════════════
+   STEP 5 — WHATSAPP REDIRECT
+   Message: "Order placed for IMO ID: [ID] - Pack: [Amount]. UTR: [UTR_No]"
+════════════════════════════════════════════════════ */
+function goWhatsApp() {
+  const msg = encodeURIComponent(
+    `Order placed for IMO ID: ${ord.imo} - Pack: ₹${ord.price}. UTR: ${ord.utr}`
   );
-  window.open(`https://wa.me/${CFG.waNum}?text=${msg}`,'_blank');
+  window.open(`https://wa.me/${CFG.WA}?text=${msg}`, '_blank');
 }
 
-/* ── TOAST ───────────────────────────────────────────────────────────── */
-let tTm;
-function showToast(msg,type=''){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.className=`toast ${type} show`;
-  clearTimeout(tTm); tTm=setTimeout(()=>t.classList.remove('show'),3600);
+/* ════════════════════════════════════════════════════
+   ORDER TRACKER  (calls Apps Script doGet)
+════════════════════════════════════════════════════ */
+async function searchOrder() {
+  const utr = document.getElementById('trkUtr').value.trim();
+  if (!utr || utr.length < 6) { showToast('Enter a valid UTR number', 'err'); return; }
+
+  document.getElementById('trkResult').classList.remove('on');
+  document.getElementById('trkEmpty').style.display = 'none';
+  showToast('Searching live database…');
+
+  try {
+    const url  = `${CFG.APPS_SCRIPT}?action=searchUTR&utr=${encodeURIComponent(utr)}`;
+    const res  = await fetch(url);
+    const json = await res.json();
+
+    if (json.found && json.data) {
+      renderTrackResult(json.data);
+    } else {
+      document.getElementById('trkEmpty').style.display = 'block';
+    }
+  } catch (e) {
+    showToast('Connection error — check Apps Script URL', 'err');
+    document.getElementById('trkEmpty').style.display = 'block';
+  }
+}
+
+function renderTrackResult(d) {
+  const raw  = (d.status || 'pending').toLowerCase();
+  const st   = ['approved', 'success'].includes(raw) ? 'approved' : raw === 'rejected' ? 'rejected' : 'pending';
+  const ico  = { approved: '✅', pending: '⏳', rejected: '❌' }[st];
+  const lbl  = { approved: 'Approved', pending: 'Pending', rejected: 'Rejected' }[st];
+
+  document.getElementById('trkHdr').className    = 'tr-hdr ' + st;
+  document.getElementById('trkIco').textContent   = ico;
+  document.getElementById('trkTitle').textContent = st === 'approved' ? 'Order Delivered!' : st === 'rejected' ? 'Order Rejected' : 'Order Processing…';
+  document.getElementById('trkSub').textContent   = 'UTR: ' + (d.utr_number || '—');
+  document.getElementById('trkBadge').textContent = lbl;
+  document.getElementById('trkBadge').className   = 'tr-badge ' + st;
+
+  document.getElementById('trkBody').innerHTML = [
+    ['Order ID',     d.order_id   || '—'],
+    ['Timestamp',    d.timestamp  || '—'],
+    ['UTR Number',   d.utr_number || '—'],
+    ['Customer ID',  d.customer_id|| '—'],
+    ['Game/App',     d.game_id    || 'IMO'],
+    ['Package',      d.package    || '—'],
+    ['Status',       lbl],
+  ].map(([k, v]) =>
+    `<div class="tr-drow"><div class="tr-dk">${k}</div><div class="tr-dv">${v}</div></div>`
+  ).join('');
+
+  document.getElementById('trkResult').classList.add('on');
+}
+
+/* ════════════════════════════════════════════════════
+   REFUND REQUEST → WHATSAPP
+════════════════════════════════════════════════════ */
+function submitRefund() {
+  const name   = document.getElementById('rfName').value.trim();
+  const imo    = document.getElementById('rfImo').value.trim();
+  const mob    = document.getElementById('rfMob').value.trim();
+  const utr    = document.getElementById('rfUtr').value.trim();
+  const reason = document.getElementById('rfReason').value.trim();
+
+  if (!name || !imo || !utr || !reason) {
+    showToast('Please fill all required fields', 'err');
+    return;
+  }
+  const msg = encodeURIComponent(
+    `*REFUND REQUEST — Kamal Diamond Reseller*\n\n` +
+    `Customer Name: ${name}\nIMO ID: ${imo}\nMobile: ${mob || 'N/A'}\n` +
+    `UTR Number: ${utr}\nReason for Refund: ${reason}`
+  );
+  window.open(`https://wa.me/${CFG.WA}?text=${msg}`, '_blank');
+}
+
+/* ════════════════════════════════════════════════════
+   TOAST NOTIFICATION
+════════════════════════════════════════════════════ */
+let _tm;
+function showToast(msg, type = '') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className   = `toast ${type} show`;
+  clearTimeout(_tm);
+  _tm = setTimeout(() => t.classList.remove('show'), 3600);
 }
 </script>
 </body>

@@ -831,8 +831,15 @@ a { color:inherit; text-decoration:none }
           autocomplete="off" spellcheck="false" oninput="onImo(this)"/>
         <div class="fld-hint" id="imoHint"></div>
       </div>
-      <button class="btn-pay" id="payBtn" disabled onclick="openPaySheet()">
-        💎 &nbsp;Pay Now via QR
+      <div class="fld">
+        <label class="fld-lbl" for="mobNum">Customer Mobile Number</label>
+        <input class="fld-inp" id="mobNum" type="tel" inputmode="numeric"
+          placeholder="Enter 10-digit mobile number"
+          autocomplete="off" spellcheck="false" oninput="onMob(this)"/>
+        <div class="fld-hint" id="mobHint"></div>
+      </div>
+      <button class="btn-pay" id="payBtn" disabled onclick="initiatePayment()">
+        💎 &nbsp;Pay Now
       </button>
       <div class="trust-strip">
         <span class="trust-item"><em>🔒</em> Secure QR Only</span>
@@ -1208,6 +1215,7 @@ const PACKS = [
 let selPack  = null;
 let qty      = 1;
 let imoValid = false;
+let mobValid = false;
 let timerInt = null;
 let ord      = {};
 
@@ -1219,6 +1227,11 @@ window.addEventListener('load', () => {
   renderPackGrid();
   updateQtyUI();
   setTimeout(() => document.getElementById('loader').classList.add('hide'), 1600);
+
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('status') === 'check') {
+    checkOrderStatus(urlParams.get('order_id'));
+  }
 });
 
 /* ─── Starfield ─── */
@@ -1333,8 +1346,26 @@ function onImo(el) {
   checkPayBtn();
 }
 
+function onMob(el) {
+  const v = el.value.replace(/\D/g, '');
+  el.value = v;
+  const h = document.getElementById('mobHint');
+  if (!v) {
+    el.className = 'fld-inp'; h.className = 'fld-hint'; mobValid = false;
+  } else if (/^\d{10}$/.test(v)) {
+    el.className = 'fld-inp ok';
+    h.className  = 'fld-hint ok'; h.innerHTML = '✓ &nbsp;Valid Mobile';
+    mobValid = true;
+  } else {
+    el.className = 'fld-inp bad';
+    h.className  = 'fld-hint err'; h.innerHTML = '✗ &nbsp;Must be exactly 10 digits';
+    mobValid = false;
+  }
+  checkPayBtn();
+}
+
 function checkPayBtn() {
-  document.getElementById('payBtn').disabled = !(selPack && imoValid);
+  document.getElementById('payBtn').disabled = !(selPack && imoValid && mobValid);
 }
 
 /* ════════════════════════════════════════════════════
@@ -1350,7 +1381,106 @@ function markStep(n) {
 }
 
 /* ════════════════════════════════════════════════════
-   OPEN PAYMENT SHEET
+   API PAYMENT INTEGRATION (AdityaLoot All-in-One)
+════════════════════════════════════════════════════ */
+async function initiatePayment() {
+  if (!selPack || !imoValid || !mobValid) return;
+  const btn = document.getElementById('payBtn');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ &nbsp;Processing...';
+
+  const imo = document.getElementById('imoId').value.trim();
+  const mob = document.getElementById('mobNum').value.trim();
+  const totalP = selPack.price * qty;
+  const totalD = selPack.d * qty;
+  const packLbl = selPack.label + (qty > 1 ? ' × ' + qty : '');
+  const orderId = 'KDR' + Date.now();
+  const redirectUrl = 'https://kamalseller.com/?status=check&order_id=' + orderId;
+
+  localStorage.setItem('last_order', JSON.stringify({
+    imo, mob, packLbl, totalP, totalD
+  }));
+
+  const payload = new URLSearchParams();
+  payload.append('customer_mobile', mob);
+  payload.append('user_token', '6c276aafc0ae980450dd3ef93932ecb0');
+  payload.append('amount', totalP);
+  payload.append('order_id', orderId);
+  payload.append('redirect_url', redirectUrl);
+  payload.append('remark1', 'IMO: ' + imo);
+  payload.append('remark2', packLbl);
+  payload.append('expiry_seconds', '7200');
+
+  try {
+    const res = await fetch('https://wp.adityaloot.com/api/create-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: payload.toString()
+    });
+    const data = await res.json();
+    if (data.status && data.result && data.result.payment_url) {
+      window.location.href = data.result.payment_url;
+    } else {
+      showToast(data.message || 'Payment creation failed', 'err');
+      btn.disabled = false;
+      btn.innerHTML = '💎 &nbsp;Pay Now';
+    }
+  } catch (e) {
+    showToast('Error connecting to payment gateway', 'err');
+    btn.disabled = false;
+    btn.innerHTML = '💎 &nbsp;Pay Now';
+  }
+}
+
+async function checkOrderStatus(orderId) {
+  showToast('Checking payment status...', 'ok');
+  const payload = new URLSearchParams();
+  payload.append('user_token', '6c276aafc0ae980450dd3ef93932ecb0');
+  payload.append('order_id', orderId);
+
+  try {
+    const res = await fetch('https://wp.adityaloot.com/api/check-order-status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: payload.toString()
+    });
+    const data = await res.json();
+    if (data.status === 'SUCCESS') {
+      const saved = JSON.parse(localStorage.getItem('last_order') || '{}');
+      ord = {
+        imo: saved.imo || '—',
+        pack: saved.packLbl || '—',
+        price: data.amount || saved.totalP || 0,
+        utr: data.UTR || orderId,
+        date: data.date || new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+      };
+      
+      try {
+        fetch(CFG.APPS_SCRIPT, {
+          method  : 'POST',
+          mode    : 'no-cors',
+          headers : { 'Content-Type': 'application/json' },
+          body    : JSON.stringify({
+            order_id        : orderId,
+            utr_number      : data.UTR || orderId,
+            customer_id     : ord.imo,
+            game_app_id     : 'IMO',
+            package_details : ord.pack + ' — ₹' + ord.price,
+          }),
+        });
+      } catch(e){}
+
+      showReceiptScreen();
+    } else {
+      showToast('Payment was not successful or is pending.', 'err');
+    }
+  } catch (e) {
+    showToast('Error checking status', 'err');
+  }
+}
+
+/* ════════════════════════════════════════════════════
+   OPEN PAYMENT SHEET (DEPRECATED)
 ════════════════════════════════════════════════════ */
 function openPaySheet() {
   if (!selPack || !imoValid) return;

@@ -1402,17 +1402,16 @@ async function initiatePayment() {
   }));
 
   const payload = new URLSearchParams();
+  payload.append('action', 'create-order');
   payload.append('customer_mobile', mob);
-  payload.append('user_token', '6c276aafc0ae980450dd3ef93932ecb0');
   payload.append('amount', totalP);
   payload.append('order_id', orderId);
   payload.append('redirect_url', redirectUrl);
   payload.append('remark1', 'IMO: ' + imo);
   payload.append('remark2', packLbl);
-  payload.append('expiry_seconds', '7200');
 
   try {
-    const res = await fetch('https://wp.adityaloot.com/api/create-order', {
+    const res = await fetch('api.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: payload.toString()
@@ -1435,11 +1434,11 @@ async function initiatePayment() {
 async function checkOrderStatus(orderId) {
   showToast('Checking payment status...', 'ok');
   const payload = new URLSearchParams();
-  payload.append('user_token', '6c276aafc0ae980450dd3ef93932ecb0');
+  payload.append('action', 'check-order-status');
   payload.append('order_id', orderId);
 
   try {
-    const res = await fetch('https://wp.adityaloot.com/api/check-order-status', {
+    const res = await fetch('api.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: payload.toString()

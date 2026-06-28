@@ -1404,11 +1404,11 @@ async function initiatePayment() {
   const payload = new URLSearchParams();
   payload.append('action', 'create-order');
   payload.append('customer_mobile', mob);
-  payload.append('amount', totalP);
+  payload.append('imo', imo);
+  payload.append('pack_id', selPack.id);
+  payload.append('qty', qty);
   payload.append('order_id', orderId);
   payload.append('redirect_url', redirectUrl);
-  payload.append('remark1', 'IMO: ' + imo);
-  payload.append('remark2', packLbl);
 
   try {
     const res = await fetch('api.php', {
@@ -1425,7 +1425,8 @@ async function initiatePayment() {
       btn.innerHTML = '💎 &nbsp;Pay Now';
     }
   } catch (e) {
-    showToast('Error connecting to payment gateway', 'err');
+    showToast('Error: ' + e.message + ' (Please test on Live Server)', 'err');
+    console.error('Payment Error:', e);
     btn.disabled = false;
     btn.innerHTML = '💎 &nbsp;Pay Now';
   }
